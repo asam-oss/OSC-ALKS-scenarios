@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<OpenSCENARIO>
+  <FileHeader revMajor="1" revMinor="0" date="2020-03-31T17:00:00" author="BMW AG" description="Pedestrian Catalog" />
+  <Catalog name="PedestrianCatalog">
+    <Pedestrian model="Adult" mass="70" name="pedestrian" pedestrianCategory="pedestrian">
+      <BoundingBox>
+        <Center x="0.15" y="0.0" z="0.9" />
+        <Dimensions width="0.5" length="0.3" height="1.8" />
+      </BoundingBox>
+      <Properties></Properties>
+    </Pedestrian>
+  </Catalog>
+</OpenSCENARIO>

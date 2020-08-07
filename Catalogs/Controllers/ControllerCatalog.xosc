@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<OpenSCENARIO>
+  <FileHeader revMajor="1" revMinor="0" date="2020-03-31T17:00:00" description="Controller Catalog for ALKS Scenarios" author="BMW AG" />
+  <Catalog name="ControllerCatalog">
+    <Controller name="ALKSController">
+      <Properties></Properties>
+    </Controller>
+  </Catalog>
+</OpenSCENARIO>

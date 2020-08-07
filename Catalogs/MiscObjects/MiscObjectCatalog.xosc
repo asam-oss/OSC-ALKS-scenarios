@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<OpenSCENARIO>
+  <FileHeader revMajor="1" revMinor="0" date="2020-03-31T17:00:00" author="BMW AG" description="Misc Object Catalog" />
+  <Catalog name="MiscObjectCatalog">
+    <MiscObject miscObjectCategory="obstacle" mass="70" name="obstacle">
+      <BoundingBox>
+        <Center x="0.5" y="0.0" z="0.5" />
+        <Dimensions width="1.0" length="1.0" height="1.0" />
+      </BoundingBox>
+      <Properties></Properties>
+    </MiscObject>
+  </Catalog>
+</OpenSCENARIO>
