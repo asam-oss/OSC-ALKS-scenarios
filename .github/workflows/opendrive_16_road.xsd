@@ -12,12 +12,8 @@ This file is distributable in accordance with the ASAM license terms.
 See www.asam.net/license.html for further details.
 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-	<xs:include schemaLocation="opendrive_16_junction.xsd"/>
-	<xs:include schemaLocation="opendrive_16_railroad.xsd"/>
-	<xs:include schemaLocation="opendrive_16_signal.xsd"/>
 	<xs:include schemaLocation="opendrive_16_object.xsd"/>
 	<xs:include schemaLocation="opendrive_16_lane.xsd"/>
-	<xs:include schemaLocation="opendrive_16_core.xsd"/>
 	<xs:simpleType name="e_countryCode">
 		<xs:union memberTypes="e_countryCode_iso3166alpha2 e_countryCode_iso3166alpha3_deprecated e_countryCode_deprecated"/>
 	</xs:simpleType>
