@@ -7,17 +7,41 @@ on:
 jobs:
   validate-xosc:
     env:
-      SCEN_DIR: ./Scenarios 
+      SCEN_DIR: ${{ toJson(github.ref) }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        xml-file: [ ./Scenarios/'*.xosc' ]
-        #xml-file: [ ./Scenarios/ALKS_MASTER_Scenario_TEMPLATE.xosc, ./Scenarios/ALKS_Scenario_1_1_FreeDriving_TEMPLATE.xosc ]
+        #xml-file: ${{ github.ref './Scenarios/*.xosc' }}
+        xml-file: [ ./Scenarios/ALKS_MASTER_Scenario_TEMPLATE.xosc ] #, ./Scenarios/ALKS_Scenario_1_1_FreeDriving_TEMPLATE.xosc ]
     steps:
-    - name: Checkout
-      uses: actions/checkout@master
-    - name: Lint MASTER Scenario
-      uses: ChristophWurst/xmllint-action@v1
-      with:
-        xml-file: ${{ matrix.xml-file }}
-        xml-schema-file: ./.github/workflows/OpenSCENARIO.xsd
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Dump job context
+        env:
+          JOB_CONTEXT: ${{ toJson(job) }}
+        run: echo "$JOB_CONTEXT"
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+        run: echo "$STEPS_CONTEXT"
+      - name: Dump runner context
+        env:
+          RUNNER_CONTEXT: ${{ toJson(runner) }}
+        run: echo "$RUNNER_CONTEXT"
+      - name: Dump strategy context
+        env:
+          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+        run: echo "$STRATEGY_CONTEXT"
+      - name: Dump matrix context
+        env:
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
+        run: echo "$MATRIX_CONTEXT"
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Lint MASTER Scenario
+        uses: ChristophWurst/xmllint-action@v1
+        with:
+          xml-file: ${{ matrix.xml-file }}
+          xml-schema-file: ./.github/workflows/OpenSCENARIO.xsd
