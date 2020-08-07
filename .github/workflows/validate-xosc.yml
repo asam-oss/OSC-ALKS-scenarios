@@ -19,4 +19,4 @@ jobs:
         uses: ChristophWurst/xmllint-action@v1
         with:
           xml-file: ./Scenarios/ALKS_Road.xodr ./Scenarios/ALKS_Road_Different_Curvatures.xodr
-          xml-schema-file: ./.github/workflows/opendrive_16_core.xsd
+          xml-schema-file: ./.github/workflows/opendrive_16_core.xsd ./.github/workflows/opendrive_16_road.xsd ./.github/workflows/opendrive_16_signal.xsd ./.github/workflows/opendrive_16_junction.xsd ./.github/workflows/opendrive_16_railroad.xsd ./.github/workflows/opendrive_16_lane.xsd ./.github/workflows/opendrive_16_object.xsd
