@@ -6,12 +6,18 @@ on:
 
 jobs:
   validate-xosc:
+    env:
+      SCEN_DIR: ./Scenarios 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        #xml-file: [ $SCEN_DIR/'*.xosc' ]
+        xml-file: [ $SCEN_DIR/'*.xosc'ALKS_MASTER_Scenario_TEMPLATE.xosc, $SCEN_DIR/ALKS_Scenario_1_1_FreeDriving_TEMPLATE.xosc ]
     steps:
     - name: Checkout
       uses: actions/checkout@master
     - name: Lint MASTER Scenario
       uses: ChristophWurst/xmllint-action@v1
       with:
-        xml-file: ./Scenarios/ALKS_MASTER_Scenario_TEMPLATE.xosc
+        xml-file: ${{ matrix.xml-file }}
         xml-schema-file: ./.github/workflows/OpenSCENARIO.xsd
