@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         #xml-file: [ $SCEN_DIR/'*.xosc' ]
-        xml-file: [ $SCEN_DIR/'*.xosc'ALKS_MASTER_Scenario_TEMPLATE.xosc, $SCEN_DIR/ALKS_Scenario_1_1_FreeDriving_TEMPLATE.xosc ]
+        xml-file: [ ./Scenarios/ALKS_MASTER_Scenario_TEMPLATE.xosc, ./Scenarios/ALKS_Scenario_1_1_FreeDriving_TEMPLATE.xosc ]
     steps:
     - name: Checkout
       uses: actions/checkout@master
