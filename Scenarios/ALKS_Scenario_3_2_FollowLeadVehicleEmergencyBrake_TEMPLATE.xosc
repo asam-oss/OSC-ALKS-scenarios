@@ -8,6 +8,7 @@
     <ParameterDeclaration name="$Duration" parameterType="double" value="40" />
     <ParameterDeclaration name="$LeadVehicle_Model" parameterType="string" value="car" />
     <ParameterDeclaration name="$LeadVehicle_InitDistance_dx0" parameterType="double" value="33.33333333" />
+    <ParameterDeclaration name="$LeadVehicle_BrakeRate_Gx_max" parameterType="double" value="6.0" />
   </ParameterDeclarations>
   <CatalogLocations>
     <VehicleCatalog>
@@ -128,7 +129,7 @@
                 <PrivateAction>
                   <LongitudinalAction>
                     <SpeedAction>
-                      <SpeedActionDynamics dynamicsShape="linear" value="6.0" dynamicsDimension="rate" />
+                      <SpeedActionDynamics dynamicsShape="linear" value="$LeadVehicle_BrakeRate_Gx_max" dynamicsDimension="rate" />
                       <SpeedActionTarget>
                         <AbsoluteTargetSpeed value="0.0" />
                       </SpeedActionTarget>
