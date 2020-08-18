@@ -3,11 +3,10 @@
   <FileHeader revMajor="1" revMinor="0" date="2020-06-16T10:00:00" description="ALKS Scenario 4.1 CutInNoCollision Template" author="BMW AG" />
   <ParameterDeclarations>
     <!--The whole ParameterDeclarations section is needed for easy variation. The "*_Visibility" parameters for the entities and the "*_Story" parameters are used for varying different functional scenarios. E.g. for a CutIn Scenario the parameter "CutInVehicle_Visibility" must be true.-->
-    <ParameterDeclaration name="$Ego_InitPosition_LaneId" parameterType="integer" value="-4" />
     <ParameterDeclaration name="$Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667" />
     <ParameterDeclaration name="$Duration" parameterType="double" value="40" />
     <ParameterDeclaration name="$CutInVehicle_Model" parameterType="string" value="car" />
-    <ParameterDeclaration name="$CutInVehicle_InitPosition_RelativeLaneId" parameterType="integer" value="-1"/>
+    <ParameterDeclaration name="$CutInVehicle_InitPosition_RelativeLaneId" parameterType="integer" value="-1" />
     <ParameterDeclaration name="$CutInVehicle_RelativeInitSpeed_Ve0_Vo0" parameterType="double" value="-5.5555" />
     <ParameterDeclaration name="$CutInVehicle_HeadwayDistanceTrigger_dx0" parameterType="double" value="30.0" />
     <ParameterDeclaration name="$CutInVehicle_LaneChange_MaxLateralVelocity_Vy" parameterType="double" value="1.0" />
@@ -49,7 +48,7 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="0.0"></LanePosition>
+                <LanePosition roadId="0" laneId="-4" offset="0.0" s="0.0"></LanePosition>
               </Position>
             </TeleportAction>
           </PrivateAction>
