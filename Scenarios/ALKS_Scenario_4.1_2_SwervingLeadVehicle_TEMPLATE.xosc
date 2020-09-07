@@ -1,15 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <OpenSCENARIO>
-  <FileHeader revMajor="1" revMinor="0" date="2020-06-16T10:00:00" description="ALKS Scenario 5.2 CutOutMultipleBlockingTargets Template" author="BMW AG" />
+  <FileHeader revMajor="1" revMinor="0" date="2020-06-16T10:00:00" description="ALKS Scenario 4.1_2 Swerving Lead Vehicle Template" author="BMW AG" />
   <ParameterDeclarations>
-    <!--The whole ParameterDeclarations section is needed for easy variation. The "*_Visibility" parameters for the entities and the "*_Story" parameters are used for varying different functional scenarios. E.g. for a CutIn Scenario the parameter "CutInVehicle_Visibility" must be true.-->
+    <!--The whole ParameterDeclarations section is needed for easy variation.-->
     <ParameterDeclaration name="$Ego_InitPosition_LaneId" parameterType="integer" value="-4" />
     <ParameterDeclaration name="$Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667" />
     <ParameterDeclaration name="$Duration" parameterType="double" value="40" />
+    <ParameterDeclaration name="$LeadVehicle_Model" parameterType="string" value="car" />
     <ParameterDeclaration name="$LeadVehicle_InitDistance_dx0" parameterType="double" value="33.33333333" />
-    <ParameterDeclaration name="$TargetBlocking_Catalog" parameterType="string" value="PedestrianCatalog" />
-    <ParameterDeclaration name="$TargetBlocking_Model" parameterType="string" value="pedestrian" />
-    <ParameterDeclaration name="$TargetBlocking2_Model" parameterType="string" value="bus" />
+    <ParameterDeclaration name="$Swerve_Offset_Left" parameterType="double" value="1.0" />
+    <ParameterDeclaration name="$Swerve_Offset_Right" parameterType="double" value="-1.0" />
+    <ParameterDeclaration name="$Swerve_MaxLateralAcc" parameterType="double" value="0.3" />
   </ParameterDeclarations>
   <CatalogLocations>
     <VehicleCatalog>
@@ -35,14 +36,8 @@
         <CatalogReference catalogName="ControllerCatalog" entryName="ALKSController"></CatalogReference>
       </ObjectController>
     </ScenarioObject>
-    <ScenarioObject name="TargetBlocking">
-      <CatalogReference catalogName="$TargetBlocking_Catalog" entryName="$TargetBlocking_Model"></CatalogReference>
-    </ScenarioObject>
-    <ScenarioObject name="TargetBlocking2">
-      <CatalogReference catalogName="VehicleCatalog" entryName="$TargetBlocking2_Model"></CatalogReference>
-    </ScenarioObject>
     <ScenarioObject name="LeadVehicle">
-      <CatalogReference catalogName="VehicleCatalog" entryName="car"></CatalogReference>
+      <CatalogReference catalogName="VehicleCatalog" entryName="$LeadVehicle_Model"></CatalogReference>
     </ScenarioObject>
   </Entities>
   <Storyboard>
@@ -65,24 +60,6 @@
                 </SpeedActionTarget>
               </SpeedAction>
             </LongitudinalAction>
-          </PrivateAction>
-        </Private>
-        <Private entityRef="TargetBlocking">
-          <PrivateAction>
-            <TeleportAction>
-              <Position>
-                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="500.0"></LanePosition>
-              </Position>
-            </TeleportAction>
-          </PrivateAction>
-        </Private>
-        <Private entityRef="TargetBlocking2">
-          <PrivateAction>
-            <TeleportAction>
-              <Position>
-                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="515.0"></LanePosition>
-              </Position>
-            </TeleportAction>
           </PrivateAction>
         </Private>
         <Private entityRef="LeadVehicle">
@@ -142,37 +119,101 @@
         </StartTrigger>
       </Act>
     </Story>
-    <Story name="EvasionStory">
-      <Act name="EvasionAct">
-        <ManeuverGroup maximumExecutionCount="1" name="EvasionSequence">
+    <Story name="SwerveStory">
+      <Act name="SwerveAct">
+        <ManeuverGroup maximumExecutionCount="1" name="SwerveSequence">
           <Actors selectTriggeringEntities="false">
             <EntityRef entityRef="LeadVehicle" />
           </Actors>
-          <Maneuver name="EvasionManeuver">
-            <Event name="EvasionEvent" priority="overwrite">
-              <Action name="EvasionAction">
+          <Maneuver name="SwerveManeuver">
+            <Event name="SwerveEvent" priority="overwrite">
+              <Action name="SwerveAction">
                 <PrivateAction>
                   <LateralAction>
-                    <LaneChangeAction>
-                      <LaneChangeActionDynamics dynamicsShape="sinusoidal" value="2" dynamicsDimension="time" />
-                      <LaneChangeTarget>
-                        <RelativeTargetLane entityRef="TargetBlocking" value="-1" />
-                      </LaneChangeTarget>
-                    </LaneChangeAction>
+                    <LaneOffsetAction continuous="true">
+                      <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc" dynamicsShape="sinusoidal" />
+                      <LaneOffsetTarget>
+                        <AbsoluteTargetLaneOffset value="$Swerve_Offset_Left" />
+                      </LaneOffsetTarget>
+                    </LaneOffsetAction>
                   </LateralAction>
                 </PrivateAction>
               </Action>
               <StartTrigger>
                 <ConditionGroup>
-                  <Condition name="EvasionStartCondition" delay="0" conditionEdge="rising">
-                    <ByEntityCondition>
-                      <TriggeringEntities triggeringEntitiesRule="any">
-                        <EntityRef entityRef="LeadVehicle" />
-                      </TriggeringEntities>
-                      <EntityCondition>
-                        <RelativeDistanceCondition entityRef="TargetBlocking" relativeDistanceType="longitudinal" value="30" freespace="true" rule="lessThan" />
-                      </EntityCondition>
-                    </ByEntityCondition>
+                  <Condition name="SwerveEventStart" delay="0" conditionEdge="rising">
+                    <ByValueCondition>
+                      <SimulationTimeCondition value="5.0" rule="greaterThan" />
+                    </ByValueCondition>
+                  </Condition>
+                </ConditionGroup>
+              </StartTrigger>
+            </Event>
+            <Event name="SwerveEvent2" priority="overwrite">
+              <Action name="SwerveAction2">
+                <PrivateAction>
+                  <LateralAction>
+                    <LaneOffsetAction continuous="true">
+                      <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc" dynamicsShape="sinusoidal" />
+                      <LaneOffsetTarget>
+                        <AbsoluteTargetLaneOffset value="0.0" />
+                      </LaneOffsetTarget>
+                    </LaneOffsetAction>
+                  </LateralAction>
+                </PrivateAction>
+              </Action>
+              <StartTrigger>
+                <ConditionGroup>
+                  <Condition name="SwerveEvent2Start" delay="5" conditionEdge="rising">
+                    <ByValueCondition>
+                      <StoryboardElementStateCondition storyboardElementType="action" storyboardElementRef="SwerveAction" state="endTransition" />
+                    </ByValueCondition>
+                  </Condition>
+                </ConditionGroup>
+              </StartTrigger>
+            </Event>
+            <Event name="SwerveEvent3" priority="overwrite">
+              <Action name="SwerveAction3">
+                <PrivateAction>
+                  <LateralAction>
+                    <LaneOffsetAction continuous="true">
+                      <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc" dynamicsShape="sinusoidal" />
+                      <LaneOffsetTarget>
+                        <AbsoluteTargetLaneOffset value="$Swerve_Offset_Right" />
+                      </LaneOffsetTarget>
+                    </LaneOffsetAction>
+                  </LateralAction>
+                </PrivateAction>
+              </Action>
+              <StartTrigger>
+                <ConditionGroup>
+                  <Condition name="SwerveEvent3Start" delay="0" conditionEdge="rising">
+                    <ByValueCondition>
+                      <StoryboardElementStateCondition storyboardElementType="action" storyboardElementRef="SwerveAction2" state="endTransition" />
+                    </ByValueCondition>
+                  </Condition>
+                </ConditionGroup>
+              </StartTrigger>
+            </Event>
+            <Event name="SwerveEvent4" priority="overwrite">
+              <Action name="SwerveAction4">
+                <PrivateAction>
+                  <LateralAction>
+                    <LaneOffsetAction continuous="true">
+                      <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc" dynamicsShape="sinusoidal" />
+                      <LaneOffsetTarget>
+                        <AbsoluteTargetLaneOffset value="0.0" />
+                      </LaneOffsetTarget>
+                    </LaneOffsetAction>
+                  </LateralAction>
+                </PrivateAction>
+              </Action>
+              <StartTrigger>
+                <ConditionGroup>
+                  <Condition name="SwerveEvent4Start" delay="5" conditionEdge="rising">
+                    <ByValueCondition>
+                      <StoryboardElementStateCondition storyboardElementType="action" storyboardElementRef="SwerveAction3" state="endTransition" />
+                    </ByValueCondition>
                   </Condition>
                 </ConditionGroup>
               </StartTrigger>
@@ -181,9 +222,9 @@
         </ManeuverGroup>
         <StartTrigger>
           <ConditionGroup>
-            <Condition name="EvasionActStart" delay="0" conditionEdge="rising">
+            <Condition name="SwerveActStart" delay="0" conditionEdge="rising">
               <ByValueCondition>
-                <SimulationTimeCondition value="0" rule="greaterThan" />
+                <SimulationTimeCondition value="0.0" rule="greaterThan" />
               </ByValueCondition>
             </Condition>
           </ConditionGroup>

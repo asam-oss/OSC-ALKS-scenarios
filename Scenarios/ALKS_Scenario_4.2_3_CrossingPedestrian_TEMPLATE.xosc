@@ -1,14 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <OpenSCENARIO>
-  <FileHeader revMajor="1" revMinor="0" date="2020-06-16T10:00:00" description="ALKS Scenario 6.1 ForwardDetectionRange Template" author="BMW AG" />
+  <FileHeader revMajor="1" revMinor="0" date="2020-06-16T10:00:00" description="ALKS Scenario 4.2_3 CrossingPedestrian Template" author="BMW AG" />
   <ParameterDeclarations>
-    <!--The whole ParameterDeclarations section is needed for easy variation. The "*_Visibility" parameters for the entities and the "*_Story" parameters are used for varying different functional scenarios. E.g. for a CutIn Scenario the parameter "CutInVehicle_Visibility" must be true.-->
+    <!--The whole ParameterDeclarations section is needed for easy variation.-->
     <ParameterDeclaration name="$Ego_InitPosition_LaneId" parameterType="integer" value="-4" />
     <ParameterDeclaration name="$Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667" />
     <ParameterDeclaration name="$Duration" parameterType="double" value="40" />
-    <ParameterDeclaration name="$TargetBlocking_Catalog" parameterType="string" value="PedestrianCatalog" />
-    <ParameterDeclaration name="$TargetBlocking_Model" parameterType="string" value="pedestrian" />
-    <ParameterDeclaration name="$TargetBlocking_InitPosition_Offset" parameterType="double" value="-5.25" />
+    <ParameterDeclaration name="$TargetBlocking_InitPosition_Heading" parameterType="double" value="1.57" />
   </ParameterDeclarations>
   <CatalogLocations>
     <VehicleCatalog>
@@ -35,7 +33,7 @@
       </ObjectController>
     </ScenarioObject>
     <ScenarioObject name="TargetBlocking">
-      <CatalogReference catalogName="$TargetBlocking_Catalog" entryName="$TargetBlocking_Model"></CatalogReference>
+      <CatalogReference catalogName="PedestrianCatalog" entryName="pedestrian"></CatalogReference>
     </ScenarioObject>
   </Entities>
   <Storyboard>
@@ -64,7 +62,9 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="$TargetBlocking_InitPosition_Offset" s="500.0"></LanePosition>
+                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="-5.0" s="500.0">
+                  <Orientation h="$TargetBlocking_InitPosition_Heading" />
+                </LanePosition>
               </Position>
             </TeleportAction>
           </PrivateAction>
@@ -99,6 +99,74 @@
         <StartTrigger>
           <ConditionGroup>
             <Condition name="ActivateALKSControllerStart" delay="0" conditionEdge="rising">
+              <ByValueCondition>
+                <SimulationTimeCondition value="0" rule="greaterThan" />
+              </ByValueCondition>
+            </Condition>
+          </ConditionGroup>
+        </StartTrigger>
+      </Act>
+    </Story>
+    <Story name="CrossStory">
+      <Act name="CrossAct">
+        <ManeuverGroup maximumExecutionCount="1" name="CrossSequence">
+          <Actors selectTriggeringEntities="false">
+            <EntityRef entityRef="TargetBlocking" />
+          </Actors>
+          <Maneuver name="CrossManeuver">
+            <Event name="CrossEvent" priority="overwrite">
+              <Action name="CrossAction">
+                <PrivateAction>
+                  <RoutingAction>
+                    <FollowTrajectoryAction>
+                      <Trajectory name="CrossTrajectory" closed="false">
+                        <Shape>
+                          <Polyline>
+                            <Vertex time="0">
+                              <Position>
+                                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="-5.0" s="500.0">
+                                  <Orientation h="$TargetBlocking_InitPosition_Heading" />
+                                </LanePosition>
+                              </Position>
+                            </Vertex>
+                            <Vertex time="7.2">
+                              <Position>
+                                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="5.0" s="500.0">
+                                  <Orientation h="$TargetBlocking_InitPosition_Heading" />
+                                </LanePosition>
+                              </Position>
+                            </Vertex>
+                          </Polyline>
+                        </Shape>
+                      </Trajectory>
+                      <TimeReference>
+                        <Timing domainAbsoluteRelative="relative" scale="1.0" offset="0.0" />
+                      </TimeReference>
+                      <TrajectoryFollowingMode followingMode="position" />
+                    </FollowTrajectoryAction>
+                  </RoutingAction>
+                </PrivateAction>
+              </Action>
+              <StartTrigger>
+                <ConditionGroup>
+                  <Condition name="CrossStartCondition" delay="0" conditionEdge="rising">
+                    <ByEntityCondition>
+                      <TriggeringEntities triggeringEntitiesRule="any">
+                        <EntityRef entityRef="Ego" />
+                      </TriggeringEntities>
+                      <EntityCondition>
+                        <TimeHeadwayCondition entityRef="TargetBlocking" value="3.6" freespace="true" alongRoute="true" rule="lessThan" />
+                      </EntityCondition>
+                    </ByEntityCondition>
+                  </Condition>
+                </ConditionGroup>
+              </StartTrigger>
+            </Event>
+          </Maneuver>
+        </ManeuverGroup>
+        <StartTrigger>
+          <ConditionGroup>
+            <Condition name="CrossActStart" delay="0" conditionEdge="rising">
               <ByValueCondition>
                 <SimulationTimeCondition value="0" rule="greaterThan" />
               </ByValueCondition>

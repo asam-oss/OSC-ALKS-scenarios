@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <OpenSCENARIO>
-  <FileHeader revMajor="1" revMinor="0" date="2020-06-16T10:00:00" description="ALKS Scenario 2.2 PartiallyBlockingTarget Template" author="BMW AG" />
+  <FileHeader revMajor="1" revMinor="0" date="2020-06-16T10:00:00" description="ALKS Scenario 4.2_4 MultipleBlockingTargets Template" author="BMW AG" />
   <ParameterDeclarations>
     <!--The whole ParameterDeclarations section is needed for easy variation. The "*_Visibility" parameters for the entities and the "*_Story" parameters are used for varying different functional scenarios. E.g. for a CutIn Scenario the parameter "CutInVehicle_Visibility" must be true.-->
     <ParameterDeclaration name="$Ego_InitPosition_LaneId" parameterType="integer" value="-4" />
@@ -8,7 +8,7 @@
     <ParameterDeclaration name="$Duration" parameterType="double" value="40" />
     <ParameterDeclaration name="$TargetBlocking_Catalog" parameterType="string" value="PedestrianCatalog" />
     <ParameterDeclaration name="$TargetBlocking_Model" parameterType="string" value="pedestrian" />
-    <ParameterDeclaration name="$TargetBlocking_InitPosition_Offset" parameterType="double" value="-1.5" />
+    <ParameterDeclaration name="$TargetBlocking2_Model" parameterType="string" value="bus" />
   </ParameterDeclarations>
   <CatalogLocations>
     <VehicleCatalog>
@@ -37,6 +37,9 @@
     <ScenarioObject name="TargetBlocking">
       <CatalogReference catalogName="$TargetBlocking_Catalog" entryName="$TargetBlocking_Model"></CatalogReference>
     </ScenarioObject>
+    <ScenarioObject name="TargetBlocking2">
+      <CatalogReference catalogName="VehicleCatalog" entryName="$TargetBlocking2_Model"></CatalogReference>
+    </ScenarioObject>
   </Entities>
   <Storyboard>
     <Init>
@@ -64,7 +67,16 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="$TargetBlocking_InitPosition_Offset" s="500.0"></LanePosition>
+                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="500.0"></LanePosition>
+              </Position>
+            </TeleportAction>
+          </PrivateAction>
+        </Private>
+        <Private entityRef="TargetBlocking2">
+          <PrivateAction>
+            <TeleportAction>
+              <Position>
+                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="515.0"></LanePosition>
               </Position>
             </TeleportAction>
           </PrivateAction>

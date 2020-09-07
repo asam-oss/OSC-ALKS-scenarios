@@ -1,10 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <OpenSCENARIO>
-  <FileHeader revMajor="1" revMinor="0" date="2020-06-16T10:00:00" description="ALKS Scenario 1.1 FreeDriving Template" author="BMW AG" />
+  <FileHeader revMajor="1" revMinor="0" date="2020-06-16T10:00:00" description="ALKS Scenario 4.2_1 FullyBlockingTarget Template" author="BMW AG" />
   <ParameterDeclarations>
-    <!--The ParameterDeclarations section is needed for easy variation.-->
+    <!--The whole ParameterDeclarations section is needed for easy variation.-->
+    <ParameterDeclaration name="$Ego_InitPosition_LaneId" parameterType="integer" value="-4" />
     <ParameterDeclaration name="$Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667" />
-    <ParameterDeclaration name="$Duration" parameterType="double" value="300" />
+    <ParameterDeclaration name="$Duration" parameterType="double" value="40" />
+    <ParameterDeclaration name="$TargetBlocking_Catalog" parameterType="string" value="PedestrianCatalog" />
+    <ParameterDeclaration name="$TargetBlocking_Model" parameterType="string" value="pedestrian" />
   </ParameterDeclarations>
   <CatalogLocations>
     <VehicleCatalog>
@@ -21,7 +24,7 @@
     </ControllerCatalog>
   </CatalogLocations>
   <RoadNetwork>
-    <LogicFile filepath="./ALKS_Road_Different_Curvatures.xodr" />
+    <LogicFile filepath="./ALKS_Road.xodr" />
   </RoadNetwork>
   <Entities>
     <ScenarioObject name="Ego">
@@ -29,6 +32,9 @@
       <ObjectController>
         <CatalogReference catalogName="ControllerCatalog" entryName="ALKSController"></CatalogReference>
       </ObjectController>
+    </ScenarioObject>
+    <ScenarioObject name="TargetBlocking">
+      <CatalogReference catalogName="$TargetBlocking_Catalog" entryName="$TargetBlocking_Model"></CatalogReference>
     </ScenarioObject>
   </Entities>
   <Storyboard>
@@ -38,7 +44,7 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <LanePosition roadId="0" laneId="-4" offset="0.0" s="0.0"></LanePosition>
+                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="0.0"></LanePosition>
               </Position>
             </TeleportAction>
           </PrivateAction>
@@ -51,6 +57,15 @@
                 </SpeedActionTarget>
               </SpeedAction>
             </LongitudinalAction>
+          </PrivateAction>
+        </Private>
+        <Private entityRef="TargetBlocking">
+          <PrivateAction>
+            <TeleportAction>
+              <Position>
+                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="500.0"></LanePosition>
+              </Position>
+            </TeleportAction>
           </PrivateAction>
         </Private>
       </Actions>

@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <OpenSCENARIO>
-  <FileHeader revMajor="1" revMinor="0" date="2020-06-16T10:00:00" description="ALKS Scenario 1.2 Swerving Lead Vehicle Template" author="BMW AG" />
+  <FileHeader revMajor="1" revMinor="0" date="2020-06-16T10:00:00" description="ALKS Scenario 4.6_2 LateralDetectionRange Template" author="BMW AG" />
   <ParameterDeclarations>
     <!--The whole ParameterDeclarations section is needed for easy variation.-->
-    <ParameterDeclaration name="$Ego_InitPosition_LaneId" parameterType="integer" value="-4" />
     <ParameterDeclaration name="$Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667" />
     <ParameterDeclaration name="$Duration" parameterType="double" value="40" />
-    <ParameterDeclaration name="$LeadVehicle_Model" parameterType="string" value="car" />
-    <ParameterDeclaration name="$LeadVehicle_InitDistance_dx0" parameterType="double" value="33.33333333" />
-    <ParameterDeclaration name="$Swerve_Offset_Left" parameterType="double" value="1.0" />
-    <ParameterDeclaration name="$Swerve_Offset_Right" parameterType="double" value="-1.0" />
-    <ParameterDeclaration name="$Swerve_MaxLateralAcc" parameterType="double" value="0.3" />
+    <ParameterDeclaration name="$SideVehicle_InitLongitudinalOffset" parameterType="double" value="0.0" />
+    <ParameterDeclaration name="$SideVehicle_InitPosition_LaneId" parameterType="integer" value="-5" />
+    <ParameterDeclaration name="$SideVehicle_InitLateralOffset" parameterType="double" value="-1.75" />
+    <ParameterDeclaration name="$Swerve_Offset_Left" parameterType="double" value="1.5" />
+    <ParameterDeclaration name="$Swerve_Offset_Right" parameterType="double" value="-0.0" />
+    <ParameterDeclaration name="$Swerve_MaxLateralAcc" parameterType="double" value="0.1" />
   </ParameterDeclarations>
   <CatalogLocations>
     <VehicleCatalog>
@@ -36,8 +36,8 @@
         <CatalogReference catalogName="ControllerCatalog" entryName="ALKSController"></CatalogReference>
       </ObjectController>
     </ScenarioObject>
-    <ScenarioObject name="LeadVehicle">
-      <CatalogReference catalogName="VehicleCatalog" entryName="$LeadVehicle_Model"></CatalogReference>
+    <ScenarioObject name="SideVehicle">
+      <CatalogReference catalogName="VehicleCatalog" entryName="motorbike"></CatalogReference>
     </ScenarioObject>
   </Entities>
   <Storyboard>
@@ -47,7 +47,7 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="0.0"></LanePosition>
+                <LanePosition roadId="0" laneId="-4" offset="0.0" s="0.0"></LanePosition>
               </Position>
             </TeleportAction>
           </PrivateAction>
@@ -62,11 +62,11 @@
             </LongitudinalAction>
           </PrivateAction>
         </Private>
-        <Private entityRef="LeadVehicle">
+        <Private entityRef="SideVehicle">
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="$LeadVehicle_InitDistance_dx0"></LanePosition>
+                <LanePosition roadId="0" laneId="$SideVehicle_InitPosition_LaneId" s="$SideVehicle_InitLongitudinalOffset" offset="$SideVehicle_InitLateralOffset"></LanePosition>
               </Position>
             </TeleportAction>
           </PrivateAction>
@@ -75,7 +75,7 @@
               <SpeedAction>
                 <SpeedActionDynamics dynamicsShape="step" dynamicsDimension="time" value="0" />
                 <SpeedActionTarget>
-                  <RelativeTargetSpeed entityRef="Ego" value="0" speedTargetValueType="delta" continuous="false" />
+                  <AbsoluteTargetSpeed value="$Ego_InitSpeed_Ve0" />
                 </SpeedActionTarget>
               </SpeedAction>
             </LongitudinalAction>
@@ -123,7 +123,7 @@
       <Act name="SwerveAct">
         <ManeuverGroup maximumExecutionCount="1" name="SwerveSequence">
           <Actors selectTriggeringEntities="false">
-            <EntityRef entityRef="LeadVehicle" />
+            <EntityRef entityRef="SideVehicle" />
           </Actors>
           <Maneuver name="SwerveManeuver">
             <Event name="SwerveEvent" priority="overwrite">
