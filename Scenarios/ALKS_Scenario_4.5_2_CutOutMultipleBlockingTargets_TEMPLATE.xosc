@@ -1,17 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <OpenSCENARIO>
-  <FileHeader revMajor="1" revMinor="0" date="2020-06-16T10:00:00" description="ALKS Scenario 4.1 CutInNoCollision Template" author="BMW AG" />
+  <FileHeader revMajor="1" revMinor="0" date="2020-06-16T10:00:00" description="ALKS Scenario 4.5_2 CutOutMultipleBlockingTargets Template" author="BMW AG" />
   <ParameterDeclarations>
     <!--The whole ParameterDeclarations section is needed for easy variation. The "*_Visibility" parameters for the entities and the "*_Story" parameters are used for varying different functional scenarios. E.g. for a CutIn Scenario the parameter "CutInVehicle_Visibility" must be true.-->
+    <ParameterDeclaration name="$Ego_InitPosition_LaneId" parameterType="integer" value="-4" />
     <ParameterDeclaration name="$Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667" />
     <ParameterDeclaration name="$Duration" parameterType="double" value="40" />
-    <ParameterDeclaration name="$CutInVehicle_Model" parameterType="string" value="car" />
-    <ParameterDeclaration name="$CutInVehicle_InitPosition_RelativeLaneId" parameterType="integer" value="-1" />
-    <ParameterDeclaration name="$CutInVehicle_RelativeInitSpeed_Ve0_Vo0" parameterType="double" value="-5.5555" />
-    <ParameterDeclaration name="$CutInVehicle_HeadwayDistanceTrigger_dx0" parameterType="double" value="30.0" />
-    <ParameterDeclaration name="$CutInVehicle_LaneChange_MaxLateralVelocity_Vy" parameterType="double" value="1.0" />
-    <ParameterDeclaration name="$CutInVehicle_Acceleration_Rate" parameterType="double" value="0.0" />
-    <ParameterDeclaration name="$CutInVehicle_Acceleration_Target" parameterType="double" value="15.0" />
+    <ParameterDeclaration name="$LeadVehicle_InitDistance_dx0" parameterType="double" value="33.33333333" />
+    <ParameterDeclaration name="$TargetBlocking_Catalog" parameterType="string" value="PedestrianCatalog" />
+    <ParameterDeclaration name="$TargetBlocking_Model" parameterType="string" value="pedestrian" />
+    <ParameterDeclaration name="$TargetBlocking2_Model" parameterType="string" value="bus" />
   </ParameterDeclarations>
   <CatalogLocations>
     <VehicleCatalog>
@@ -37,8 +35,14 @@
         <CatalogReference catalogName="ControllerCatalog" entryName="ALKSController"></CatalogReference>
       </ObjectController>
     </ScenarioObject>
-    <ScenarioObject name="CutInVehicle">
-      <CatalogReference catalogName="VehicleCatalog" entryName="$CutInVehicle_Model"></CatalogReference>
+    <ScenarioObject name="TargetBlocking">
+      <CatalogReference catalogName="$TargetBlocking_Catalog" entryName="$TargetBlocking_Model"></CatalogReference>
+    </ScenarioObject>
+    <ScenarioObject name="TargetBlocking2">
+      <CatalogReference catalogName="VehicleCatalog" entryName="$TargetBlocking2_Model"></CatalogReference>
+    </ScenarioObject>
+    <ScenarioObject name="LeadVehicle">
+      <CatalogReference catalogName="VehicleCatalog" entryName="car"></CatalogReference>
     </ScenarioObject>
   </Entities>
   <Storyboard>
@@ -48,7 +52,7 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <LanePosition roadId="0" laneId="-4" offset="0.0" s="0.0"></LanePosition>
+                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="0.0"></LanePosition>
               </Position>
             </TeleportAction>
           </PrivateAction>
@@ -63,11 +67,29 @@
             </LongitudinalAction>
           </PrivateAction>
         </Private>
-        <Private entityRef="CutInVehicle">
+        <Private entityRef="TargetBlocking">
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <RelativeLanePosition entityRef="Ego" dLane="$CutInVehicle_InitPosition_RelativeLaneId" ds="50.0" offset="0.0" />
+                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="500.0"></LanePosition>
+              </Position>
+            </TeleportAction>
+          </PrivateAction>
+        </Private>
+        <Private entityRef="TargetBlocking2">
+          <PrivateAction>
+            <TeleportAction>
+              <Position>
+                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="515.0"></LanePosition>
+              </Position>
+            </TeleportAction>
+          </PrivateAction>
+        </Private>
+        <Private entityRef="LeadVehicle">
+          <PrivateAction>
+            <TeleportAction>
+              <Position>
+                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="$LeadVehicle_InitDistance_dx0"></LanePosition>
               </Position>
             </TeleportAction>
           </PrivateAction>
@@ -76,7 +98,7 @@
               <SpeedAction>
                 <SpeedActionDynamics dynamicsShape="step" dynamicsDimension="time" value="0" />
                 <SpeedActionTarget>
-                  <RelativeTargetSpeed entityRef="Ego" value="$CutInVehicle_RelativeInitSpeed_Ve0_Vo0" speedTargetValueType="delta" continuous="false" />
+                  <RelativeTargetSpeed entityRef="Ego" value="0" speedTargetValueType="delta" continuous="false" />
                 </SpeedActionTarget>
               </SpeedAction>
             </LongitudinalAction>
@@ -120,47 +142,35 @@
         </StartTrigger>
       </Act>
     </Story>
-    <Story name="CutInStory">
-      <Act name="CutInAct">
-        <ManeuverGroup maximumExecutionCount="1" name="CutInSequence">
+    <Story name="EvasionStory">
+      <Act name="EvasionAct">
+        <ManeuverGroup maximumExecutionCount="1" name="EvasionSequence">
           <Actors selectTriggeringEntities="false">
-            <EntityRef entityRef="CutInVehicle" />
+            <EntityRef entityRef="LeadVehicle" />
           </Actors>
-          <Maneuver name="CutInManeuver">
-            <Event name="CutInEvent" priority="overwrite">
-              <Action name="CutInAction">
+          <Maneuver name="EvasionManeuver">
+            <Event name="EvasionEvent" priority="overwrite">
+              <Action name="EvasionAction">
                 <PrivateAction>
                   <LateralAction>
                     <LaneChangeAction>
-                      <LaneChangeActionDynamics dynamicsShape="sinusoidal" value="$CutInVehicle_LaneChange_MaxLateralVelocity_Vy" dynamicsDimension="rate" />
+                      <LaneChangeActionDynamics dynamicsShape="sinusoidal" value="2" dynamicsDimension="time" />
                       <LaneChangeTarget>
-                        <RelativeTargetLane entityRef="Ego" value="0" />
+                        <RelativeTargetLane entityRef="TargetBlocking" value="-1" />
                       </LaneChangeTarget>
                     </LaneChangeAction>
                   </LateralAction>
                 </PrivateAction>
               </Action>
-              <Action name="CutInAccelerateAction">
-                <PrivateAction>
-                  <LongitudinalAction>
-                    <SpeedAction>
-                      <SpeedActionDynamics dynamicsShape="linear" value="$CutInVehicle_Acceleration_Rate" dynamicsDimension="rate" />
-                      <SpeedActionTarget>
-                        <AbsoluteTargetSpeed value="$CutInVehicle_Acceleration_Target" />
-                      </SpeedActionTarget>
-                    </SpeedAction>
-                  </LongitudinalAction>
-                </PrivateAction>
-              </Action>
               <StartTrigger>
                 <ConditionGroup>
-                  <Condition name="CutInStartCondition" delay="0" conditionEdge="rising">
+                  <Condition name="EvasionStartCondition" delay="0" conditionEdge="rising">
                     <ByEntityCondition>
                       <TriggeringEntities triggeringEntitiesRule="any">
-                        <EntityRef entityRef="Ego" />
+                        <EntityRef entityRef="LeadVehicle" />
                       </TriggeringEntities>
                       <EntityCondition>
-                        <RelativeDistanceCondition entityRef="CutInVehicle" relativeDistanceType="longitudinal" value="$CutInVehicle_HeadwayDistanceTrigger_dx0" freespace="true" rule="lessThan" />
+                        <RelativeDistanceCondition entityRef="TargetBlocking" relativeDistanceType="longitudinal" value="30" freespace="true" rule="lessThan" />
                       </EntityCondition>
                     </ByEntityCondition>
                   </Condition>
@@ -171,7 +181,7 @@
         </ManeuverGroup>
         <StartTrigger>
           <ConditionGroup>
-            <Condition name="CutInActStart" delay="0" conditionEdge="rising">
+            <Condition name="EvasionActStart" delay="0" conditionEdge="rising">
               <ByValueCondition>
                 <SimulationTimeCondition value="0" rule="greaterThan" />
               </ByValueCondition>
