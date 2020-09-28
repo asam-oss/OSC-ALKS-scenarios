@@ -1,0 +1,1 @@
+%ESMINI%\EgoSimulator.exe --window 100 200 1024 576  --osc ./ALKS_Scenario_4.6_2_LateralDetectionRange_TEMPLATE.xosc --trails off

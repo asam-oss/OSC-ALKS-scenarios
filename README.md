@@ -17,3 +17,13 @@ The activation of the ALKS takes place in all scenarios at the beginning of the 
 The corresponding OpenSCENARIO Bundle (6 subject areas analogous to Annex 5, Chapter 4.1-4.6) has been licensed by CC-BY-SA 4.0 and is hereby made publicly available. 
 
 BMW is not liable for the correctness and completeness of the OpenSCENARIO files. The legal text is authoritative.
+
+# Usage
+
+The scenarios can be executed with various open source or proprietary environment simulation tools, if they are compatible with the OpenSCENARIO 1.0 standard. 
+Here the execution with the open source tool "esmini", a basic OpenSCENARIO player is described on Windows:
+
+1. Clone or download the repository to your local drive.
+2. Download the latest esmini release (e.g. esmini-bin_win_x64.zip) from https://github.com/esmini/esmini/releases
+3. Create an environment variable "ESMINI", which directs to the "bin" folder of esmini. E.g. "C:\MyFolder\esmini\bin\"
+3. Execute the scripts "run_SubScenario*.bat", located in the "Scenarios" folder of the local repository

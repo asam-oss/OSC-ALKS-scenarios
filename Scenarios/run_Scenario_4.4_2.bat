@@ -1,0 +1,1 @@
+%ESMINI%\EgoSimulator.exe --window 100 200 1024 576  --osc ./ALKS_Scenario_4.4_2_CutInUnavoidableCollision_TEMPLATE_esmini.xosc --trails off
