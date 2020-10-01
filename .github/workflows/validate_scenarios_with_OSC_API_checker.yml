@@ -15,5 +15,5 @@ jobs:
     - name: OpenSCENARIO checker action
       uses: ahege/openscenario.ci.test@v3.0.3
       with:
-        CONF_FILE: workflows/config_osc_api_checker.yml
+        CONF_FILE: .github/workflows/config/checker_config.yml
         BASE_DIR: ./
