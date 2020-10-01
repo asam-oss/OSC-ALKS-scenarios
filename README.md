@@ -27,3 +27,9 @@ Here the execution with the open source tool "esmini", a basic OpenSCENARIO play
 2. Download the latest esmini release (e.g. esmini-bin_win_x64.zip) from https://github.com/esmini/esmini/releases
 3. Create an environment variable "ESMINI", which directs to the "bin" folder of esmini. E.g. "C:\MyFolder\esmini\bin\"
 3. Execute the scripts "run_SubScenario*.bat", located in the "Scenarios" folder of the local repository
+
+# CI
+
+The validation of the scenarios and maps provided in this repository is integrated into the CI workflow. There are two validation mechanisms implemented with GitHub actions:
+1. Syntactic validation of the scenarios and maps against the XSD schemas of the OpenSCENARIO and OpenDRIVE standards with xmllint
+2. Syntactic and semantic validation of the scenarios with the *Standalone Checker* of the [OpenSCENARIO API](https://github.com/RA-Consulting-GmbH/openscenario.api.test). Integration into the CI is prepared by a [GitHub action](https://github.com/ahege/openscenario.ci.test) and an [example](https://github.com/ahege/opensceanrio.ci.example.test/).
