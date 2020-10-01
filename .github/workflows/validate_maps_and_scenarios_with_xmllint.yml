@@ -1,11 +1,13 @@
-name: Validate-OpenX-files
+name: Validate OpenX files with xmllint
 
 on:
+  push:
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
 jobs:
-  validate-openx-files:
+  validate_openx_files_with_xmllint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
