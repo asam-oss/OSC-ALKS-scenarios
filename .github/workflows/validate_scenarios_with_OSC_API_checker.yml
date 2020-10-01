@@ -1,0 +1,19 @@
+name: Validate scenarios with OSC Checker Tool
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  validate_xosc_with_checker_tool:
+    name: Validate xosc with OSC Checker Tool
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: OpenSCENARIO checker action
+      uses: ahege/openscenario.ci.test@v3.0.3
+      with:
+        CONF_FILE: workflows/config_osc_api_checker.yml
+        BASE_DIR: ./
