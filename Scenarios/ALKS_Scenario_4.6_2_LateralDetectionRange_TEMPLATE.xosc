@@ -3,14 +3,14 @@
   <FileHeader revMajor="1" revMinor="0" date="2020-06-16T10:00:00" description="ALKS Scenario 4.6_2 LateralDetectionRange Template" author="BMW AG" />
   <ParameterDeclarations>
     <!--The whole ParameterDeclarations section is needed for easy variation.-->
-    <ParameterDeclaration name="$Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667" />
-    <ParameterDeclaration name="$Duration" parameterType="double" value="40" />
-    <ParameterDeclaration name="$SideVehicle_InitLongitudinalOffset" parameterType="double" value="0.0" />
-    <ParameterDeclaration name="$SideVehicle_InitPosition_LaneId" parameterType="string" value="-5" />
-    <ParameterDeclaration name="$SideVehicle_InitLateralOffset" parameterType="double" value="-1.75" />
-    <ParameterDeclaration name="$Swerve_Offset_Left" parameterType="double" value="1.5" />
-    <ParameterDeclaration name="$Swerve_Offset_Right" parameterType="double" value="-0.0" />
-    <ParameterDeclaration name="$Swerve_MaxLateralAcc" parameterType="double" value="0.1" />
+    <ParameterDeclaration name="Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667" />
+    <ParameterDeclaration name="Duration" parameterType="double" value="40" />
+    <ParameterDeclaration name="SideVehicle_InitLongitudinalOffset" parameterType="double" value="0.0" />
+    <ParameterDeclaration name="SideVehicle_InitPosition_LaneId" parameterType="string" value="-5" />
+    <ParameterDeclaration name="SideVehicle_InitLateralOffset" parameterType="double" value="-1.75" />
+    <ParameterDeclaration name="Swerve_Offset_Left" parameterType="double" value="1.5" />
+    <ParameterDeclaration name="Swerve_Offset_Right" parameterType="double" value="-0.0" />
+    <ParameterDeclaration name="Swerve_MaxLateralAcc" parameterType="double" value="0.1" />
   </ParameterDeclarations>
   <CatalogLocations>
     <VehicleCatalog>
