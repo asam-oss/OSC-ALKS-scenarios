@@ -87,7 +87,7 @@
                 <ConditionGroup>
                   <Condition name="ActivateALKSControllerStartCondition" delay="0" conditionEdge="rising">
                     <ByValueCondition>
-                      <SimulationTimeCondition value="0" rule="greaterThan" />
+                      <SimulationTimeCondition value="10000" rule="greaterThan" />
                     </ByValueCondition>
                   </Condition>
                 </ConditionGroup>
