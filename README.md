@@ -13,8 +13,6 @@ The ALKS document contains test scenarios at a functional level in Annex 5, Chap
 
 The focus of the scenarios is on securing the planning aspects of an ALKS. By extending the scenarios with references to e.g. 3D models or environmental conditions (light, rain), aspects of sensor and actuator technology could also be simulated and validated.
 
-The activation of the ALKS takes place in all scenarios at the beginning of the scenario via a so-called "controller".
-
 ## Usage
 
 The scenarios can be executed with various open source or proprietary environment simulation tools, if they are compatible with the OpenSCENARIO 1.0 and OpenDRIVE 1.6 standards. By using parameters in the OpenSCENARIO files, the scenarios can be varied by changing the parameter values into different concrete scenarios.
@@ -25,6 +23,10 @@ Here the execution with the open source tool "esmini", a basic OpenSCENARIO play
 2. Download the [latest esmini release](https://github.com/esmini/esmini/releases) (e.g. esmini-bin_win_x64.zip)
 3. Create an environment variable "ESMINI", which directs to the "bin" folder of esmini. E.g. "C:\MyFolder\esmini\bin\"
 3. Execute the scripts "run_SubScenario*.bat", located in the "Scenarios" folder of the local repository
+
+# Behavior of the vehicle under test
+Esmini is an environment simulator with a visualization and does not provide an ALKS. Therefore, for demonstration purposes the vehicle under test is controlled by a so called "default controller", which is provided by esmini. This controller type is defined by the OpenSCENARIO standard as a controller that only maintains the speed and lane offset without taking other traffic participants into account. 
+If the scenarios are used for testing an ALKS, then the activation of the ALKS is already prepared in the scenarios. Every scenario has an "ActivateALKSControllerAction" with an "ActivateALKSControllerStartCondition" referring to the simulation time. If the value for the simulation time is changed to 0, then the ALKS shall be activated directly at the beginning of the scenario. The actual sending of the manufacturer-specific signal from the environment simulation to the ALKS component for ALKS activation needs to be implemented in the environment simulation.
 
 ## Quality Measures
 
