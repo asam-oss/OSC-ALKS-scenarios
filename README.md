@@ -20,7 +20,7 @@ The scenarios can be executed with various open source or proprietary environmen
 Here the execution with the open source tool "esmini", a basic OpenSCENARIO player is described on Windows:
 
 1. Clone or download the repository to your local drive.
-2. Download the [latest esmini release](https://github.com/esmini/esmini/releases) (e.g. esmini-bin_win_x64.zip)
+2. Download the [latest esmini release](https://github.com/esmini/esmini/releases) (e.g. esmini-bin_win_x64.zip) (tested successfully with [esmini 1.7.12](https://github.com/esmini/esmini/releases/tag/v1.7.12))
 3. Create an environment variable "ESMINI", which directs to the "bin" folder of esmini. E.g. "C:\MyFolder\esmini\bin\"
 4. Execute the scripts "run_SubScenario*.bat", located in the "Scenarios" folder of the local repository
 
