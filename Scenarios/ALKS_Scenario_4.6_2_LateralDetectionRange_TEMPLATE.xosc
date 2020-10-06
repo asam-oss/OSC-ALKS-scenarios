@@ -2,7 +2,7 @@
 <OpenSCENARIO>
   <FileHeader revMajor="1" revMinor="0" date="2020-06-16T10:00:00" description="ALKS Scenario 4.6_2 LateralDetectionRange Template" author="BMW AG" />
   <ParameterDeclarations>
-    <!--The whole ParameterDeclarations section is needed for easy variation.-->
+    <!--The ParameterDeclarations section is needed for easy variation.-->
     <ParameterDeclaration name="Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667" />
     <ParameterDeclaration name="Duration" parameterType="double" value="40" />
     <ParameterDeclaration name="SideVehicle_InitLongitudinalOffset" parameterType="double" value="0.0" />
