@@ -22,7 +22,10 @@ Here the execution with the open source tool "esmini", a basic OpenSCENARIO play
 1. Clone or download the repository to your local drive.
 2. Download the [latest esmini release](https://github.com/esmini/esmini/releases) (e.g. esmini-bin_win_x64.zip)
 3. Create an environment variable "ESMINI", which directs to the "bin" folder of esmini. E.g. "C:\MyFolder\esmini\bin\"
-3. Execute the scripts "run_SubScenario*.bat", located in the "Scenarios" folder of the local repository
+4. Execute the scripts "run_SubScenario*.bat", located in the "Scenarios" folder of the local repository
+
+NOTE:
+The bounding boxes shown in esmini are not according to the given dimensions in the scenario catalogs.
 
 ### Behavior of the vehicle under test
 Esmini is an environment simulator with a visualization and does not provide an ALKS. Therefore, for demonstration purposes the vehicle under test is controlled by a so called "default controller", which is provided by esmini. This controller type is defined by the OpenSCENARIO standard as a controller that only maintains the speed and lane offset without taking other traffic participants into account. 
