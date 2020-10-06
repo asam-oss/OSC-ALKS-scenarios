@@ -2,7 +2,7 @@
 <OpenSCENARIO>
   <FileHeader revMajor="1" revMinor="0" date="2020-06-16T10:00:00" description="ALKS Scenario 4.4_2 CutInUnavoidableCollision Template. Changed to be executable with esmini. NOT ACCORDING TO SPECIFIED ALKS TEST PROCEDURE!" author="BMW AG" />
   <ParameterDeclarations>
-    <!--The whole ParameterDeclarations section is needed for easy variation. The "*_Visibility" parameters for the entities and the "*_Story" parameters are used for varying different functional scenarios. E.g. for a CutIn Scenario the parameter "CutInVehicle_Visibility" must be true.-->
+    <!--The ParameterDeclarations section is needed for easy variation. Since esmini at the moment does not implement the LaneChangeAction with "rate", this scenario uses "time" as parameter for demonstration purposes. Variation with "time" as parameter is not recommended, since this does not correspond to the test requirements of the ALKS regulation.-->
     <ParameterDeclaration name="Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667" />
     <ParameterDeclaration name="Duration" parameterType="double" value="40" />
     <ParameterDeclaration name="CutInVehicle_Model" parameterType="string" value="car" />
