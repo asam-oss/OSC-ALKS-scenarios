@@ -48,4 +48,12 @@ The validation of the scenarios and maps provided in this repository is integrat
 
 The corresponding OpenSCENARIO Bundle has been licensed by [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.de) and is hereby made publicly available. 
 
+The XSD schema of OpenSCENARIO is used under the license of ASAM, which can be found here:
+https://www.asam.net/index.php?eID=dumpFile&t=f&f=3496&token=df4fdaf41a8463e585495001cc3db3298b57d426
+
+The XSD schemas of OpenDRIVE are used under the license of ASAM, which can be found here:
+https://www.asam.net/index.php?eID=dumpFile&t=f&f=3495&token=56b15ffd9dfe23ad8f759523c806fc1f1a90a0e8
+
+The *Standalone Checker* of the OpenSCENARIO API and the corresponding GitHub action are used under the Apache 2.0 license.
+
 BMW is not liable for the correctness and completeness of the OpenSCENARIO files. The legal text is authoritative.
