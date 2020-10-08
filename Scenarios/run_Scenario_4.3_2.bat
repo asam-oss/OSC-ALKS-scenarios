@@ -1,1 +1,0 @@
-"%ESMINI%\EgoSimulator.exe" --window 100 200 1024 576  --osc ./ALKS_Scenario_4.3_2_FollowLeadVehicleEmergencyBrake_TEMPLATE.xosc --trails off

@@ -1,1 +1,0 @@
-"%ESMINI%\EgoSimulator.exe" --window 100 200 1024 576  --osc ./ALKS_Scenario_4.5_2_CutOutMultipleBlockingTargets_TEMPLATE.xosc --trails off
