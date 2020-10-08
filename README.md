@@ -26,7 +26,7 @@ The execution with the open source tool "esmini", a basic OpenSCENARIO player is
 1. Clone or download the repository to your local drive.
 2. Download the [latest esmini release](https://github.com/esmini/esmini/releases) (e.g. esmini-bin_win_x64.zip) (tested successfully with [esmini 1.7.12](https://github.com/esmini/esmini/releases/tag/v1.7.12))
 3. Create an environment variable "ESMINI", which directs to the "bin" folder of esmini. E.g. "C:\MyFolder\esmini\bin\"
-4. Execute the scripts "run_SubScenario*.bat", located in the "Scenarios" folder of the local repository
+4. Execute the script "run_Scenario.bat", located in the "Scenarios" folder of the local repository
 5. By changing the parameter values in the parameter declaration section of the OpenSCENARIO files, the concrete scenarios can be varied.
 
 ### Notes regarding esmini:
@@ -48,12 +48,10 @@ The validation of the scenarios and maps provided in this repository is integrat
 
 The corresponding OpenSCENARIO Bundle has been licensed by [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.de) and is hereby made publicly available. 
 
-The XSD schema of OpenSCENARIO is used under the license of ASAM, which can be found here:
-https://www.asam.net/index.php?eID=dumpFile&t=f&f=3496&token=df4fdaf41a8463e585495001cc3db3298b57d426
+The XSD schema of OpenSCENARIO is used under the license of ASAM, which can be found [here](https://www.asam.net/index.php?eID=dumpFile&t=f&f=3496&token=df4fdaf41a8463e585495001cc3db3298b57d426).
 
-The XSD schemas of OpenDRIVE are used under the license of ASAM, which can be found here:
-https://www.asam.net/index.php?eID=dumpFile&t=f&f=3495&token=56b15ffd9dfe23ad8f759523c806fc1f1a90a0e8
+The XSD schemas of OpenDRIVE are used under the license of ASAM, which can be found [here](https://www.asam.net/index.php?eID=dumpFile&t=f&f=3495&token=56b15ffd9dfe23ad8f759523c806fc1f1a90a0e8)
 
-The *Standalone Checker* of the OpenSCENARIO API and the corresponding GitHub action are used under the Apache 2.0 license.
+The *Standalone Checker* of the OpenSCENARIO API and the corresponding GitHub action are used under the [Apache 2.0](https://github.com/RA-Consulting-GmbH/openscenario.api.test/blob/master/LICENSE) license.
 
 BMW is not liable for the correctness and completeness of the OpenSCENARIO files. The legal text is authoritative.
