@@ -7,7 +7,7 @@ ECHO SYSTEM INFO.
 ECHO ====================================
 setlocal EnableDelayedExpansion
 
-if not exist "%ESMINI%" (
+if not defined ESMINI (
     ECHO Esmini path not found. Please install and create ESMINI environment variable.
     pause
     GOTO finish
