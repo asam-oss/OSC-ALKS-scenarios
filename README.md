@@ -52,6 +52,6 @@ The XSD schema of OpenSCENARIO is used under the license of ASAM, which can be f
 
 The XSD schemas of OpenDRIVE are used under the license of ASAM, which can be found [here](https://www.asam.net/index.php?eID=dumpFile&t=f&f=3495&token=56b15ffd9dfe23ad8f759523c806fc1f1a90a0e8)
 
-The *Standalone Checker* of the OpenSCENARIO API and the corresponding GitHub action are used under the Apache 2.0 license.
+The *Standalone Checker* of the OpenSCENARIO API and the corresponding GitHub action are used under the [Apache 2.0](https://github.com/RA-Consulting-GmbH/openscenario.api.test/blob/master/LICENSE) license.
 
 BMW is not liable for the correctness and completeness of the OpenSCENARIO files. The legal text is authoritative.
