@@ -7,6 +7,8 @@
     <ParameterDeclaration name="Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667" />
     <ParameterDeclaration name="Duration" parameterType="double" value="40" />
     <ParameterDeclaration name="LeadVehicle_InitDistance_dx0" parameterType="double" value="33.33333333" />
+    <ParameterDeclaration name="FrontOfLead_Distance_dx0_f" parameterType="double" value="50.0" />
+    <ParameterDeclaration name="Lateral_Velocity_Vy" parameterType="double" value="2.0" />
     <ParameterDeclaration name="TargetBlocking_Catalog" parameterType="string" value="PedestrianCatalog" />
     <ParameterDeclaration name="TargetBlocking_Model" parameterType="string" value="pedestrian" />
     <ParameterDeclaration name="TargetBlocking2_Model" parameterType="string" value="bus" />
@@ -142,21 +144,21 @@
         </StartTrigger>
       </Act>
     </Story>
-    <Story name="EvasionStory">
-      <Act name="EvasionAct">
-        <ManeuverGroup maximumExecutionCount="1" name="EvasionSequence">
+    <Story name="CutOutStory">
+      <Act name="CutOutAct">
+        <ManeuverGroup maximumExecutionCount="1" name="CutOutManeuverGroup">
           <Actors selectTriggeringEntities="false">
             <EntityRef entityRef="LeadVehicle" />
           </Actors>
-          <Maneuver name="EvasionManeuver">
-            <Event name="EvasionEvent" priority="overwrite">
-              <Action name="EvasionAction">
+          <Maneuver name="CutOutManeuver">
+            <Event name="CutOutEvent" priority="overwrite">
+              <Action name="CutOutAction">
                 <PrivateAction>
                   <LateralAction>
                     <LaneChangeAction>
-                      <LaneChangeActionDynamics dynamicsShape="sinusoidal" value="2" dynamicsDimension="time" />
+                      <LaneChangeActionDynamics dynamicsShape="sinusoidal" value="$Lateral_Velocity_Vy" dynamicsDimension="rate" />
                       <LaneChangeTarget>
-                        <RelativeTargetLane entityRef="TargetBlocking" value="-1" />
+                        <RelativeTargetLane entityRef="TargetBlocking" value="1" />
                       </LaneChangeTarget>
                     </LaneChangeAction>
                   </LateralAction>
@@ -164,13 +166,13 @@
               </Action>
               <StartTrigger>
                 <ConditionGroup>
-                  <Condition name="EvasionStartCondition" delay="0" conditionEdge="rising">
+                  <Condition name="CutOutStartCondition" delay="0" conditionEdge="rising">
                     <ByEntityCondition>
                       <TriggeringEntities triggeringEntitiesRule="any">
                         <EntityRef entityRef="LeadVehicle" />
                       </TriggeringEntities>
                       <EntityCondition>
-                        <RelativeDistanceCondition entityRef="TargetBlocking" relativeDistanceType="longitudinal" value="30" freespace="true" rule="lessThan" />
+                        <RelativeDistanceCondition entityRef="TargetBlocking" relativeDistanceType="longitudinal" value="$FrontOfLead_Distance_dx0_f" freespace="true" rule="lessThan" />
                       </EntityCondition>
                     </ByEntityCondition>
                   </Condition>
@@ -181,7 +183,7 @@
         </ManeuverGroup>
         <StartTrigger>
           <ConditionGroup>
-            <Condition name="EvasionActStart" delay="0" conditionEdge="rising">
+            <Condition name="CutOutActStart" delay="0" conditionEdge="rising">
               <ByValueCondition>
                 <SimulationTimeCondition value="0" rule="greaterThan" />
               </ByValueCondition>
