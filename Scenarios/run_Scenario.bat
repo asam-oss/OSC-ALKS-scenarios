@@ -32,7 +32,7 @@ if !Major! LSS 1 set supported=0
 if !Major! EQU 1 (
     if !Minor! LSS 7 set supported=0
     if !Minor! EQU 7 (
-        if !Revision! LSS 12 set supported=0
+        if !Revision! LSS 13 set supported=0
         )
     )
 )
@@ -52,7 +52,7 @@ set Filesx=%x%
 
 :again
 ECHO ====================================
-ECHO List of OpenSceanrio (XOSC) files.
+ECHO List of OpenSCENARIO (XOSC) files.
 ECHO ====================================
 rem Display array elements
 for /L %%i in (1,1,%Filesx%) do echo [%%i]: "!list[%%i]!"
@@ -66,7 +66,6 @@ set /p id="Enter ID: "
 if %id% GEQ 1 (
     if %id% LEQ !x! (
         "%ESMINI%\EgoSimulator.exe" --window 100 200 1024 576  --osc !list[%id%]! --trails off
-        cls
         GOTO again
     )
 )
