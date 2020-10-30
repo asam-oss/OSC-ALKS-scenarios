@@ -1,0 +1,51 @@
+<slaveConfig SchemaVersion="0.8.1">
+  <ProfilesCatalog>ProfilesCatalog.xml</ProfilesCatalog>
+  <Experiment>
+    <ExperimentID>0</ExperimentID>
+    <NumberOfInvocations>1</NumberOfInvocations>
+    <RandomSeed>0</RandomSeed>
+    <Libraries>
+      <WorldLibrary>World_OSI</WorldLibrary>
+    </Libraries>
+  </Experiment>
+  <Scenario>
+    <OpenScenarioFile>Scenario.xosc</OpenScenarioFile>
+  </Scenario>
+  <Environment>
+    <TimeOfDays>
+      <TimeOfDay Value="15" Probability="1.0"/>
+    </TimeOfDays>
+    <VisibilityDistances>
+      <VisibilityDistance Value="150" Probability="1.0"/>
+    </VisibilityDistances>
+    <Frictions>
+      <Friction Value="1.0" Probability="1.0"/>
+    </Frictions>
+    <Weathers>
+      <Weather Value="Sunny" Probability="1.0"/>
+    </Weathers>
+  </Environment>
+  <Observations>
+    <Observation>
+      <Library>Observation_Log</Library>
+      <Parameters>
+        <String Key="OutputFilename" Value="simulationOutput.xml"/>
+        <Bool Key="LoggingCyclicsToCsv" Value="false"/>
+        <StringVector Key="LoggingGroup_Trace" Value="XPosition,YPosition,YawAngle"/>
+        <StringVector Key="LoggingGroup_RoadPosition" Value="AgentInFront,Lane,PositionRoute,Road,TCoordinate"/>
+        <StringVector Key="LoggingGroup_RoadPositionExtended" Value="SecondaryLanes"/>
+        <StringVector Key="LoggingGroup_Sensor" Value="Sensor*_DetectedAgents,Sensor*_VisibleAgents"/>
+        <StringVector Key="LoggingGroup_Vehicle" Value="AccelerationPedalPosition,BrakePedalPosition,EngineMoment,Gear,SteeringAngle,TotalDistanceTraveled,YawRate"/>
+        <StringVector Key="LoggingGroup_Visualization" Value="AccelerationEgo,BrakeLight,IndicatorState,LightStatus,VelocityEgo"/>
+        <StringVector Key="LoggingGroups" Value="Trace,Visualization,RoadPosition,Sensor"/>
+      </Parameters>
+    </Observation>
+  </Observations>
+  <Spawners>
+    <Spawner>
+      <Library>SpawnPointScenario</Library>
+      <Type>PreRun</Type>
+      <Priority>1</Priority>
+    </Spawner>
+  </Spawners>
+</slaveConfig>

@@ -1,0 +1,102 @@
+<Profiles SchemaVersion="0.4.2">
+  <AgentProfiles>
+    <AgentProfile Name="car_ego" Type="Dynamic">
+      <DriverProfiles>
+        <DriverProfile Name="EgoDriver" Probability="1.0"/>
+      </DriverProfiles>
+      <VehicleProfiles>
+        <VehicleProfile Name="EgoVehicle" Probability="1.0"/>
+      </VehicleProfiles>
+    </AgentProfile>
+	<AgentProfile Name="car" Type="Dynamic">
+      <DriverProfiles>
+        <DriverProfile Name="ConstantDriver" Probability="1.0"/>
+      </DriverProfiles>
+      <VehicleProfiles>
+        <VehicleProfile Name="TFVehicle" Probability="1.0"/>
+      </VehicleProfiles>
+    </AgentProfile>
+    <AgentProfile Name="pedestrian" Type="Dynamic">
+      <DriverProfiles>
+        <DriverProfile Name="Standing" Probability="1.0"/>
+      </DriverProfiles>
+      <VehicleProfiles>
+        <VehicleProfile Name="Pedestrian" Probability="1.0"/>
+      </VehicleProfiles>
+    </AgentProfile>
+	<AgentProfile Name="bus" Type="Dynamic">
+      <DriverProfiles>
+        <DriverProfile Name="Standing" Probability="1.0"/>
+      </DriverProfiles>
+      <VehicleProfiles>
+        <VehicleProfile Name="Bus" Probability="1.0"/>
+      </VehicleProfiles>
+    </AgentProfile>
+  </AgentProfiles>
+  <VehicleProfiles>
+    <VehicleProfile Name="EgoVehicle">
+      <Model Name="car_ego"/>
+      <Components/>
+      <Sensors/>
+    </VehicleProfile>
+	<VehicleProfile Name="Bus">
+      <Model Name="bus"/>
+      <Components/>
+      <Sensors/>
+    </VehicleProfile>
+    <VehicleProfile Name="Pedestrian">
+      <Model Name="pedestrian"/>
+      <Components/>
+      <Sensors/>
+    </VehicleProfile>
+    <VehicleProfile Name="TFVehicle">
+      <Model Name="car"/>
+      <Components>
+        <Component Type="Dynamics_TrajectoryFollower">
+          <Profiles>
+            <Profile Name="BasicTrajectoryFollower" Probability="1.0"/>
+          </Profiles>
+        </Component>
+      </Components>
+      <Sensors/>
+    </VehicleProfile>
+  </VehicleProfiles>
+  <ProfileGroup Type="Driver">
+    <Profile Name="EgoDriver">
+      <String Key="Type" Value="AlgorithmAgentFollowingDriverModel"/>
+      <String Key="AlgorithmLateralModule" Value="Algorithm_LateralAfdm"/>
+      <String Key="AlgorithmLongitudinalModule" Value="Algorithm_LongitudinalAfdm"/>
+      <Double Key="VelocityWish" Value="16.66667"/>
+      <Double Key="Delta" Value="4.0"/>
+      <Double Key="TGapWish" Value="0.1"/>
+      <Double Key="MinDistance" Value="2.0"/>
+      <Double Key="MaxAcceleration" Value="1.4"/>
+      <Double Key="MaxDeceleration" Value="2.8"/>
+    </Profile>
+	<Profile Name="ConstantDriver">
+      <String Key="Type" Value="AlgorithmAgentFollowingDriverModel"/>
+      <String Key="AlgorithmLateralModule" Value="Algorithm_LateralAfdm"/>
+      <String Key="AlgorithmLongitudinalModule" Value="Algorithm_LongitudinalAfdm"/>
+      <Double Key="VelocityWish" Value="16.66667"/>
+      <Double Key="Delta" Value="4.0"/>
+      <Double Key="TGapWish" Value="0.1"/>
+      <Double Key="MinDistance" Value="2.0"/>
+      <Double Key="MaxAcceleration" Value="1.4"/>
+      <Double Key="MaxDeceleration" Value="0.0"/>
+    </Profile>
+    <Profile Name="Standing">
+      <String Key="Type" Value="AlgorithmAgentFollowingDriverModel"/>
+      <String Key="AlgorithmLateralModule" Value="Algorithm_LateralAfdm"/>
+      <String Key="AlgorithmLongitudinalModule" Value="Algorithm_LongitudinalAfdm"/>
+      <Double Key="VelocityWish" Value="0.0"/>
+      <Double Key="MaxAcceleration" Value="0.0"/>
+      <Double Key="MaxDeceleration" Value="0.0"/>
+    </Profile>
+  </ProfileGroup>
+  <ProfileGroup Type="Dynamics_TrajectoryFollower">
+    <Profile Name="BasicTrajectoryFollower">
+      <Bool Key="AutomaticDeactivation" Value="true"/>
+      <Bool Key="EnforceTrajectory" Value="true"/>
+    </Profile>
+  </ProfileGroup>
+</Profiles>
