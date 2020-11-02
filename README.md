@@ -5,7 +5,7 @@ The "ALKS Regulation UN R157" ECE/TRANS/WP.29/2020/81 <sup>[[1]](https://undocs.
 
 ## Goal
 
-BMW has taken on the task of implementing the test scenarios from the ALKS regulation using [OpenSCENARIO](https://www.asam.net/standards/detail/openscenario/) and [OpenDRIVE](https://www.asam.net/standards/detail/opendrive/) resulting in a bundle of XML files executable with standard compliant simulators. The ALKS regulation itself leaves room for interpretation, therefore the coordination on a common interpretation with partners is recommended. This work has been conducted in the context of the German research project "SET Level 4to5".
+BMW has taken on the task of implementing the test scenarios from the ALKS regulation using [OpenSCENARIO](https://www.asam.net/standards/detail/openscenario/) and [OpenDRIVE](https://www.asam.net/standards/detail/opendrive/) resulting in a bundle of XML files executable with standard compliant simulators. The ALKS regulation itself leaves room for interpretation, therefore the coordination on a common interpretation with partners is recommended. This work has been conducted in the context of the German research project [SET Level](https://sl4to5.de/).
 
 ## Content
 
