@@ -47,11 +47,11 @@ openPASS currently supports the execution of the scenarios 4.1_1, 4.2_1, 4.2_2, 
 
 The execution with openPASS works on Linux with the same scenarios. However, steps from the execution script "run_Scenario.bat" have to be performed manually.
 
-The simulation in openPASS is configured through a set of configuration files. These files consist of the scenario, its catalogs and the map. Additionally some configuration files located in "OSC-ALKS-scenarios\Scenarios\openPASS_Resources" are required. Prior to simulation some slight modifications have to be done in the scenarios. This step is automated in the "run_Scenario_openPASS.bat" by applying an xslt to the scenario. 
+The simulation in openPASS is configured through a set of configuration files. These files consist of the scenario, its catalogs and the map. Additionally some configuration files located in "OSC-ALKS-scenarios\Scenarios\openPASS_Resources" are required. Prior to simulation some slight modifications have to be done in the scenarios. This step is automated in the "run_Scenario.bat" by applying an xslt to the scenario. 
 
 Similar to esmini, openPASS does not provide an ALKS. Therefore, for demonstration purposes the vehicle under test is controlled by a so called "Algorithm Following Driver Model - AFDM", which is provided by openPASS. This model is parametrized to drive approximately at its target velocity of 60 km/h and keeps the lane. Other traffic participants are taken into account (This differentiates the execution of the scenarios in openPASS from execution in esmini). For information on the integration of an ALKS in the simulation, we refer to the documentation of openPASS.
 
-Currently openPASS does not support the controller concept of OpenSCENARIO. Instead, entities and their controlling components are defined in the ProfilesCatalog.xml. Sourrounding entities are also controlled by the Algorithm Following Driver Model. Therefore, the velocities od the surrounding entities may differ slightly from the definitions in the scenarios. 
+Currently openPASS does not support the controller concept of OpenSCENARIO. Instead, entities and their controlling components are defined in the ProfilesCatalog.xml. Sourrounding entities are also controlled by the Algorithm Following Driver Model. Therefore, the velocities of the surrounding entities may differ slightly from the definitions in the scenarios. 
 
 ## Quality Measures
 

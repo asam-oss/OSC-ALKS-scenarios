@@ -112,7 +112,7 @@ IF DEFINED OPENPASS (
     ECHO OPENPASS path: %OPENPASS%
 ) ELSE (
     ECHO OPENPASS path not found. 
-    ECHO Please create OPENPASS environment variable, which directs to the installation directory of openPASS and restart shell.
+    ECHO Please create OPENPASS environment variable, which directs to the installation directory of openPASS and restart script.
     PAUSE 
     GOTO finish
 )
@@ -160,13 +160,13 @@ if %id% GEQ 1 (
     if %id% LEQ !num_supported_scenario_version! (
         ECHO Running...
         IF EXIST %OPENPASS%\configs\NUL (
-            ECHO Config directory does exist. Empty config directory.
+            ECHO Config directory does exist. Emptying config directory.
             cd /d "%OPENPASS%\configs"
             FOR /F "delims=" %%i in ('dir /b') DO (
                 rmdir "%%i" /s/q 2>NUL || del "%%i" /s/q >NUL 
             )
         ) ELSE (
-            ECHO Config directory does not exist. Create config directory.
+            ECHO Config directory does not exist. Creating config directory.
             mkdir %OPENPASS%\configs
         )
 
