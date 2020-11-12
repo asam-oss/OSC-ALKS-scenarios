@@ -23,6 +23,8 @@ The focus of the scenarios is on securing the planning aspects of an "Automated 
 
 The execution in the open source tools "esmini", a basic OpenSCENARIO player, and "openPASS", a simulation platform for traffic simulation, is described on Windows:
 
+_Note:_ The execution with openPASS expects xsltproc on the system path. Check out the "Notes regarding openPASS" for more information.
+
 1. Clone or download the repository to your local drive.
 2. a) Download the [latest esmini release](https://github.com/esmini/esmini/releases) (e.g. esmini-bin_win_x64.zip) (tested successfully with [esmini 1.7.13](https://github.com/esmini/esmini/releases/tag/v1.7.13)),  
 or  
@@ -48,6 +50,10 @@ openPASS currently supports the execution of the scenarios 4.1_1, 4.2_1, 4.2_2, 
 The execution with openPASS works on Linux with the same scenarios. However, steps from the execution script "run_Scenario.bat" have to be performed manually.
 
 The simulation in openPASS is configured through a set of configuration files. These files consist of the scenario, its catalogs and the map. Additionally some configuration files located in "OSC-ALKS-scenarios\Scenarios\openPASS_Resources" are required. Prior to simulation some slight modifications have to be done in the scenarios. This step is automated in the "run_Scenario.bat" by applying an xslt to the scenario. 
+
+Dependency: xsltproc is used to apply the xslt script to the scenario. Guide for installation:  
+1. Download and install [msys2](https://www.msys2.org/)
+2. Extent the path environment variable by the _bin_ directory of msys2 (e.g. "C:\msys64\usr\bin") 
 
 Similar to esmini, openPASS does not provide an ALKS. Therefore, for demonstration purposes the vehicle under test is controlled by a so called "Algorithm Following Driver Model - AFDM", which is provided by openPASS. This model is parametrized to drive approximately at its target velocity of 60 km/h and keeps the lane. Other traffic participants are taken into account (This differentiates the execution of the scenarios in openPASS from execution in esmini). For information on the integration of an ALKS in the simulation, we refer to the documentation of openPASS.
 
