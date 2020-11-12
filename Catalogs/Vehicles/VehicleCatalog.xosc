@@ -4,6 +4,7 @@
   <Catalog name="VehicleCatalog">
     <Vehicle name="car_ego" vehicleCategory="car">
 	  <Properties>
+		<!-- Properties are necessary for simulation with openPASS -->
         <Property name="AirDragCoefficient" value="0.3"/>
         <Property name="AxleRatio" value="1.0"/>
         <Property name="DecelerationFromPowertrainDrag" value="0.5"/>
@@ -33,6 +34,7 @@
     </Vehicle>
     <Vehicle name="car" vehicleCategory="car">
 	  <Properties>
+        <!-- Properties are necessary for simulation with openPASS -->
         <Property name="AirDragCoefficient" value="0.3"/>
         <Property name="AxleRatio" value="1.0"/>
         <Property name="DecelerationFromPowertrainDrag" value="0.5"/>
@@ -62,6 +64,7 @@
     </Vehicle>
     <Vehicle name="truck" vehicleCategory="truck">
       <Properties>
+        <!-- Properties are necessary for simulation with openPASS -->
         <Property name="AirDragCoefficient" value="0.8"/>
         <Property name="AxleRatio" value="4.0"/>
         <Property name="DecelerationFromPowertrainDrag" value="1.0"/>
@@ -98,6 +101,7 @@
     </Vehicle>
     <Vehicle name="van" vehicleCategory="truck">
       <Properties>
+        <!-- Properties are necessary for simulation with openPASS -->
         <Property name="AirDragCoefficient" value="0.4"/>
         <Property name="AxleRatio" value="1.0"/>
         <Property name="DecelerationFromPowertrainDrag" value="0.5"/>
@@ -127,6 +131,7 @@
     </Vehicle>
     <Vehicle name="bus" vehicleCategory="bus">
 	  <Properties>
+        <!-- Properties are necessary for simulation with openPASS -->
         <Property name="AirDragCoefficient" value="0.8"/>
         <Property name="AxleRatio" value="4.0"/>
         <Property name="DecelerationFromPowertrainDrag" value="1.0"/>
@@ -163,6 +168,7 @@
     </Vehicle>
     <Vehicle name="motorbike" vehicleCategory="motorbike">
 	  <Properties>
+        <!-- Properties are necessary for simulation with openPASS -->
         <Property name="AirDragCoefficient" value="0.2"/>
         <Property name="AxleRatio" value="1.0"/>
         <Property name="DecelerationFromPowertrainDrag" value="0.8"/>
