@@ -72,9 +72,10 @@ ECHO ####################################
 ECHO #       ESMINI: SIMULATION         #
 ECHO ####################################
 
+:again_esmini
 ECHO Supported OpenSCENARIO (XOSC) files:
 FOR /L %%i in (1,1,%Filesx%) DO ECHO [%%i]: "!list[%%i]!"
-:again_esmini
+
 ECHO ------------------------------------
 ECHO Select a scenario by number.
 ECHO Abort with 0.
@@ -144,12 +145,12 @@ ECHO ####################################
 ECHO #      OPENPASS: SIMULATION        #
 ECHO ####################################
 
+:again_openpass
 ECHO Supported OpenSCENARIO (XOSC) files:
 FOR /L %%i in (1,1,%num_supported_scenario_version%) DO (
     ECHO [%%i]: !list_supported_scenario_path_and_filename[%%i]!
 )
 
-:again_openpass
 ECHO ------------------------------------
 ECHO Select a scenario by number.
 ECHO Abort with 0.
