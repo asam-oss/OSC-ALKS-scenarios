@@ -1,33 +1,32 @@
-:: This batch allows to run simulations with Esmini and openPASS.
+:: This batch allows to run simulations with esmini and openPASS.
 @ECHO OFF
 cls
 SETLOCAL ENABLEDELAYEDEXPANSION
 
-ECHO ====================================
 ECHO ####################################
-ECHO #       SIMULATION TOOL SELECTION         #
+ECHO #    SIMULATION TOOL SELECTION     #
 ECHO ####################################
 
 SET sel=0
 ECHO Please select simulation tool:
 ECHO [0]: Abort program
-ECHO [1]: Esmini
+ECHO [1]: esmini
 ECHO [2]: openPASS
 SET /p sel="Enter ID: "
 
 IF %sel% LSS 1 GOTO finish
 IF %sel% GTR 2 GOTO finish
-IF %sel% EQU 1 GOTO Esmini
+IF %sel% EQU 1 GOTO esmini
 IF %sel% EQU 2 GOTO OpenPASS
 
-:Esmini
+:esmini
 
 ECHO ####################################
 ECHO #    ESMINI: SYSTEM SETTINGS       #
 ECHO ####################################
 
 IF NOT DEFINED ESMINI (
-    ECHO Esmini path not found. Please install and create ESMINI environment variable.
+    ECHO esmini path not found. Please install and create ESMINI environment variable.
     PAUSE
     GOTO finish
 )
@@ -47,11 +46,11 @@ ECHO esmini version is: !Major!.!Minor!.!Revision!
 
 SET supported=1
 
-IF !Major! LSS 1 SET supported=0
-IF !Major! EQU 1 (
-    IF !Minor! LSS 7 SET supported=0
-    IF !Minor! EQU 7 (
-        IF !Revision! LSS 13 SET supported=0
+IF !Major! LSS 2 SET supported=0
+IF !Major! EQU 2 (
+    IF !Minor! LSS 0 SET supported=0
+    IF !Minor! EQU 0 (
+        IF !Revision! LSS 3 SET supported=0
         )
     )
 )
@@ -73,7 +72,9 @@ ECHO #       ESMINI: SIMULATION         #
 ECHO ####################################
 
 :again_esmini
+ECHO:
 ECHO Supported OpenSCENARIO (XOSC) files:
+ECHO ------------------------------------
 FOR /L %%i in (1,1,%Filesx%) DO ECHO [%%i]: "!list[%%i]!"
 
 ECHO ------------------------------------
@@ -84,7 +85,7 @@ SET /p id="Enter ID: "
 
 IF %id% GEQ 1 (
     IF %id% LEQ !x! (
-        "%ESMINI%\EgoSimulator.exe" --window 100 200 1024 576  --osc !list[%id%]! --trails off
+        "%ESMINI%\esmini.exe" --window 100 200 1024 576  --osc !list[%id%]! --trails
         GOTO again_esmini
     )
 )
@@ -206,7 +207,7 @@ if %id% GEQ 1 (
 GOTO finish
 
 :finish 
-ECHO ------------------------------------
-ECHO Good bye.
-ECHO ====================================
+ECHO ####################################
+ECHO # Good bye.                        #
+ECHO ####################################
 ENDLOCAL 

@@ -67,7 +67,7 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <RelativeLanePosition entityRef="Ego" dLane="$CutInVehicle_InitPosition_RelativeLaneId" ds="50.0" offset="0.0" />
+                <RelativeLanePosition entityRef="Ego" dLane="$CutInVehicle_InitPosition_RelativeLaneId" ds="80.0" offset="0.0" />
               </Position>
             </TeleportAction>
           </PrivateAction>
