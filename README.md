@@ -21,20 +21,43 @@ The focus of the scenarios is on securing the planning aspects of an "Automated 
 
 ## Usage
 
-The execution with the open source tool "esmini", a basic OpenSCENARIO player is described on Windows:
+The execution in the open source tools "esmini", a basic OpenSCENARIO player, and "openPASS", a simulation platform for traffic simulation, is described on Windows:
+
+_Note:_ The execution with openPASS expects xsltproc on the system path. Check out the "Notes regarding openPASS" for more information.
 
 1. Clone or download the repository to your local drive.
-2. Download the [latest esmini release](https://github.com/esmini/esmini/releases) (e.g. esmini-bin_win_x64.zip) (tested successfully with [esmini 1.7.13](https://github.com/esmini/esmini/releases/tag/v1.7.13))
-3. Create an environment variable "ESMINI", which directs to the "bin" folder of esmini. E.g. "C:\MyFolder\esmini\bin\"
+2. a) Download the [latest esmini release](https://github.com/esmini/esmini/releases) (e.g. esmini-bin_win_x64.zip) (tested successfully with [esmini 1.7.13](https://github.com/esmini/esmini/releases/tag/v1.7.13)),  
+or  
+b) Download the [latest openPASS release](https://gitlab.eclipse.org/eclipse/simopenpass/simopenpass) (tested successfully with [openPASS v0.7](https://gitlab.eclipse.org/eclipse/simopenpass/simopenpass/-/tree/openPASS_0.7))
+3. a) Create an environment variable "ESMINI", which directs to the "bin" folder of esmini. E.g. "C:\MyFolder\esmini\bin\",  
+or  
+b) Create an environment variable "OPENPASS", which directs to the installation directory of openPASS. E.g. "C:\MyFolder\openPASS\"
 4. Execute the script "run_Scenario.bat", located in the "Scenarios" folder of the local repository
 5. By changing the parameter values in the parameter declaration section of the OpenSCENARIO files, the concrete scenarios can be varied.
 
-### Notes regarding esmini:
+
+#### Notes regarding esmini:
 
 The bounding boxes shown in esmini are not according to the given dimensions in the scenario catalogs.
 
 Esmini is an environment simulator with a visualization and does not provide an ALKS. Therefore, for demonstration purposes the vehicle under test is controlled by a so called "default controller", which is provided by esmini. This controller type is defined by the OpenSCENARIO standard as a controller that only maintains the speed and lane offset without taking other traffic participants into account. 
 If the scenarios are used for testing an ALKS, then the activation of the ALKS is already prepared in the scenarios. Every scenario has an "ActivateALKSControllerAction" with an "ActivateALKSControllerStartCondition" referring to the simulation time. If the value for the simulation time is changed to 0, then the ALKS shall be activated directly at the beginning of the scenario. The actual sending of the manufacturer-specific signal from the environment simulation to the ALKS component for ALKS activation needs to be implemented in the environment simulation.
+
+#### Notes regarding openPASS:
+
+openPASS currently supports the execution of the scenarios 4.1_1, 4.2_1, 4.2_2, 4.2_4, 4.5_1, 4.5_2 and 4.6_1. The remaining scenarios will be enabled in upcoming releases of openPASS.
+
+The execution with openPASS works on Linux with the same scenarios. However, steps from the execution script "run_Scenario.bat" have to be performed manually.
+
+The simulation in openPASS is configured through a set of configuration files. These files consist of the scenario, its catalogs and the map. Additionally some configuration files located in "OSC-ALKS-scenarios\Scenarios\openPASS_Resources" are required. Prior to simulation some slight modifications have to be done in the scenarios. This step is automated in the "run_Scenario.bat" by applying an xslt to the scenario. 
+
+Dependency: xsltproc is used to apply the xslt script to the scenario. Guide for installation:  
+1. Download and install [msys2](https://www.msys2.org/)
+2. Extent the path environment variable by the _bin_ directory of msys2 (e.g. "C:\msys64\usr\bin") 
+
+Similar to esmini, openPASS does not provide an ALKS. Therefore, for demonstration purposes the vehicle under test is controlled by a so called "Algorithm Following Driver Model - AFDM", which is provided by openPASS. This model is parametrized to drive approximately at its target velocity of 60 km/h and keeps the lane. Other traffic participants are taken into account (This differentiates the execution of the scenarios in openPASS from execution in esmini). For information on the integration of an ALKS in the simulation, we refer to the documentation of openPASS.
+
+Currently openPASS does not support the controller concept of OpenSCENARIO. Instead, entities and their controlling components are defined in the ProfilesCatalog.xml. Sourrounding entities are also controlled by the Algorithm Following Driver Model. Therefore, the velocities of the surrounding entities may differ slightly from the definitions in the scenarios. 
 
 ## Quality Measures
 
