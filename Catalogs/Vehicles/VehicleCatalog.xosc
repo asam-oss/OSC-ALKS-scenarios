@@ -162,8 +162,7 @@
       </BoundingBox>
       <Performance maxSpeed="70" maxDeceleration="10" maxAcceleration="10" />
       <Axles>
-        <!-- maxSteering is expected in degrees by openPASS although the standard defines rad. This will be corrected in future. Esmini is not affected by the change. -->
-		<FrontAxle maxSteering="0.5" wheelDiameter="0.8" trackWidth="1.68" positionX="2.98" positionZ="0.4" />
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.8" trackWidth="1.68" positionX="2.98" positionZ="0.4" />
         <RearAxle maxSteering="0" wheelDiameter="0.8" trackWidth="1.68" positionX="0" positionZ="0.4" />
       </Axles>
     </Vehicle>
