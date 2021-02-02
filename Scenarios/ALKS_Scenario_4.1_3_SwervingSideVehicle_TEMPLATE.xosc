@@ -130,7 +130,7 @@
               <Action name="SwerveAction">
                 <PrivateAction>
                   <LateralAction>
-                    <LaneOffsetAction continuous="true">
+                    <LaneOffsetAction continuous="false">
                       <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc" dynamicsShape="sinusoidal" />
                       <LaneOffsetTarget>
                         <AbsoluteTargetLaneOffset value="$Swerve_Offset_Left" />
@@ -153,7 +153,7 @@
               <Action name="SwerveAction2">
                 <PrivateAction>
                   <LateralAction>
-                    <LaneOffsetAction continuous="true">
+                    <LaneOffsetAction continuous="false">
                       <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc" dynamicsShape="sinusoidal" />
                       <LaneOffsetTarget>
                         <AbsoluteTargetLaneOffset value="0.0" />
@@ -176,7 +176,7 @@
               <Action name="SwerveAction3">
                 <PrivateAction>
                   <LateralAction>
-                    <LaneOffsetAction continuous="true">
+                    <LaneOffsetAction continuous="false">
                       <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc" dynamicsShape="sinusoidal" />
                       <LaneOffsetTarget>
                         <AbsoluteTargetLaneOffset value="$Swerve_Offset_Right" />
@@ -199,7 +199,7 @@
               <Action name="SwerveAction4">
                 <PrivateAction>
                   <LateralAction>
-                    <LaneOffsetAction continuous="true">
+                    <LaneOffsetAction continuous="false">
                       <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc" dynamicsShape="sinusoidal" />
                       <LaneOffsetTarget>
                         <AbsoluteTargetLaneOffset value="0.0" />
