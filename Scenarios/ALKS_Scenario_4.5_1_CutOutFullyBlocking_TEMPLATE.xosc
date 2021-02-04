@@ -112,7 +112,7 @@
               </Action>
               <StartTrigger>
                 <ConditionGroup>
-                  <Condition name="ActivateALKSControllerStartCondition" delay="0" conditionEdge="rising">
+                  <Condition name="ActivateALKSControllerEventCondition" delay="0" conditionEdge="rising">
                     <ByValueCondition>
                       <SimulationTimeCondition value="10000" rule="greaterThan" />
                     </ByValueCondition>
@@ -124,7 +124,7 @@
         </ManeuverGroup>
         <StartTrigger>
           <ConditionGroup>
-            <Condition name="ActivateALKSControllerStart" delay="0" conditionEdge="rising">
+            <Condition name="ActivateALKSControllerActCondition" delay="0" conditionEdge="rising">
               <ByValueCondition>
                 <SimulationTimeCondition value="0" rule="greaterThan" />
               </ByValueCondition>
