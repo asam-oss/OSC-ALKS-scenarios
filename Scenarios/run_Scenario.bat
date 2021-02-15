@@ -56,9 +56,13 @@ IF !Major! EQU 2 (
 )
 
 IF !supported! EQU 0 (
-    ECHO Unsupported esmini version.
+    ECHO Unsupported or unidentified esmini version.
+    SET /p sel2="Continue anyway? [y/n] (n): "
+    IF !sel2!==y GOTO esmini_continue
     GOTO finish
 )
+
+:esmini_continue 
 
 SET x=0
 FOR /f "delims=" %%a in ('dir /s /b *.xosc') DO (
