@@ -3,8 +3,10 @@
   <FileHeader revMajor="1" revMinor="0" date="2020-07-10T10:00:00" author="BMW AG" description="Vehicle catalog" />
   <Catalog name="VehicleCatalog">
     <Vehicle name="car_ego" vehicleCategory="car">
-	  <Properties>
-		<!-- Properties are necessary for simulation with openPASS -->
+      <Properties>
+	<!-- Property is necessary for simulation with CARLA -->
+	<Property name="type" value="ego_vehicle"/>
+	<!-- Properties are necessary for simulation with openPASS -->
         <Property name="AirDragCoefficient" value="0.3"/>
         <Property name="AxleRatio" value="1.0"/>
         <Property name="DecelerationFromPowertrainDrag" value="0.5"/>
