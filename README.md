@@ -19,13 +19,13 @@ The implementation of the scenarios should as well be conducted using an interna
 
 The focus of the scenarios is on securing the planning aspects of an "Automated Lane Keeping System". By extending the scenarios with references to e.g. 3D models or environmental conditions (e.g. light, rain), aspects of sensor and actuator technology could also be simulated and validated.
 
-## Usage
+## Running on Windows
 
 The execution in the open source tools "esmini", a basic OpenSCENARIO player, and "openPASS", a simulation platform for traffic simulation, is described on Windows:
 
 _Note:_ The execution with openPASS expects xsltproc on the system path. Check out the "Notes regarding openPASS" for more information.
 
-1. Clone or download the repository to your local drive.
+1. Clone or download this repository to your local drive.
 2. a) Download the [latest esmini release](https://github.com/esmini/esmini/releases) (e.g. esmini-bin_win_x64.zip) (tested successfully with [esmini 2.0.3](https://github.com/esmini/esmini/releases/tag/v2.0.3)),  
 or  
 b) Download the [latest openPASS release](https://gitlab.eclipse.org/eclipse/simopenpass/simopenpass) (tested successfully with [openPASS v0.7](https://gitlab.eclipse.org/eclipse/simopenpass/simopenpass/-/tree/openPASS_0.7))
@@ -34,7 +34,6 @@ or
 b) Create an environment variable "OPENPASS", which directs to the installation directory of openPASS. E.g. "C:\MyFolder\openPASS\"
 4. Execute the script "run_Scenario.bat", located in the "Scenarios" folder of the local repository
 5. By changing the parameter values in the parameter declaration section of the OpenSCENARIO files, the concrete scenarios can be varied.
-
 
 #### Notes regarding esmini:
 
@@ -56,6 +55,22 @@ Dependency: xsltproc is used to apply the xslt script to the scenario. Guide for
 Similar to esmini, openPASS does not provide an ALKS. Therefore, for demonstration purposes the vehicle under test is controlled by a so called "Algorithm Following Driver Model - AFDM", which is provided by openPASS. This model is parametrized to drive approximately at its target velocity of 60 km/h and keeps the lane. Other traffic participants are taken into account (This differentiates the execution of the scenarios in openPASS from execution in esmini). For information on the integration of an ALKS in the simulation, we refer to the documentation of openPASS.
 
 Currently openPASS does not support the controller concept of OpenSCENARIO. Instead, entities and their controlling components are defined in the ProfilesCatalog.xml. Sourrounding entities are also controlled by the Algorithm Following Driver Model. Therefore, the velocities of the surrounding entities may differ slightly from the definitions in the scenarios. 
+
+## Running on Linux
+
+The execution in the open source simulator "CARLA" under Ubuntu 20.04 is described here:
+1. Clone or download this repository to your local drive.
+2. Download CARLA and the compatible scenario-runner for CARLA (tested successfully with [CARLA 0.9.11](https://github.com/carla-simulator/carla/releases/tag/0.9.11) and [scenario_runner-0.9.11](https://github.com/carla-simulator/scenario_runner/releases/tag/v0.9.11)
+3. Follow the installation instructions for [CARLA](https://carla.readthedocs.io/en/0.9.11/) and the [scenario_runner](https://github.com/carla-simulator/scenario_runner/blob/master/Docs/getting_scenariorunner.md) (be sure to install all the required tools and libs from requirements.txt (mentioned in "Installation summary" and to set the environment variables (mentioned in "B. Download ScenarioRunner from source"))
+4. Once you can run the .xosc scenarios delivered with CARLA, run the ALKS scenarios like this:
+ a) Start the CARLA simulator: Go to the CARLA installation folder and type "./CarlaUE4.sh" 
+ b) Start the scenario runner: Go to the scenario_runner installation folder and type e.g. "python scenario_runner.py --openscenario /path/to/OSC-ALKS-scenarios/Scenarios/ALKS_Scenario_4.1_1_FreeDriving_TEMPLATE.xosc"
+
+Execution with esmini or openPASS on Linux hasn't been tested yet.
+
+#### Notes regarding CARLA
+
+With CARLA version 0.9.11 the following scenarios are supported: 4.1_1, 4.2_1, 4.2_2, 4.2_4 (4.2 only if the pedestrian is modeled directly in the scenario and not in a catalog or is exchanged by a vehicle).
 
 ## Quality Measures
 
