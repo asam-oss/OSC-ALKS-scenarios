@@ -100,7 +100,7 @@
               <SpeedAction>
                 <SpeedActionDynamics dynamicsShape="step" dynamicsDimension="time" value="0" />
                 <SpeedActionTarget>
-                  <RelativeTargetSpeed entityRef="Ego" value="0" speedTargetValueType="delta" continuous="false" />
+                  <AbsoluteTargetSpeed value="$Ego_InitSpeed_Ve0" />
                 </SpeedActionTarget>
               </SpeedAction>
             </LongitudinalAction>
