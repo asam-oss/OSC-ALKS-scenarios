@@ -6,7 +6,7 @@
     <ParameterDeclaration name="Ego_InitPosition_LaneId" parameterType="string" value="-4" />
     <ParameterDeclaration name="Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667" />
     <ParameterDeclaration name="Duration" parameterType="double" value="40" />
-    <ParameterDeclaration name="LeadVehicle_InitDistance_dx0" parameterType="double" value="33.33333333" />
+    <ParameterDeclaration name="LeadVehicle_InitDistance_dx0" parameterType="double" value="38.33333333" />
     <ParameterDeclaration name="FrontOfLead_Distance_dx0_f" parameterType="double" value="50.0" />
     <ParameterDeclaration name="Lateral_Velocity_Vy" parameterType="double" value="2.0" />
     <ParameterDeclaration name="TargetBlocking_Catalog" parameterType="string" value="PedestrianCatalog" />
@@ -54,7 +54,7 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="0.0"></LanePosition>
+                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="5.0"></LanePosition>
               </Position>
             </TeleportAction>
           </PrivateAction>
@@ -100,7 +100,7 @@
               <SpeedAction>
                 <SpeedActionDynamics dynamicsShape="step" dynamicsDimension="time" value="0" />
                 <SpeedActionTarget>
-                  <RelativeTargetSpeed entityRef="Ego" value="0" speedTargetValueType="delta" continuous="false" />
+                  <AbsoluteTargetSpeed value="$Ego_InitSpeed_Ve0" />
                 </SpeedActionTarget>
               </SpeedAction>
             </LongitudinalAction>

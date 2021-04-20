@@ -6,7 +6,7 @@
     <ParameterDeclaration name="Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667" />
     <ParameterDeclaration name="Duration" parameterType="double" value="40" />
     <ParameterDeclaration name="SideVehicle_InitLongitudinalOffset" parameterType="double" value="0.0" />
-    <ParameterDeclaration name="SideVehicle_InitPosition_LaneId" parameterType="string" value="-5" />
+    <ParameterDeclaration name="SideVehicle_InitPosition_RelativeLaneId" parameterType="string" value="-1" />
     <ParameterDeclaration name="SideVehicle_InitLateralOffset" parameterType="double" value="-1.75" />
     <ParameterDeclaration name="Swerve_Offset_Left" parameterType="double" value="1.5" />
     <ParameterDeclaration name="Swerve_Offset_Right" parameterType="double" value="-0.0" />
@@ -47,7 +47,7 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <LanePosition roadId="0" laneId="-4" offset="0.0" s="0.0"></LanePosition>
+                <LanePosition roadId="0" laneId="-4" offset="0.0" s="5.0"></LanePosition>
               </Position>
             </TeleportAction>
           </PrivateAction>
@@ -66,7 +66,7 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <LanePosition roadId="0" laneId="$SideVehicle_InitPosition_LaneId" s="$SideVehicle_InitLongitudinalOffset" offset="$SideVehicle_InitLateralOffset"></LanePosition>
+                <RelativeLanePosition entityRef="Ego" dLane="$SideVehicle_InitPosition_RelativeLaneId" ds="$SideVehicle_InitLongitudinalOffset" offset="$SideVehicle_InitLateralOffset" />
               </Position>
             </TeleportAction>
           </PrivateAction>
