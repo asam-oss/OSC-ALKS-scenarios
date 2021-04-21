@@ -1,0 +1,12 @@
+name: 'Validate XML schema'
+description: 'Validate XML schema with xmllint'
+inputs:
+  FILE:
+    description: "File to be validated"
+    required: true
+  SCHEMA:
+    description: "Schema file (xsd)"
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
