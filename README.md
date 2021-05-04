@@ -1,7 +1,7 @@
 ALKS Scenario Interpretation in OpenSCENARIO
 ============================================
 
-The "ALKS Regulation UN R157" ECE/TRANS/WP.29/2020/81 <sup>[[1]](https://undocs.org/ECE/TRANS/WP.29/2020/81)</sup>  is necessary for the approval of an "Automated Lane Keeping System" on motorways presented in the [UNECE Press Release](https://unece.org/transport/press/un-regulation-automated-lane-keeping-systems-milestone-safe-introduction-automated).
+The "ALKS Regulation UN R157" ECE/TRANS/WP.29/2020/81 <sup>[[1]](https://unece.org/transport/documents/2021/03/standards/un-regulation-no-157-automated-lane-keeping-systems-alks)</sup>  is necessary for the approval of an "Automated Lane Keeping System" on motorways presented in the [UNECE Press Release](https://unece.org/transport/press/un-regulation-automated-lane-keeping-systems-milestone-safe-introduction-automated).
 
 ## Goal
 
