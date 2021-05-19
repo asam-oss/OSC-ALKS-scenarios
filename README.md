@@ -15,7 +15,7 @@ The ALKS document contains test scenarios at a functional level, which are to be
 
 The here provided 15 executable test scenarios are derived from the 6 subject areas analogous to Annex 5, Chapter 4.1-4.6 as an initial attempt to clarify the described set of functional scenarios.
 
-The implementation of the scenarios should as well be conducted using an international standard to ensure exchange and compatibility via the tool landscape. At the [ASAM e.V.](https://www.asam.net/standards/domain-simulation/) members are developing the so called "OpenX" standards for the simulation domain like OpenSCENARIO (Release v1.0 Q1/20) for test scenario definitions and OpenDRIVE (Release v1.6 Q1/2020) for road network definitions.
+The implementation of the scenarios should as well be conducted using an international standard to ensure exchange and compatibility via the tool landscape. At the [ASAM e.V.](https://www.asam.net/standards/domain-simulation/) members are developing the so called "OpenX" standards for the simulation domain like OpenSCENARIO (Release v1.1 Q1/21) for test scenario definitions and OpenDRIVE (Release v1.6 Q1/2020) for road network definitions.
 
 The focus of the scenarios is on securing the planning aspects of an "Automated Lane Keeping System". By extending the scenarios with references to e.g. 3D models or environmental conditions (e.g. light, rain), aspects of sensor and actuator technology could also be simulated and validated.
 
@@ -23,10 +23,12 @@ The focus of the scenarios is on securing the planning aspects of an "Automated 
 
 The execution in the open source tools "esmini", a basic OpenSCENARIO player, and "openPASS", a simulation platform for traffic simulation, is described on Windows:
 
+_Note:_ Currently only esmini supports the OpenSCENARIO 1.1 format. For openPASS please use the [release v0.3.2](https://github.com/asam-oss/OSC-ALKS-scenarios/releases/tag/v0.3.2) with scenarios in OpenSCENARIO 1.0 format.
+
 _Note:_ The execution with openPASS expects xsltproc on the system path. Check out the "Notes regarding openPASS" for more information.
 
 1. Clone or download this repository to your local drive.
-2. a) Download the [latest esmini release](https://github.com/esmini/esmini/releases) (e.g. esmini-bin_win_x64.zip) (tested successfully with [esmini 2.7.2](https://github.com/esmini/esmini/releases/tag/v2.7.2)),  
+2. a) Download the [latest esmini release](https://github.com/esmini/esmini/releases) (e.g. esmini-bin_win_x64.zip) (tested successfully with [esmini 2.8.2](https://github.com/esmini/esmini/releases/tag/v2.8.2)),  
 or  
 b) Download the [latest openPASS release](https://gitlab.eclipse.org/eclipse/simopenpass/simopenpass) (tested successfully with [openPASS v0.7](https://gitlab.eclipse.org/eclipse/simopenpass/simopenpass/-/tree/openPASS_0.7))
 3. a) Create an environment variable "ESMINI", which directs to the "bin" folder of esmini. E.g. "C:\MyFolder\esmini\bin\",  
@@ -38,7 +40,7 @@ b) Create an environment variable "OPENPASS", which directs to the installation 
 #### Notes regarding esmini:
 
 Esmini is an environment simulator with a visualization and does not provide an ALKS. Therefore, for demonstration purposes the vehicle under test is controlled by a so called "default controller", which is provided by esmini. This controller type is defined by the OpenSCENARIO standard as a controller that only maintains the speed and lane offset without taking other traffic participants into account. 
-If the scenarios are used for testing an ALKS, then the activation of the ALKS is already prepared in the scenarios. Every scenario has an "ActivateALKSControllerAction" with an "ActivateALKSControllerStartCondition" referring to the simulation time. If the value for the simulation time is changed to 0, then the ALKS shall be activated directly at the beginning of the scenario. The actual sending of the manufacturer-specific signal from the environment simulation to the ALKS component for ALKS activation needs to be implemented in the environment simulation.
+If the scenarios are used for testing an ALKS, then the activation of the ALKS is already prepared in the scenarios. Every scenario has an "ActivateALKSControllerAction" with an "ActivateALKSControllerStartCondition" referring to the simulation time. If the value for the simulation time is changed to 0, then the ALKS shall be activated directly at the beginning of the scenario. The actual sending of the manufacturer-specific signal from the environment simulation to the ALKS component for ALKS activation needs to be implemented in the environment simulation. Another option would be to embed the scenarios in test cases and trigger the activation of the ALKS from the test case.
 
 #### Notes regarding openPASS:
 
@@ -59,6 +61,9 @@ Currently openPASS does not support the controller concept of OpenSCENARIO. Inst
 ## Running on Linux
 
 The execution in the open source simulator "CARLA" under Ubuntu 20.04 is described here:
+
+_Note:_ For execution with CARLA please use the [release v0.3.2](https://github.com/asam-oss/OSC-ALKS-scenarios/releases/tag/v0.3.2) with scenarios in OpenSCENARIO 1.0 format.
+
 1. Clone or download this repository to your local drive.
 2. Download CARLA and the compatible scenario-runner for CARLA (tested successfully with [CARLA 0.9.11](https://github.com/carla-simulator/carla/releases/tag/0.9.11) and [scenario_runner-0.9.11](https://github.com/carla-simulator/scenario_runner/releases/tag/v0.9.11)
 3. Follow the installation instructions for [CARLA](https://carla.readthedocs.io/en/0.9.11/) and the [scenario_runner](https://github.com/carla-simulator/scenario_runner/blob/master/Docs/getting_scenariorunner.md) (be sure to install all the required tools and libs from requirements.txt (mentioned in "Installation summary" and to set the environment variables (mentioned in "B. Download ScenarioRunner from source"))
@@ -70,14 +75,14 @@ Execution with esmini or openPASS on Linux hasn't been tested yet.
 
 #### Notes regarding CARLA
 
-With CARLA version 0.9.11 the following scenarios are supported: 4.1_1, 4.2_1, 4.2_2, 4.2_4 (4.2 only if the pedestrian is modeled directly in the scenario and not in a catalog or is exchanged by a vehicle).
+With CARLA version 0.9.11 the following scenarios are supported: 4.1_1, 4.2_1, 4.2_2, 4.2_4.
 
 ## Quality Measures
 
 As a first proof-of-concept the scenarios have been integrated and simulated in [openPASS 0.7](https://git.eclipse.org/c/simopenpass/simopenpass.git/tag/?h=openPASS_0.7) at BMW. In addition the open source tool esmini can be used as described above.
 
 The validation of the scenarios and maps provided in this repository is integrated into the CI workflow. There are two validation mechanisms implemented with GitHub actions:
-1. Syntactic validation of the scenarios and maps against the XSD schemas of the OpenSCENARIO 1.0 and OpenDRIVE 1.6 standards with xmllint
+1. Syntactic validation of the scenarios and maps against the XSD schemas of the OpenSCENARIO 1.1 and OpenDRIVE 1.6 standards with xmllint
 2. Syntactic and semantic validation of the scenarios with the *Standalone Checker* of the [OpenSCENARIO API](https://github.com/RA-Consulting-GmbH/openscenario.api.test). Integration into the CI is prepared by a [GitHub action](https://github.com/ahege/openscenario.ci.test) and an [example](https://github.com/ahege/opensceanrio.ci.example.test/).
 
 ## Legal

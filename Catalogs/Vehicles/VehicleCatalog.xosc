@@ -1,28 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <OpenSCENARIO>
-  <FileHeader revMajor="1" revMinor="0" date="2020-07-10T10:00:00" author="BMW AG" description="Vehicle catalog" />
+  <FileHeader revMajor="1" revMinor="1" date="2020-07-10T10:00:00" author="BMW AG" description="Vehicle catalog" />
   <Catalog name="VehicleCatalog">
     <Vehicle name="car_ego" vehicleCategory="car">
       <Properties>
-	<!-- Property is necessary for simulation with CARLA -->
-	<Property name="type" value="ego_vehicle"/>
-	<!-- Properties are necessary for simulation with openPASS -->
-        <Property name="AirDragCoefficient" value="0.3"/>
-        <Property name="AxleRatio" value="1.0"/>
-        <Property name="DecelerationFromPowertrainDrag" value="0.5"/>
-        <Property name="FrictionCoefficient" value="1.0"/>
-        <Property name="FrontSurface" value="2.4"/>
-        <Property name="GearRatio1" value="9.6"/>
-        <Property name="Mass" value="1300.0"/>
-        <Property name="MaximumEngineSpeed" value="6000.0"/>
-        <Property name="MaximumEngineTorque" value="250.0"/>
-        <Property name="MinimumEngineSpeed" value="900.0"/>
-        <Property name="MinimumEngineTorque" value="-54.0"/>
-        <Property name="MomentInertiaPitch" value="0.0"/>
-        <Property name="MomentInertiaRoll" value="0.0"/>
-        <Property name="MomentInertiaYaw" value="0.0"/>
-        <Property name="NumberOfGears" value="1"/>
-        <Property name="SteeringRatio" value="10.0"/>
+        <!-- Property is necessary for simulation with CARLA -->
+        <Property name="type" value="ego_vehicle" />
+        <!-- Properties are necessary for simulation with openPASS -->
+        <Property name="AirDragCoefficient" value="0.3" />
+        <Property name="AxleRatio" value="1.0" />
+        <Property name="DecelerationFromPowertrainDrag" value="0.5" />
+        <Property name="FrictionCoefficient" value="1.0" />
+        <Property name="FrontSurface" value="2.4" />
+        <Property name="GearRatio1" value="9.6" />
+        <Property name="Mass" value="1300.0" />
+        <Property name="MaximumEngineSpeed" value="6000.0" />
+        <Property name="MaximumEngineTorque" value="250.0" />
+        <Property name="MinimumEngineSpeed" value="900.0" />
+        <Property name="MinimumEngineTorque" value="-54.0" />
+        <Property name="MomentInertiaPitch" value="0.0" />
+        <Property name="MomentInertiaRoll" value="0.0" />
+        <Property name="MomentInertiaYaw" value="0.0" />
+        <Property name="NumberOfGears" value="1" />
+        <Property name="SteeringRatio" value="10.0" />
       </Properties>
       <BoundingBox>
         <Center x="1.4" y="0.0" z="0.9" />
@@ -35,24 +35,24 @@
       </Axles>
     </Vehicle>
     <Vehicle name="car" vehicleCategory="car">
-	  <Properties>
+      <Properties>
         <!-- Properties are necessary for simulation with openPASS -->
-        <Property name="AirDragCoefficient" value="0.3"/>
-        <Property name="AxleRatio" value="1.0"/>
-        <Property name="DecelerationFromPowertrainDrag" value="0.5"/>
-        <Property name="FrictionCoefficient" value="1.0"/>
-        <Property name="FrontSurface" value="2.4"/>
-        <Property name="GearRatio1" value="9.6"/>
-        <Property name="Mass" value="1300.0"/>
-        <Property name="MaximumEngineSpeed" value="6000.0"/>
-        <Property name="MaximumEngineTorque" value="250.0"/>
-        <Property name="MinimumEngineSpeed" value="900.0"/>
-        <Property name="MinimumEngineTorque" value="-54.0"/>
-        <Property name="MomentInertiaPitch" value="0.0"/>
-        <Property name="MomentInertiaRoll" value="0.0"/>
-        <Property name="MomentInertiaYaw" value="0.0"/>
-        <Property name="NumberOfGears" value="1"/>
-        <Property name="SteeringRatio" value="10.0"/>
+        <Property name="AirDragCoefficient" value="0.3" />
+        <Property name="AxleRatio" value="1.0" />
+        <Property name="DecelerationFromPowertrainDrag" value="0.5" />
+        <Property name="FrictionCoefficient" value="1.0" />
+        <Property name="FrontSurface" value="2.4" />
+        <Property name="GearRatio1" value="9.6" />
+        <Property name="Mass" value="1300.0" />
+        <Property name="MaximumEngineSpeed" value="6000.0" />
+        <Property name="MaximumEngineTorque" value="250.0" />
+        <Property name="MinimumEngineSpeed" value="900.0" />
+        <Property name="MinimumEngineTorque" value="-54.0" />
+        <Property name="MomentInertiaPitch" value="0.0" />
+        <Property name="MomentInertiaRoll" value="0.0" />
+        <Property name="MomentInertiaYaw" value="0.0" />
+        <Property name="NumberOfGears" value="1" />
+        <Property name="SteeringRatio" value="10.0" />
       </Properties>
       <BoundingBox>
         <Center x="1.4" y="0.0" z="0.9" />
@@ -60,36 +60,36 @@
       </BoundingBox>
       <Performance maxSpeed="70" maxDeceleration="10" maxAcceleration="10" />
       <Axles>
-		<FrontAxle maxSteering="0.5" wheelDiameter="0.8" trackWidth="1.68" positionX="2.98" positionZ="0.4" />
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.8" trackWidth="1.68" positionX="2.98" positionZ="0.4" />
         <RearAxle maxSteering="0" wheelDiameter="0.8" trackWidth="1.68" positionX="0" positionZ="0.4" />
       </Axles>
     </Vehicle>
     <Vehicle name="truck" vehicleCategory="truck">
       <Properties>
         <!-- Properties are necessary for simulation with openPASS -->
-        <Property name="AirDragCoefficient" value="0.8"/>
-        <Property name="AxleRatio" value="4.0"/>
-        <Property name="DecelerationFromPowertrainDrag" value="1.0"/>
-        <Property name="FrictionCoefficient" value="1.0"/>
-        <Property name="FrontSurface" value="9.0"/>
-        <Property name="GearRatio1" value="6.3"/>
-        <Property name="GearRatio2" value="4.5"/>
-        <Property name="GearRatio3" value="3.3"/>
-        <Property name="GearRatio4" value="2.4"/>
-        <Property name="GearRatio5" value="1.7"/>
-        <Property name="GearRatio6" value="1.2"/>
-        <Property name="GearRatio7" value="0.9"/>
-        <Property name="GearRatio8" value="0.6"/>
-        <Property name="Mass" value="30000.0"/>
-        <Property name="MaximumEngineSpeed" value="2500.0"/>
-        <Property name="MaximumEngineTorque" value="1400.0"/>
-        <Property name="MinimumEngineSpeed" value="600.0"/>
-        <Property name="MinimumEngineTorque" value="-140.0"/>
-        <Property name="MomentInertiaPitch" value="0.0"/>
-        <Property name="MomentInertiaRoll" value="0.0"/>
-        <Property name="MomentInertiaYaw" value="0.0"/>
-        <Property name="NumberOfGears" value="8"/>
-        <Property name="SteeringRatio" value="15.0"/>
+        <Property name="AirDragCoefficient" value="0.8" />
+        <Property name="AxleRatio" value="4.0" />
+        <Property name="DecelerationFromPowertrainDrag" value="1.0" />
+        <Property name="FrictionCoefficient" value="1.0" />
+        <Property name="FrontSurface" value="9.0" />
+        <Property name="GearRatio1" value="6.3" />
+        <Property name="GearRatio2" value="4.5" />
+        <Property name="GearRatio3" value="3.3" />
+        <Property name="GearRatio4" value="2.4" />
+        <Property name="GearRatio5" value="1.7" />
+        <Property name="GearRatio6" value="1.2" />
+        <Property name="GearRatio7" value="0.9" />
+        <Property name="GearRatio8" value="0.6" />
+        <Property name="Mass" value="30000.0" />
+        <Property name="MaximumEngineSpeed" value="2500.0" />
+        <Property name="MaximumEngineTorque" value="1400.0" />
+        <Property name="MinimumEngineSpeed" value="600.0" />
+        <Property name="MinimumEngineTorque" value="-140.0" />
+        <Property name="MomentInertiaPitch" value="0.0" />
+        <Property name="MomentInertiaRoll" value="0.0" />
+        <Property name="MomentInertiaYaw" value="0.0" />
+        <Property name="NumberOfGears" value="8" />
+        <Property name="SteeringRatio" value="15.0" />
       </Properties>
       <BoundingBox>
         <Center x="1.3" y="0.0" z="0.8" />
@@ -97,29 +97,29 @@
       </BoundingBox>
       <Performance maxSpeed="70" maxDeceleration="10" maxAcceleration="10" />
       <Axles>
-		<FrontAxle maxSteering="0.5" wheelDiameter="0.8" trackWidth="1.68" positionX="2.98" positionZ="0.4" />
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.8" trackWidth="1.68" positionX="2.98" positionZ="0.4" />
         <RearAxle maxSteering="0" wheelDiameter="0.8" trackWidth="1.68" positionX="0" positionZ="0.4" />
       </Axles>
     </Vehicle>
     <Vehicle name="van" vehicleCategory="truck">
       <Properties>
         <!-- Properties are necessary for simulation with openPASS -->
-        <Property name="AirDragCoefficient" value="0.4"/>
-        <Property name="AxleRatio" value="1.0"/>
-        <Property name="DecelerationFromPowertrainDrag" value="0.5"/>
-        <Property name="FrictionCoefficient" value="1.0"/>
-        <Property name="FrontSurface" value="3.0"/>
-        <Property name="GearRatio1" value="9.6"/>
-        <Property name="Mass" value="1300.0"/>
-        <Property name="MaximumEngineSpeed" value="6000.0"/>
-        <Property name="MaximumEngineTorque" value="250.0"/>
-        <Property name="MinimumEngineSpeed" value="900.0"/>
-        <Property name="MinimumEngineTorque" value="-54.0"/>
-        <Property name="MomentInertiaPitch" value="0.0"/>
-        <Property name="MomentInertiaRoll" value="0.0"/>
-        <Property name="MomentInertiaYaw" value="0.0"/>
-        <Property name="NumberOfGears" value="1"/>
-        <Property name="SteeringRatio" value="10.0"/>
+        <Property name="AirDragCoefficient" value="0.4" />
+        <Property name="AxleRatio" value="1.0" />
+        <Property name="DecelerationFromPowertrainDrag" value="0.5" />
+        <Property name="FrictionCoefficient" value="1.0" />
+        <Property name="FrontSurface" value="3.0" />
+        <Property name="GearRatio1" value="9.6" />
+        <Property name="Mass" value="1300.0" />
+        <Property name="MaximumEngineSpeed" value="6000.0" />
+        <Property name="MaximumEngineTorque" value="250.0" />
+        <Property name="MinimumEngineSpeed" value="900.0" />
+        <Property name="MinimumEngineTorque" value="-54.0" />
+        <Property name="MomentInertiaPitch" value="0.0" />
+        <Property name="MomentInertiaRoll" value="0.0" />
+        <Property name="MomentInertiaYaw" value="0.0" />
+        <Property name="NumberOfGears" value="1" />
+        <Property name="SteeringRatio" value="10.0" />
       </Properties>
       <BoundingBox>
         <Center x="1.3" y="0.0" z="0.8" />
@@ -127,37 +127,37 @@
       </BoundingBox>
       <Performance maxSpeed="70" maxDeceleration="10" maxAcceleration="10" />
       <Axles>
-		<FrontAxle maxSteering="0.5" wheelDiameter="0.8" trackWidth="1.68" positionX="2.98" positionZ="0.4" />
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.8" trackWidth="1.68" positionX="2.98" positionZ="0.4" />
         <RearAxle maxSteering="0" wheelDiameter="0.8" trackWidth="1.68" positionX="0" positionZ="0.4" />
       </Axles>
     </Vehicle>
     <Vehicle name="bus" vehicleCategory="bus">
-	  <Properties>
+      <Properties>
         <!-- Properties are necessary for simulation with openPASS -->
-        <Property name="AirDragCoefficient" value="0.8"/>
-        <Property name="AxleRatio" value="4.0"/>
-        <Property name="DecelerationFromPowertrainDrag" value="1.0"/>
-        <Property name="FrictionCoefficient" value="1.0"/>
-        <Property name="FrontSurface" value="9.0"/>
-        <Property name="GearRatio1" value="6.3"/>
-        <Property name="GearRatio2" value="4.5"/>
-        <Property name="GearRatio3" value="3.3"/>
-        <Property name="GearRatio4" value="2.4"/>
-        <Property name="GearRatio5" value="1.7"/>
-        <Property name="GearRatio6" value="1.2"/>
-        <Property name="GearRatio7" value="0.9"/>
-        <Property name="GearRatio8" value="0.6"/>
-        <Property name="Mass" value="30000.0"/>
-        <Property name="MaximumEngineSpeed" value="2500.0"/>
-        <Property name="MaximumEngineTorque" value="1400.0"/>
-        <Property name="MinimumEngineSpeed" value="600.0"/>
-        <Property name="MinimumEngineTorque" value="-140.0"/>
-        <Property name="MomentInertiaPitch" value="0.0"/>
-        <Property name="MomentInertiaRoll" value="0.0"/>
-        <Property name="MomentInertiaYaw" value="0.0"/>
-        <Property name="NumberOfGears" value="8"/>
-        <Property name="SteeringRatio" value="15.0"/>
-      </Properties>								  
+        <Property name="AirDragCoefficient" value="0.8" />
+        <Property name="AxleRatio" value="4.0" />
+        <Property name="DecelerationFromPowertrainDrag" value="1.0" />
+        <Property name="FrictionCoefficient" value="1.0" />
+        <Property name="FrontSurface" value="9.0" />
+        <Property name="GearRatio1" value="6.3" />
+        <Property name="GearRatio2" value="4.5" />
+        <Property name="GearRatio3" value="3.3" />
+        <Property name="GearRatio4" value="2.4" />
+        <Property name="GearRatio5" value="1.7" />
+        <Property name="GearRatio6" value="1.2" />
+        <Property name="GearRatio7" value="0.9" />
+        <Property name="GearRatio8" value="0.6" />
+        <Property name="Mass" value="30000.0" />
+        <Property name="MaximumEngineSpeed" value="2500.0" />
+        <Property name="MaximumEngineTorque" value="1400.0" />
+        <Property name="MinimumEngineSpeed" value="600.0" />
+        <Property name="MinimumEngineTorque" value="-140.0" />
+        <Property name="MomentInertiaPitch" value="0.0" />
+        <Property name="MomentInertiaRoll" value="0.0" />
+        <Property name="MomentInertiaYaw" value="0.0" />
+        <Property name="NumberOfGears" value="8" />
+        <Property name="SteeringRatio" value="15.0" />
+      </Properties>
       <BoundingBox>
         <Center x="1.3" y="0.0" z="0.8" />
         <Dimensions width="1.8" length="4.5" height="1.5" />
@@ -169,25 +169,25 @@
       </Axles>
     </Vehicle>
     <Vehicle name="motorbike" vehicleCategory="motorbike">
-	  <Properties>
+      <Properties>
         <!-- Properties are necessary for simulation with openPASS -->
-        <Property name="AirDragCoefficient" value="0.2"/>
-        <Property name="AxleRatio" value="1.0"/>
-        <Property name="DecelerationFromPowertrainDrag" value="0.8"/>
-        <Property name="FrictionCoefficient" value="1.0"/>
-        <Property name="FrontSurface" value="1.2"/>
-        <Property name="GearRatio1" value="6.0"/>
-        <Property name="Mass" value="300.0"/>
-        <Property name="MaximumEngineSpeed" value="6000.0"/>
-        <Property name="MaximumEngineTorque" value="250.0"/>
-        <Property name="MinimumEngineSpeed" value="900.0"/>
-        <Property name="MinimumEngineTorque" value="-54.0"/>
-        <Property name="MomentInertiaPitch" value="0.0"/>
-        <Property name="MomentInertiaRoll" value="0.0"/>
-        <Property name="MomentInertiaYaw" value="0.0"/>
-        <Property name="NumberOfGears" value="1"/>
-        <Property name="SteeringRatio" value="10.0"/>
-      </Properties>	
+        <Property name="AirDragCoefficient" value="0.2" />
+        <Property name="AxleRatio" value="1.0" />
+        <Property name="DecelerationFromPowertrainDrag" value="0.8" />
+        <Property name="FrictionCoefficient" value="1.0" />
+        <Property name="FrontSurface" value="1.2" />
+        <Property name="GearRatio1" value="6.0" />
+        <Property name="Mass" value="300.0" />
+        <Property name="MaximumEngineSpeed" value="6000.0" />
+        <Property name="MaximumEngineTorque" value="250.0" />
+        <Property name="MinimumEngineSpeed" value="900.0" />
+        <Property name="MinimumEngineTorque" value="-54.0" />
+        <Property name="MomentInertiaPitch" value="0.0" />
+        <Property name="MomentInertiaRoll" value="0.0" />
+        <Property name="MomentInertiaYaw" value="0.0" />
+        <Property name="NumberOfGears" value="1" />
+        <Property name="SteeringRatio" value="10.0" />
+      </Properties>
       <BoundingBox>
         <Center x="0.40" y="0.0" z="0.65" />
         <Dimensions width="0.9" length="2.2" height="1.3" />

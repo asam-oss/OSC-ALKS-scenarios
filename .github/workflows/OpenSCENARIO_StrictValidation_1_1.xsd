@@ -1,7 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-<!--
-ASAM OpenSCENARIO V1.1.0
+	<!--
+ASAM OpenSCENARIO V1.1 FINAL- STRICT
+*************************************************************************************************************
+** Note:This is the 1.1 schema with all deprecated artifacts removed for 1.1 strict validation 
+*************************************************************************************************************
 
 __(c)__ by ASAM e.V., 2021
 
@@ -179,9 +182,6 @@ See www.asam.net/license.html for further details.
 					<xsd:enumeration value="trafficIsland"/>
 					<xsd:enumeration value="tree"/>
 					<xsd:enumeration value="vegetation"/>
-					<xsd:enumeration value="wind">
-						<xsd:annotation><xsd:appinfo>deprecated</xsd:appinfo></xsd:annotation>
-					</xsd:enumeration>
 				</xsd:restriction>
 			</xsd:simpleType>
 			<xsd:simpleType>
@@ -283,9 +283,6 @@ See www.asam.net/license.html for further details.
 				<xsd:restriction base="xsd:string">
 					<xsd:enumeration value="lateral"/>
 					<xsd:enumeration value="longitudinal"/>
-					<xsd:enumeration value="cartesianDistance">
-						<xsd:annotation><xsd:appinfo>deprecated</xsd:appinfo></xsd:annotation>
-					</xsd:enumeration>
 					<xsd:enumeration value="euclidianDistance"/>
 				</xsd:restriction>
 			</xsd:simpleType>
@@ -570,9 +567,6 @@ See www.asam.net/license.html for further details.
 			<xsd:element name="Position" type="Position"/>
 		</xsd:sequence>
 		<xsd:attribute name="curvature" type="Double" use="required"/>
-		<xsd:attribute name="curvatureDot" type="Double">
-			<xsd:annotation><xsd:appinfo>deprecated</xsd:appinfo></xsd:annotation>
-		</xsd:attribute>
 		<xsd:attribute name="length" type="Double" use="required"/>
 		<xsd:attribute name="startTime" type="Double"/>
 		<xsd:attribute name="stopTime" type="Double"/>
@@ -639,7 +633,7 @@ See www.asam.net/license.html for further details.
 	<xsd:complexType name="CustomCommandAction">
 		<xsd:simpleContent>
 			<xsd:extension base="xsd:string">
-		<xsd:attribute name="type" type="String" use="required"/>
+				<xsd:attribute name="type" type="String" use="required"/>
 			</xsd:extension>
 		</xsd:simpleContent>
 	</xsd:complexType>
@@ -691,9 +685,6 @@ See www.asam.net/license.html for further details.
 		<xsd:all>
 			<xsd:element name="Position" type="Position"/>
 		</xsd:all>
-		<xsd:attribute name="alongRoute" type="Boolean">
-			<xsd:annotation><xsd:appinfo>deprecated</xsd:appinfo></xsd:annotation>
-		</xsd:attribute>
 		<xsd:attribute name="freespace" type="Boolean" use="required"/>
 		<xsd:attribute name="rule" type="Rule" use="required"/>
 		<xsd:attribute name="value" type="Double" use="required"/>
@@ -835,12 +826,6 @@ See www.asam.net/license.html for further details.
 	</xsd:complexType>
 	<xsd:complexType name="FollowTrajectoryAction">
 		<xsd:all>
-			<xsd:element name="Trajectory" type="Trajectory" minOccurs="0">
-				<xsd:annotation><xsd:appinfo>deprecated</xsd:appinfo></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="CatalogReference" type="CatalogReference" minOccurs="0">
-				<xsd:annotation><xsd:appinfo>deprecated</xsd:appinfo></xsd:annotation>
-			</xsd:element>
 			<xsd:element name="TimeReference" type="TimeReference"/>
 			<xsd:element name="TrajectoryFollowingMode" type="TrajectoryFollowingMode"/>
 			<xsd:element name="TrajectoryRef" type="TrajectoryRef" minOccurs="0"/>
@@ -962,9 +947,9 @@ See www.asam.net/license.html for further details.
 	<xsd:complexType name="License">
 		<xsd:simpleContent>
 			<xsd:extension base="xsd:string">
-		<xsd:attribute name="name" type="String" use="required"/>
-		<xsd:attribute name="resource" type="String"/>
-		<xsd:attribute name="spdxId" type="String"/>
+				<xsd:attribute name="name" type="String" use="required"/>
+				<xsd:attribute name="resource" type="String"/>
+				<xsd:attribute name="spdxId" type="String"/>
 			</xsd:extension>
 		</xsd:simpleContent>
 	</xsd:complexType>
@@ -1122,11 +1107,11 @@ See www.asam.net/license.html for further details.
 		<xsd:attribute name="parameterRef" type="String" use="required"/>
 		<xsd:attribute name="value" type="String" use="required"/>
 	</xsd:complexType>
-		<xsd:complexType name="ParameterAssignments">
-			<xsd:sequence>
-				<xsd:element name="ParameterAssignment" type="ParameterAssignment" minOccurs="0" maxOccurs="unbounded"/>
-			</xsd:sequence>
-		</xsd:complexType>
+	<xsd:complexType name="ParameterAssignments">
+		<xsd:sequence>
+			<xsd:element name="ParameterAssignment" type="ParameterAssignment" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
 	<xsd:complexType name="ParameterCondition">
 		<xsd:attribute name="parameterRef" type="String" use="required"/>
 		<xsd:attribute name="rule" type="Rule" use="required"/>
@@ -1140,11 +1125,11 @@ See www.asam.net/license.html for further details.
 		<xsd:attribute name="parameterType" type="ParameterType" use="required"/>
 		<xsd:attribute name="value" type="String" use="required"/>
 	</xsd:complexType>
-		<xsd:complexType name="ParameterDeclarations">
-			<xsd:sequence>
-				<xsd:element name="ParameterDeclaration" type="ParameterDeclaration" minOccurs="0" maxOccurs="unbounded"/>
-			</xsd:sequence>
-		</xsd:complexType>
+	<xsd:complexType name="ParameterDeclarations">
+		<xsd:sequence>
+			<xsd:element name="ParameterDeclaration" type="ParameterDeclaration" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
 	<xsd:complexType name="ParameterModifyAction">
 		<xsd:all>
 			<xsd:element name="Rule" type="ModifyRule"/>
@@ -1179,9 +1164,6 @@ See www.asam.net/license.html for further details.
 			<xsd:element name="Properties" type="Properties"/>
 		</xsd:all>
 		<xsd:attribute name="mass" type="Double" use="required"/>
-		<xsd:attribute name="model" type="String">
-			<xsd:annotation><xsd:appinfo>deprecated</xsd:appinfo></xsd:annotation>
-		</xsd:attribute>
 		<xsd:attribute name="name" type="String" use="required"/>
 		<xsd:attribute name="pedestrianCategory" type="PedestrianCategory" use="required"/>
 		<xsd:attribute name="model3d" type="String"/>
@@ -1241,9 +1223,6 @@ See www.asam.net/license.html for further details.
 		<xsd:attribute name="entityRef" type="String" use="required"/>
 	</xsd:complexType>
 	<xsd:complexType name="Precipitation">
-		<xsd:attribute name="intensity" type="Double">
-			<xsd:annotation><xsd:appinfo>deprecated</xsd:appinfo></xsd:annotation>
-		</xsd:attribute>
 		<xsd:attribute name="precipitationType" type="PrecipitationType" use="required"/>
 		<xsd:attribute name="precipitationIntensity" type="Double"/>
 	</xsd:complexType>
@@ -1259,9 +1238,6 @@ See www.asam.net/license.html for further details.
 			<xsd:element name="LateralAction" type="LateralAction" minOccurs="0"/>
 			<xsd:element name="VisibilityAction" type="VisibilityAction" minOccurs="0"/>
 			<xsd:element name="SynchronizeAction" type="SynchronizeAction" minOccurs="0"/>
-			<xsd:element name="ActivateControllerAction" type="ActivateControllerAction" minOccurs="0">
-				<xsd:annotation><xsd:appinfo>deprecated</xsd:appinfo></xsd:annotation>
-			</xsd:element>
 			<xsd:element name="ControllerAction" type="ControllerAction" minOccurs="0"/>
 			<xsd:element name="TeleportAction" type="TeleportAction" minOccurs="0"/>
 			<xsd:element name="RoutingAction" type="RoutingAction" minOccurs="0"/>
@@ -1549,9 +1525,6 @@ See www.asam.net/license.html for further details.
 	</xsd:complexType>
 	<xsd:complexType name="TimeHeadwayCondition">
 		<xsd:attribute name="entityRef" type="String" use="required"/>
-		<xsd:attribute name="alongRoute" type="Boolean">
-			<xsd:annotation><xsd:appinfo>deprecated</xsd:appinfo></xsd:annotation>
-		</xsd:attribute>
 		<xsd:attribute name="freespace" type="Boolean" use="required"/>
 		<xsd:attribute name="rule" type="Rule" use="required"/>
 		<xsd:attribute name="value" type="Double" use="required"/>
@@ -1576,9 +1549,6 @@ See www.asam.net/license.html for further details.
 		<xsd:all>
 			<xsd:element name="TimeToCollisionConditionTarget" type="TimeToCollisionConditionTarget"/>
 		</xsd:all>
-		<xsd:attribute name="alongRoute" type="Boolean">
-			<xsd:annotation><xsd:appinfo>deprecated</xsd:appinfo></xsd:annotation>
-		</xsd:attribute>
 		<xsd:attribute name="freespace" type="Boolean" use="required"/>
 		<xsd:attribute name="rule" type="Rule" use="required"/>
 		<xsd:attribute name="value" type="Double" use="required"/>
@@ -1630,11 +1600,11 @@ See www.asam.net/license.html for further details.
 		<xsd:attribute name="name" type="String" use="required"/>
 		<xsd:attribute name="reference" type="String"/>
 	</xsd:complexType>
-		<xsd:complexType name="TrafficSignals">
-			<xsd:sequence>
-				<xsd:element name="TrafficSignalController" type="TrafficSignalController" minOccurs="0" maxOccurs="unbounded"/>
-			</xsd:sequence>
-		</xsd:complexType>
+	<xsd:complexType name="TrafficSignals">
+		<xsd:sequence>
+			<xsd:element name="TrafficSignalController" type="TrafficSignalController" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
 	<xsd:complexType name="TrafficSignalControllerAction">
 		<xsd:attribute name="trafficSignalControllerRef" type="String" use="required"/>
 		<xsd:attribute name="phase" type="String" use="required"/>
@@ -1749,7 +1719,7 @@ See www.asam.net/license.html for further details.
 	<xsd:complexType name="UserDefinedDistribution">
 		<xsd:simpleContent>
 			<xsd:extension base="xsd:string">
-		<xsd:attribute name="type" type="String" use="required"/>
+				<xsd:attribute name="type" type="String" use="required"/>
 			</xsd:extension>
 		</xsd:simpleContent>
 	</xsd:complexType>

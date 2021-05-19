@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <OpenSCENARIO>
-  <FileHeader revMajor="1" revMinor="0" date="2020-06-16T10:00:00" description="ALKS Scenario 4.2_3 CrossingPedestrian Template" author="BMW AG" />
+  <FileHeader revMajor="1" revMinor="1" date="2020-06-16T10:00:00" description="ALKS Scenario 4.2_3 CrossingPedestrian Template" author="BMW AG" />
   <ParameterDeclarations>
     <!--The ParameterDeclarations section is needed for easy variation.-->
     <ParameterDeclaration name="Ego_InitPosition_LaneId" parameterType="string" value="-4" />
@@ -81,7 +81,9 @@
             <Event name="ActivateALKSControllerEvent" priority="overwrite">
               <Action name="ActivateALKSControllerAction">
                 <PrivateAction>
-                  <ActivateControllerAction lateral="true" longitudinal="true" />
+                  <ControllerAction>
+                    <ActivateControllerAction lateral="true" longitudinal="true" />
+                  </ControllerAction>
                 </PrivateAction>
               </Action>
               <StartTrigger>
@@ -119,26 +121,28 @@
                 <PrivateAction>
                   <RoutingAction>
                     <FollowTrajectoryAction>
-                      <Trajectory name="CrossTrajectory" closed="false">
-                        <Shape>
-                          <Polyline>
-                            <Vertex time="0">
-                              <Position>
-                                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="-5.0" s="500.0">
-                                  <Orientation h="$TargetBlocking_InitPosition_Heading" />
-                                </LanePosition>
-                              </Position>
-                            </Vertex>
-                            <Vertex time="7.2">
-                              <Position>
-                                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="5.0" s="500.0">
-                                  <Orientation h="$TargetBlocking_InitPosition_Heading" />
-                                </LanePosition>
-                              </Position>
-                            </Vertex>
-                          </Polyline>
-                        </Shape>
-                      </Trajectory>
+                      <TrajectoryRef>
+                        <Trajectory name="CrossTrajectory" closed="false">
+                          <Shape>
+                            <Polyline>
+                              <Vertex time="0">
+                                <Position>
+                                  <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="-5.0" s="500.0">
+                                    <Orientation h="$TargetBlocking_InitPosition_Heading" />
+                                  </LanePosition>
+                                </Position>
+                              </Vertex>
+                              <Vertex time="7.2">
+                                <Position>
+                                  <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="5.0" s="500.0">
+                                    <Orientation h="$TargetBlocking_InitPosition_Heading" />
+                                  </LanePosition>
+                                </Position>
+                              </Vertex>
+                            </Polyline>
+                          </Shape>
+                        </Trajectory>
+                      </TrajectoryRef>
                       <TimeReference>
                         <Timing domainAbsoluteRelative="relative" scale="1.0" offset="0.0" />
                       </TimeReference>
@@ -155,7 +159,7 @@
                         <EntityRef entityRef="Ego" />
                       </TriggeringEntities>
                       <EntityCondition>
-                        <TimeHeadwayCondition entityRef="TargetBlocking" value="3.6" freespace="true" alongRoute="true" rule="lessThan" />
+                        <TimeHeadwayCondition entityRef="TargetBlocking" value="3.6" freespace="true" rule="lessThan" coordinateSystem="road" relativeDistanceType="longitudinal" />
                       </EntityCondition>
                     </ByEntityCondition>
                   </Condition>
