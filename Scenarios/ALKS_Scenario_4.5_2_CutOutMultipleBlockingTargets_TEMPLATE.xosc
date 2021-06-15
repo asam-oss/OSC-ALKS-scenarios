@@ -174,7 +174,7 @@
                         <EntityRef entityRef="LeadVehicle" />
                       </TriggeringEntities>
                       <EntityCondition>
-                        <RelativeDistanceCondition entityRef="TargetBlocking" relativeDistanceType="longitudinal" value="$FrontOfLead_Distance_dx0_f" freespace="true" rule="lessThan" />
+                        <RelativeDistanceCondition entityRef="TargetBlocking" relativeDistanceType="longitudinal" value="$FrontOfLead_Distance_dx0_f" freespace="true" rule="lessThan" coordinateSystem="road" />
                       </EntityCondition>
                     </ByEntityCondition>
                   </Condition>
