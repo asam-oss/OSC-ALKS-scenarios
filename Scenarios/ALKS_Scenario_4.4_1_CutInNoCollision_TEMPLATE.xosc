@@ -162,7 +162,7 @@
                         <EntityRef entityRef="Ego" />
                       </TriggeringEntities>
                       <EntityCondition>
-                        <RelativeDistanceCondition entityRef="CutInVehicle" relativeDistanceType="longitudinal" value="$CutInVehicle_HeadwayDistanceTrigger_dx0" freespace="true" rule="lessThan" coordinateSystem="road" />
+                        <RelativeDistanceCondition entityRef="CutInVehicle" relativeDistanceType="longitudinal" value="$CutInVehicle_HeadwayDistanceTrigger_dx0" freespace="true" rule="lessThan" coordinateSystem="entity" />
                       </EntityCondition>
                     </ByEntityCondition>
                   </Condition>
