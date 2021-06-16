@@ -85,7 +85,7 @@
     </Init>
     <Story name="ActivateALKSControllerStory">
       <Act name="ActivateALKSControllerAct">
-        <ManeuverGroup maximumExecutionCount="1" name="ActivateALKSControllerSequence">
+        <ManeuverGroup maximumExecutionCount="1" name="ActivateALKSControllerManeuverGroup">
           <Actors selectTriggeringEntities="false">
             <EntityRef entityRef="Ego" />
           </Actors>
@@ -123,7 +123,7 @@
     </Story>
     <Story name="VaryingSpeedStory">
       <Act name="VaryingSpeedAct">
-        <ManeuverGroup maximumExecutionCount="1" name="VaryingSpeedSequence">
+        <ManeuverGroup maximumExecutionCount="1" name="VaryingSpeedManeuverGroup">
           <Actors selectTriggeringEntities="false">
             <EntityRef entityRef="LeadVehicle" />
           </Actors>

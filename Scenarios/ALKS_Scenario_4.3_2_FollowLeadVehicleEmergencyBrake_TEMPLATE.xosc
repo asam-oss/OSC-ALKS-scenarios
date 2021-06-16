@@ -8,7 +8,7 @@
     <ParameterDeclaration name="Duration" parameterType="double" value="40" />
     <ParameterDeclaration name="LeadVehicle_Model" parameterType="string" value="car" />
     <ParameterDeclaration name="LeadVehicle_InitDistance_dx0" parameterType="double" value="33.33333333" />
-    <ParameterDeclaration name="LeadVehicle_BrakeRate_Gx_max" parameterType="double" value="6.0" />
+    <ParameterDeclaration name="LeadVehicle_Deceleration_Rate" parameterType="double" value="9.81" />
   </ParameterDeclarations>
   <CatalogLocations>
     <VehicleCatalog>
@@ -83,7 +83,7 @@
     </Init>
     <Story name="ActivateALKSControllerStory">
       <Act name="ActivateALKSControllerAct">
-        <ManeuverGroup maximumExecutionCount="1" name="ActivateALKSControllerSequence">
+        <ManeuverGroup maximumExecutionCount="1" name="ActivateALKSControllerManeuverGroup">
           <Actors selectTriggeringEntities="false">
             <EntityRef entityRef="Ego" />
           </Actors>
@@ -121,7 +121,7 @@
     </Story>
     <Story name="BrakeStory">
       <Act name="BrakeAct">
-        <ManeuverGroup maximumExecutionCount="1" name="BrakeSequence">
+        <ManeuverGroup maximumExecutionCount="1" name="BrakeManeuverGroup">
           <Actors selectTriggeringEntities="false">
             <EntityRef entityRef="LeadVehicle" />
           </Actors>
@@ -131,7 +131,7 @@
                 <PrivateAction>
                   <LongitudinalAction>
                     <SpeedAction>
-                      <SpeedActionDynamics dynamicsShape="linear" value="$LeadVehicle_BrakeRate_Gx_max" dynamicsDimension="rate" />
+                      <SpeedActionDynamics dynamicsShape="linear" value="$LeadVehicle_Deceleration_Rate" dynamicsDimension="rate" />
                       <SpeedActionTarget>
                         <AbsoluteTargetSpeed value="0.0" />
                       </SpeedActionTarget>

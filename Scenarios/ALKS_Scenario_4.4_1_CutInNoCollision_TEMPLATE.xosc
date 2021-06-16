@@ -86,7 +86,7 @@
     </Init>
     <Story name="ActivateALKSControllerStory">
       <Act name="ActivateALKSControllerAct">
-        <ManeuverGroup maximumExecutionCount="1" name="ActivateALKSControllerSequence">
+        <ManeuverGroup maximumExecutionCount="1" name="ActivateALKSControllerManeuverGroup">
           <Actors selectTriggeringEntities="false">
             <EntityRef entityRef="Ego" />
           </Actors>
@@ -124,7 +124,7 @@
     </Story>
     <Story name="CutInStory">
       <Act name="CutInAct">
-        <ManeuverGroup maximumExecutionCount="1" name="CutInSequence">
+        <ManeuverGroup maximumExecutionCount="1" name="CutInManeuverGroup">
           <Actors selectTriggeringEntities="false">
             <EntityRef entityRef="CutInVehicle" />
           </Actors>
