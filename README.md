@@ -77,6 +77,8 @@ Execution with esmini or openPASS on Linux hasn't been tested yet.
 
 With CARLA version 0.9.11 the following scenarios are supported: 4.1_1, 4.2_1, 4.2_2, 4.2_4.
 
+_NOTE:_ 4.2_X scenarios do only work if the pedestrian is modeled directly in the scenario and not in a catalog or is exchanged by a vehicle. Please refer to the bug fix in [this PR](https://github.com/carla-simulator/scenario_runner/pull/713)
+
 ## Quality Measures
 
 As a first proof-of-concept the scenarios have been integrated and simulated in [openPASS 0.7](https://git.eclipse.org/c/simopenpass/simopenpass.git/tag/?h=openPASS_0.7) at BMW. In addition the open source tool esmini can be used as described above.
