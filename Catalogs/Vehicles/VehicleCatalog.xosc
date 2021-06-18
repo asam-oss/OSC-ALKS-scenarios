@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <OpenSCENARIO>
-  <FileHeader revMajor="1" revMinor="1" date="2020-07-10T10:00:00" author="BMW AG" description="Vehicle catalog" />
+  <FileHeader revMajor="1" revMinor="1" date="2021-06-18T10:00:00" author="BMW AG" description="Vehicle catalog" />
   <Catalog name="VehicleCatalog">
     <Vehicle name="car_ego" vehicleCategory="car">
       <Properties>
