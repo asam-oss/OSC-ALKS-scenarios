@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <OpenSCENARIO>
-  <FileHeader revMajor="1" revMinor="0" date="2020-06-16T10:00:00" description="ALKS Scenario 4.4_1 CutInNoCollision Template" author="BMW AG" />
+  <FileHeader revMajor="1" revMinor="1" date="2021-06-18T10:00:00" description="ALKS Scenario 4.4_1 CutInNoCollision Template" author="BMW AG" />
   <ParameterDeclarations>
     <!--The ParameterDeclarations section is needed for easy variation.-->
     <ParameterDeclaration name="Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667" />
@@ -86,7 +86,7 @@
     </Init>
     <Story name="ActivateALKSControllerStory">
       <Act name="ActivateALKSControllerAct">
-        <ManeuverGroup maximumExecutionCount="1" name="ActivateALKSControllerSequence">
+        <ManeuverGroup maximumExecutionCount="1" name="ActivateALKSControllerManeuverGroup">
           <Actors selectTriggeringEntities="false">
             <EntityRef entityRef="Ego" />
           </Actors>
@@ -94,7 +94,9 @@
             <Event name="ActivateALKSControllerEvent" priority="overwrite">
               <Action name="ActivateALKSControllerAction">
                 <PrivateAction>
-                  <ActivateControllerAction lateral="true" longitudinal="true" />
+                  <ControllerAction>
+                    <ActivateControllerAction lateral="true" longitudinal="true" />
+                  </ControllerAction>
                 </PrivateAction>
               </Action>
               <StartTrigger>
@@ -122,7 +124,7 @@
     </Story>
     <Story name="CutInStory">
       <Act name="CutInAct">
-        <ManeuverGroup maximumExecutionCount="1" name="CutInSequence">
+        <ManeuverGroup maximumExecutionCount="1" name="CutInManeuverGroup">
           <Actors selectTriggeringEntities="false">
             <EntityRef entityRef="CutInVehicle" />
           </Actors>
@@ -160,7 +162,7 @@
                         <EntityRef entityRef="Ego" />
                       </TriggeringEntities>
                       <EntityCondition>
-                        <RelativeDistanceCondition entityRef="CutInVehicle" relativeDistanceType="longitudinal" value="$CutInVehicle_HeadwayDistanceTrigger_dx0" freespace="true" rule="lessThan" />
+                        <RelativeDistanceCondition entityRef="CutInVehicle" relativeDistanceType="longitudinal" value="$CutInVehicle_HeadwayDistanceTrigger_dx0" freespace="true" rule="lessThan" coordinateSystem="entity" />
                       </EntityCondition>
                     </ByEntityCondition>
                   </Condition>

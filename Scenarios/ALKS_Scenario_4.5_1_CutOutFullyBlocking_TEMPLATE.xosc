@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <OpenSCENARIO>
-  <FileHeader revMajor="1" revMinor="0" date="2020-06-16T10:00:00" description="ALKS Scenario 4.5_1 CutOutFullyBlocking Template" author="BMW AG" />
+  <FileHeader revMajor="1" revMinor="1" date="2021-06-18T10:00:00" description="ALKS Scenario 4.5_1 CutOutFullyBlocking Template" author="BMW AG" />
   <ParameterDeclarations>
     <!--The ParameterDeclarations section is needed for easy variation.-->
     <ParameterDeclaration name="Ego_InitPosition_LaneId" parameterType="string" value="-4" />
@@ -99,7 +99,7 @@
     </Init>
     <Story name="ActivateALKSControllerStory">
       <Act name="ActivateALKSControllerAct">
-        <ManeuverGroup maximumExecutionCount="1" name="ActivateALKSControllerSequence">
+        <ManeuverGroup maximumExecutionCount="1" name="ActivateALKSControllerManeuverGroup">
           <Actors selectTriggeringEntities="false">
             <EntityRef entityRef="Ego" />
           </Actors>
@@ -107,7 +107,9 @@
             <Event name="ActivateALKSControllerEvent" priority="overwrite">
               <Action name="ActivateALKSControllerAction">
                 <PrivateAction>
-                  <ActivateControllerAction lateral="true" longitudinal="true" />
+                  <ControllerAction>
+                    <ActivateControllerAction lateral="true" longitudinal="true" />
+                  </ControllerAction>
                 </PrivateAction>
               </Action>
               <StartTrigger>
@@ -161,7 +163,7 @@
                         <EntityRef entityRef="LeadVehicle" />
                       </TriggeringEntities>
                       <EntityCondition>
-                        <RelativeDistanceCondition entityRef="TargetBlocking" relativeDistanceType="longitudinal" value="$FrontOfLead_Distance_dx0_f" freespace="true" rule="lessThan" />
+                        <RelativeDistanceCondition entityRef="TargetBlocking" relativeDistanceType="longitudinal" value="$FrontOfLead_Distance_dx0_f" freespace="true" rule="lessThan" coordinateSystem="entity" />
                       </EntityCondition>
                     </ByEntityCondition>
                   </Condition>

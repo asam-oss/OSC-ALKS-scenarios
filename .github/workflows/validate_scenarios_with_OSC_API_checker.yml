@@ -2,9 +2,9 @@ name: Validate scenarios with OSC Checker Tool
 
 on:
   push:
-    branches: [ master ]
+    branches: [ none ]
   pull_request:
-    branches: [ master ]
+    branches: [ none ]
 
 jobs:
   validate_xosc_with_checker_tool:
