@@ -35,7 +35,7 @@ b) Download the [latest openPASS release](https://gitlab.eclipse.org/eclipse/sim
 or  
 b) Create an environment variable "OPENPASS", which directs to the installation directory of openPASS. E.g. "C:\MyFolder\openPASS\"
 4. Execute the script "run_Scenario.bat", located in the "Scenarios" folder of the local repository
-5. By changing the parameter values in the parameter declaration section of the OpenSCENARIO files, the concrete scenarios can be varied.
+5. By changing the parameter values in the parameter declaration section of the OpenSCENARIO files within their defined constraints, the concrete scenarios can be varied.
 
 #### Notes regarding esmini:
 

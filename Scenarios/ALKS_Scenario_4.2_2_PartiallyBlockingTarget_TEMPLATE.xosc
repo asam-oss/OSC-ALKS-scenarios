@@ -3,12 +3,41 @@
   <FileHeader revMajor="1" revMinor="1" date="2021-06-18T10:00:00" description="ALKS Scenario 4.2_2 PartiallyBlockingTarget Template" author="BMW AG" />
   <ParameterDeclarations>
     <!--The ParameterDeclarations section is needed for easy variation.-->
-    <ParameterDeclaration name="Ego_InitPosition_LaneId" parameterType="string" value="-4" />
-    <ParameterDeclaration name="Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667" />
-    <ParameterDeclaration name="Duration" parameterType="double" value="40" />
-    <ParameterDeclaration name="TargetBlocking_Catalog" parameterType="string" value="PedestrianCatalog" />
-    <ParameterDeclaration name="TargetBlocking_Model" parameterType="string" value="pedestrian" />
-    <ParameterDeclaration name="TargetBlocking_InitPosition_Offset" parameterType="double" value="-1.5" />
+    <ParameterDeclaration name="Ego_InitPosition_LaneId" parameterType="string" value="-4">
+      <ConstraintGroup>
+        <ValueConstraint rule="lessOrEqual" value="-3" />
+        <ValueConstraint rule="greaterOrEqual" value="-5" />
+      </ConstraintGroup>
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterOrEqual" value="3" />
+        <ValueConstraint rule="lessOrEqual" value="5" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667">
+      <ConstraintGroup>
+        <!--The scenarios are meant to be run with a positive ego speed less than 250 km/h (~70 m/s).-->
+        <ValueConstraint rule="greaterThan" value="0.0" />
+        <ValueConstraint rule="lessOrEqual" value="70.0" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Duration" parameterType="double" value="40">
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="TargetBlocking_Catalog" parameterType="string" value="PedestrianCatalog">
+      <!--Not constrained so it's possible to use different catalogs.-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="TargetBlocking_Model" parameterType="string" value="pedestrian">
+      <!--Not constrained so it's possible to use different models.-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="TargetBlocking_InitPosition_Offset" parameterType="double" value="-1.5">
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="-3" />
+        <ValueConstraint rule="lessThan" value="3" />
+        <!--The target must be still partially on the ego lane (lane width(3.5) / 2 + target width(2.5) / 2)-->
+      </ConstraintGroup>
+    </ParameterDeclaration>
   </ParameterDeclarations>
   <CatalogLocations>
     <VehicleCatalog>

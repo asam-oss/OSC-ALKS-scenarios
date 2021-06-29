@@ -3,12 +3,42 @@
   <FileHeader revMajor="1" revMinor="1" date="2021-06-18T10:00:00" description="ALKS Scenario 4.3_2 FollowLeadVehicleEmergencyBrake Template" author="BMW AG" />
   <ParameterDeclarations>
     <!--The ParameterDeclarations section is needed for easy variation.-->
-    <ParameterDeclaration name="Ego_InitPosition_LaneId" parameterType="string" value="-4" />
-    <ParameterDeclaration name="Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667" />
-    <ParameterDeclaration name="Duration" parameterType="double" value="40" />
-    <ParameterDeclaration name="LeadVehicle_Model" parameterType="string" value="car" />
-    <ParameterDeclaration name="LeadVehicle_InitDistance_dx0" parameterType="double" value="33.33333333" />
-    <ParameterDeclaration name="LeadVehicle_Deceleration_Rate" parameterType="double" value="9.81" />
+    <ParameterDeclaration name="Ego_InitPosition_LaneId" parameterType="string" value="-4">
+      <ConstraintGroup>
+        <ValueConstraint rule="lessOrEqual" value="-3" />
+        <ValueConstraint rule="greaterOrEqual" value="-5" />
+      </ConstraintGroup>
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterOrEqual" value="3" />
+        <ValueConstraint rule="lessOrEqual" value="5" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667">
+      <ConstraintGroup>
+        <!--The scenarios are meant to be run with a positive ego speed less than 250 km/h (~70 m/s).-->
+        <ValueConstraint rule="greaterThan" value="0.0" />
+        <ValueConstraint rule="lessOrEqual" value="70.0" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Duration" parameterType="double" value="40">
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="LeadVehicle_Model" parameterType="string" value="car">
+      <!--Not constrained so it's possible to use different models.-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="LeadVehicle_InitDistance_dx0" parameterType="double" value="33.33333333">
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="LeadVehicle_Deceleration_Rate" parameterType="double" value="9.81">
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
+        <ValueConstraint rule="lessThan" value="10.0"></ValueConstraint>
+      </ConstraintGroup>
+    </ParameterDeclaration>
   </ParameterDeclarations>
   <CatalogLocations>
     <VehicleCatalog>

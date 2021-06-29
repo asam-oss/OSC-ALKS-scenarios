@@ -3,15 +3,57 @@
   <FileHeader revMajor="1" revMinor="1" date="2021-06-18T10:00:00" description="ALKS Scenario 4.4_2 CutInUnavoidableCollision Template" author="BMW AG" />
   <ParameterDeclarations>
     <!--The ParameterDeclarations section is needed for easy variation.-->
-    <ParameterDeclaration name="Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667" />
-    <ParameterDeclaration name="Duration" parameterType="double" value="40" />
-    <ParameterDeclaration name="CutInVehicle_Model" parameterType="string" value="car" />
-    <ParameterDeclaration name="CutInVehicle_InitPosition_RelativeLaneId" parameterType="integer" value="-1" />
-    <ParameterDeclaration name="CutInVehicle_RelativeInitSpeed_Ve0_Vo0" parameterType="double" value="-5.5555" />
-    <ParameterDeclaration name="CutInVehicle_HeadwayDistanceTrigger_dx0" parameterType="double" value="10.0" />
-    <ParameterDeclaration name="CutInVehicle_LaneChange_MaxLateralVelocity_Vy" parameterType="double" value="3.0" />
-    <ParameterDeclaration name="CutInVehicle_Acceleration_Rate" parameterType="double" value="0.0" />
-    <ParameterDeclaration name="CutInVehicle_Acceleration_Target" parameterType="double" value="15.0" />
+    <ParameterDeclaration name="Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667">
+      <ConstraintGroup>
+        <!--The scenarios are meant to be run with a positive ego speed less than 250 km/h (~70 m/s).-->
+        <ValueConstraint rule="greaterThan" value="0.0" />
+        <ValueConstraint rule="lessOrEqual" value="70.0" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Duration" parameterType="double" value="40">
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="CutInVehicle_Model" parameterType="string" value="car">
+      <!--Not constrained so it's possible to use different models.-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="CutInVehicle_InitPosition_RelativeLaneId" parameterType="integer" value="-1">
+      <ConstraintGroup>
+        <ValueConstraint rule="equalTo" value="1"></ValueConstraint>
+      </ConstraintGroup>
+      <ConstraintGroup>
+        <ValueConstraint rule="equalTo" value="-1"></ValueConstraint>
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="CutInVehicle_RelativeInitSpeed_Ve0_Vo0" parameterType="double" value="-5.5555">
+      <ConstraintGroup>
+        <ValueConstraint rule="lessThan" value="0.0"></ValueConstraint>
+      </ConstraintGroup>
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="${-$Ego_InitSpeed_Ve0}"></ValueConstraint>
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="CutInVehicle_HeadwayDistanceTrigger_dx0" parameterType="double" value="10.0">
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="0.0" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="CutInVehicle_LaneChange_MaxLateralVelocity_Vy" parameterType="double" value="3.0">
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="0.0" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="CutInVehicle_Acceleration_Rate" parameterType="double" value="0.0">
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterOrEqual" value="0.0" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="CutInVehicle_Acceleration_Target" parameterType="double" value="15.0">
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterOrEqual" value="0.0" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
   </ParameterDeclarations>
   <CatalogLocations>
     <VehicleCatalog>

@@ -3,14 +3,47 @@
   <FileHeader revMajor="1" revMinor="1" date="2021-06-18T10:00:00" description="ALKS Scenario 4.6_2 LateralDetectionRange Template" author="BMW AG" />
   <ParameterDeclarations>
     <!--The ParameterDeclarations section is needed for easy variation.-->
-    <ParameterDeclaration name="Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667" />
-    <ParameterDeclaration name="Duration" parameterType="double" value="40" />
+    <ParameterDeclaration name="Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667">
+      <ConstraintGroup>
+        <!--The scenarios are meant to be run with a positive ego speed less than 250 km/h (~70 m/s).-->
+        <ValueConstraint rule="greaterThan" value="0.0" />
+        <ValueConstraint rule="lessOrEqual" value="70.0" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Duration" parameterType="double" value="40">
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
+      </ConstraintGroup>
+    </ParameterDeclaration>
     <ParameterDeclaration name="SideVehicle_InitLongitudinalOffset" parameterType="double" value="0.0" />
-    <ParameterDeclaration name="SideVehicle_InitPosition_RelativeLaneId" parameterType="string" value="-1" />
-    <ParameterDeclaration name="SideVehicle_InitLateralOffset" parameterType="double" value="-1.75" />
-    <ParameterDeclaration name="Swerve_Offset_Left" parameterType="double" value="1.5" />
-    <ParameterDeclaration name="Swerve_Offset_Right" parameterType="double" value="-0.0" />
-    <ParameterDeclaration name="Swerve_MaxLateralAcc" parameterType="double" value="0.1" />
+    <ParameterDeclaration name="SideVehicle_InitPosition_RelativeLaneId" parameterType="string" value="-1">
+      <ConstraintGroup>
+        <ValueConstraint rule="equalTo" value="-1"></ValueConstraint>
+      </ConstraintGroup>
+      <ConstraintGroup>
+        <ValueConstraint rule="equalTo" value="1"></ValueConstraint>
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="SideVehicle_InitLateralOffset" parameterType="double" value="-1.75">
+      <ConstraintGroup>
+        <ValueConstraint rule="lessThan" value="0.0"></ValueConstraint>
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Swerve_Offset_Left" parameterType="double" value="1.5">
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Swerve_Offset_Right" parameterType="double" value="-0.0">
+      <ConstraintGroup>
+        <ValueConstraint rule="lessThan" value="0.0"></ValueConstraint>
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Swerve_MaxLateralAcc" parameterType="double" value="0.1">
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
+      </ConstraintGroup>
+    </ParameterDeclaration>
   </ParameterDeclarations>
   <CatalogLocations>
     <VehicleCatalog>

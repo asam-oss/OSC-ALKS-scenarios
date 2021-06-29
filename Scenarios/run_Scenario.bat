@@ -89,7 +89,7 @@ SET /p id="Enter ID: "
 
 IF %id% GEQ 1 (
     IF %id% LEQ !x! (
-        "%ESMINI%\esmini.exe" --window 100 200 1024 576  --osc !list[%id%]! --trails
+        "%ESMINI%\esmini.exe" --window 100 200 1024 576  --osc !list[%id%]!
         GOTO again_esmini
     )
 )
