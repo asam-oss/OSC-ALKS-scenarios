@@ -90,7 +90,7 @@
                 <ConditionGroup>
                   <Condition name="ActivateALKSControllerEventCondition" delay="0" conditionEdge="rising">
                     <ByValueCondition>
-                      <SimulationTimeCondition value="10000" rule="greaterThan" />
+                      <SimulationTimeCondition value="10000" rule="greaterOrEqual" />
                     </ByValueCondition>
                   </Condition>
                 </ConditionGroup>
@@ -100,9 +100,9 @@
         </ManeuverGroup>
         <StartTrigger>
           <ConditionGroup>
-            <Condition name="ActivateALKSControllerActCondition" delay="0" conditionEdge="rising">
+            <Condition name="ActivateALKSControllerActCondition" delay="0" conditionEdge="none">
               <ByValueCondition>
-                <SimulationTimeCondition value="0" rule="greaterThan" />
+                <SimulationTimeCondition value="0" rule="greaterOrEqual" />
               </ByValueCondition>
             </Condition>
           </ConditionGroup>
@@ -170,9 +170,9 @@
         </ManeuverGroup>
         <StartTrigger>
           <ConditionGroup>
-            <Condition name="CrossActStart" delay="0" conditionEdge="rising">
+            <Condition name="CrossActStart" delay="0" conditionEdge="none">
               <ByValueCondition>
-                <SimulationTimeCondition value="0" rule="greaterThan" />
+                <SimulationTimeCondition value="0" rule="greaterOrEqual" />
               </ByValueCondition>
             </Condition>
           </ConditionGroup>
@@ -183,7 +183,7 @@
       <ConditionGroup>
         <Condition name="End" delay="0" conditionEdge="rising">
           <ByValueCondition>
-            <SimulationTimeCondition value="$Duration" rule="greaterThan" />
+            <SimulationTimeCondition value="$Duration" rule="greaterOrEqual" />
           </ByValueCondition>
         </Condition>
       </ConditionGroup>
