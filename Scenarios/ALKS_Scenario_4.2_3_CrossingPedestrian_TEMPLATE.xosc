@@ -9,20 +9,36 @@
         <ValueConstraint rule="equalTo" value="-4" />
       </ConstraintGroup>
     </ParameterDeclaration>
-    <ParameterDeclaration name="Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667">
+    <ParameterDeclaration name="Ego_InitSpeed_Ve0_kph" parameterType="double" value="60.0">
       <ConstraintGroup>
-        <!--The scenarios are meant to be run with a positive ego speed less than 250 km/h (~70 m/s).-->
+        <!--The scenarios are meant to be run with a positive ego speed up to 60 kph.-->
         <ValueConstraint rule="greaterThan" value="0.0" />
-        <ValueConstraint rule="lessOrEqual" value="70.0" />
-      </ConstraintGroup>
-    </ParameterDeclaration>
-    <ParameterDeclaration name="Duration" parameterType="double" value="40">
-      <ConstraintGroup>
-        <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
+        <ValueConstraint rule="lessOrEqual" value="60.0" />
       </ConstraintGroup>
     </ParameterDeclaration>
     <ParameterDeclaration name="TargetBlocking_InitPosition_Heading" parameterType="double" value="1.57">
       <!--Heading / orientation of pedestrian is not constrained.-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="TargetBlocking_InitPosition_LongitudinalOffset" parameterType="double" value="500.0">
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="0.0" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="TargetBlocking_InitPosition_LateralOffset" parameterType="double" value="-5.0">
+      <!--Lateral offset of the pedestrian relative to the ego.-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Duration" parameterType="double" value="${($TargetBlocking_InitPosition_LongitudinalOffset / $Ego_InitSpeed_Ve0_kph) + 10.0}">
+      <!--The scenario ends 10 s after the ego would reach the target without braking.-->
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="TargetBlocking_Speed_kph" parameterType="double" value="5.0">
+      <!--The pedestrian shall walk with a speed of 5 kph according to the test specification.-->
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="0.0" />
+        <ValueConstraint rule="lessOrEqual" value="30.0" />
+      </ConstraintGroup>
     </ParameterDeclaration>
   </ParameterDeclarations>
   <CatalogLocations>
@@ -69,7 +85,7 @@
               <SpeedAction>
                 <SpeedActionDynamics dynamicsShape="step" dynamicsDimension="time" value="0" />
                 <SpeedActionTarget>
-                  <AbsoluteTargetSpeed value="$Ego_InitSpeed_Ve0" />
+                  <AbsoluteTargetSpeed value="${$Ego_InitSpeed_Ve0_kph / 3.6}" />
                 </SpeedActionTarget>
               </SpeedAction>
             </LongitudinalAction>
@@ -79,7 +95,7 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="-5.0" s="500.0">
+                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="$TargetBlocking_InitPosition_LateralOffset" s="$TargetBlocking_InitPosition_LongitudinalOffset">
                   <Orientation h="$TargetBlocking_InitPosition_Heading" />
                 </LanePosition>
               </Position>
@@ -142,16 +158,17 @@
                         <Trajectory name="CrossTrajectory" closed="false">
                           <Shape>
                             <Polyline>
+                              <!--The target crosses the ego lane, so at the end the lateral offset is the same in the other direction.-->
                               <Vertex time="0">
                                 <Position>
-                                  <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="-5.0" s="500.0">
+                                  <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="$TargetBlocking_InitPosition_LateralOffset" s="$TargetBlocking_InitPosition_LongitudinalOffset">
                                     <Orientation h="$TargetBlocking_InitPosition_Heading" />
                                   </LanePosition>
                                 </Position>
                               </Vertex>
-                              <Vertex time="7.2">
+                              <Vertex time="${2 * $TargetBlocking_InitPosition_LateralOffset / ($TargetBlocking_Speed_kph / 3.6)}">
                                 <Position>
-                                  <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="5.0" s="500.0">
+                                  <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="${-$TargetBlocking_InitPosition_LateralOffset}" s="$TargetBlocking_InitPosition_LongitudinalOffset">
                                     <Orientation h="$TargetBlocking_InitPosition_Heading" />
                                   </LanePosition>
                                 </Position>
@@ -176,7 +193,8 @@
                         <EntityRef entityRef="Ego" />
                       </TriggeringEntities>
                       <EntityCondition>
-                        <TimeHeadwayCondition entityRef="TargetBlocking" value="3.6" freespace="true" rule="lessThan" coordinateSystem="road" relativeDistanceType="longitudinal" />
+                        <!--The target should start walking at a point in time, so that the ego would hit the target with the center of it's front bumper, if it doesn't brake.-->
+                        <TimeHeadwayCondition entityRef="TargetBlocking" value="${$TargetBlocking_InitPosition_LateralOffset / ($TargetBlocking_Speed_kph / 3.6)}" freespace="true" rule="lessThan" coordinateSystem="road" relativeDistanceType="longitudinal"></TimeHeadwayCondition>
                       </EntityCondition>
                     </ByEntityCondition>
                   </Condition>

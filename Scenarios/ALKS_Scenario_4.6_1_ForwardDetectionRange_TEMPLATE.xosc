@@ -11,11 +11,11 @@
         <ValueConstraint rule="equalTo" value="4" />
       </ConstraintGroup>
     </ParameterDeclaration>
-    <ParameterDeclaration name="Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667">
+    <ParameterDeclaration name="Ego_InitSpeed_Ve0_kph" parameterType="double" value="60.0">
       <ConstraintGroup>
-        <!--The scenarios are meant to be run with a positive ego speed less than 250 km/h (~70 m/s).-->
+        <!--The scenarios are meant to be run with a positive ego speed up to 60 kph.-->
         <ValueConstraint rule="greaterThan" value="0.0" />
-        <ValueConstraint rule="lessOrEqual" value="70.0" />
+        <ValueConstraint rule="lessOrEqual" value="60.0" />
       </ConstraintGroup>
     </ParameterDeclaration>
     <ParameterDeclaration name="Duration" parameterType="double" value="40">
@@ -30,9 +30,15 @@
       <!--Not constrained so it's possible to use different models.-->
     </ParameterDeclaration>
     <ParameterDeclaration name="TargetBlocking_InitPosition_Offset" parameterType="double" value="-5.25">
+      <!--Requirement is the outer edge of each adjacent lane and within ego lane.-->
       <ConstraintGroup>
-        <!--Requirement is the outer boundary of the adjacent lane.-->
         <ValueConstraint rule="equalTo" value="-5.25"></ValueConstraint>
+      </ConstraintGroup>
+      <ConstraintGroup>
+        <ValueConstraint rule="equalTo" value="5.25"></ValueConstraint>
+      </ConstraintGroup>
+      <ConstraintGroup>
+        <ValueConstraint rule="equalTo" value="0.0"></ValueConstraint>
       </ConstraintGroup>
     </ParameterDeclaration>
   </ParameterDeclarations>
@@ -80,7 +86,7 @@
               <SpeedAction>
                 <SpeedActionDynamics dynamicsShape="step" dynamicsDimension="time" value="0" />
                 <SpeedActionTarget>
-                  <AbsoluteTargetSpeed value="$Ego_InitSpeed_Ve0" />
+                  <AbsoluteTargetSpeed value="${$Ego_InitSpeed_Ve0_kph / 3.6}" />
                 </SpeedActionTarget>
               </SpeedAction>
             </LongitudinalAction>

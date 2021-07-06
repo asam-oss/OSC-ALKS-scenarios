@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<OpenSCENARIO>
+  <FileHeader revMajor="1" revMinor="1" date="2021-07-06T10:00:00" description="Variation for ALKS Scenario 4.6_2 LateralDetectionRange" author="BMW AG" />
+  <ParameterValueDistribution>
+    <ScenarioFile filepath="../Scenarios/ALKS_Scenario_4.6_2_LateralDetectionRange_TEMPLATE.xosc" />
+    <Deterministic>
+      <DeterministicMultiParameterDistribution>
+        <ValueSetDistribution>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="SideVehicle_InitLateralOffset" value="-5.25" />
+            <ParameterAssignment parameterRef="SideVehicle_FinalLateralOffset" value="-1.75" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="SideVehicle_InitLateralOffset" value="5.25" />
+            <ParameterAssignment parameterRef="SideVehicle_FinalLateralOffset" value="1.75" />
+          </ParameterValueSet>
+        </ValueSetDistribution>
+      </DeterministicMultiParameterDistribution>
+    </Deterministic>
+  </ParameterValueDistribution>
+</OpenSCENARIO>

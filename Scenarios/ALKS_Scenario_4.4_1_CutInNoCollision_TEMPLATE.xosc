@@ -3,11 +3,11 @@
   <FileHeader revMajor="1" revMinor="1" date="2021-06-18T10:00:00" description="ALKS Scenario 4.4_1 CutInNoCollision Template" author="BMW AG" />
   <ParameterDeclarations>
     <!--The ParameterDeclarations section is needed for easy variation.-->
-    <ParameterDeclaration name="Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667">
+    <ParameterDeclaration name="Ego_InitSpeed_Ve0_kph" parameterType="double" value="60.0">
       <ConstraintGroup>
-        <!--The scenarios are meant to be run with a positive ego speed less than 250 km/h (~70 m/s).-->
+        <!--The scenarios are meant to be run with a positive ego speed up to 60 kph.-->
         <ValueConstraint rule="greaterThan" value="0.0" />
-        <ValueConstraint rule="lessOrEqual" value="70.0" />
+        <ValueConstraint rule="lessOrEqual" value="60.0" />
       </ConstraintGroup>
     </ParameterDeclaration>
     <ParameterDeclaration name="Duration" parameterType="double" value="40">
@@ -26,20 +26,20 @@
         <ValueConstraint rule="equalTo" value="1" />
       </ConstraintGroup>
     </ParameterDeclaration>
-    <ParameterDeclaration name="CutInVehicle_RelativeInitSpeed_Ve0_Vo0" parameterType="double" value="-5.5555">
+    <ParameterDeclaration name="CutInVehicle_RelativeInitSpeed_Ve0_Vo0_kph" parameterType="double" value="-20.0">
       <ConstraintGroup>
         <ValueConstraint rule="lessThan" value="0.0" />
       </ConstraintGroup>
       <ConstraintGroup>
-        <ValueConstraint rule="greaterThan" value="${-$Ego_InitSpeed_Ve0}" />
+        <ValueConstraint rule="greaterThan" value="${-$Ego_InitSpeed_Ve0_kph}" />
       </ConstraintGroup>
     </ParameterDeclaration>
-    <ParameterDeclaration name="CutInVehicle_HeadwayDistanceTrigger_dx0" parameterType="double" value="30.0">
+    <ParameterDeclaration name="CutInVehicle_HeadwayDistanceTrigger_dx0_m" parameterType="double" value="30.0">
       <ConstraintGroup>
-        <ValueConstraint rule="greaterThan" value="0.0" />
+        <ValueConstraint rule="greaterOrEqual" value="0.0" />
       </ConstraintGroup>
     </ParameterDeclaration>
-    <ParameterDeclaration name="CutInVehicle_LaneChange_MaxLateralVelocity_Vy" parameterType="double" value="2.0">
+    <ParameterDeclaration name="CutInVehicle_LaneChange_MaxLateralVelocity_Vy_mps" parameterType="double" value="2.0">
       <ConstraintGroup>
         <ValueConstraint rule="greaterThan" value="0.0" />
       </ConstraintGroup>
@@ -100,7 +100,7 @@
               <SpeedAction>
                 <SpeedActionDynamics dynamicsShape="step" dynamicsDimension="time" value="0" />
                 <SpeedActionTarget>
-                  <AbsoluteTargetSpeed value="$Ego_InitSpeed_Ve0" />
+                  <AbsoluteTargetSpeed value="${$Ego_InitSpeed_Ve0_kph / 3.6}" />
                 </SpeedActionTarget>
               </SpeedAction>
             </LongitudinalAction>
@@ -119,7 +119,7 @@
               <SpeedAction>
                 <SpeedActionDynamics dynamicsShape="step" dynamicsDimension="time" value="0" />
                 <SpeedActionTarget>
-                  <RelativeTargetSpeed entityRef="Ego" value="$CutInVehicle_RelativeInitSpeed_Ve0_Vo0" speedTargetValueType="delta" continuous="false" />
+                  <RelativeTargetSpeed entityRef="Ego" value="${$CutInVehicle_RelativeInitSpeed_Ve0_Vo0_kph / 3.6}" speedTargetValueType="delta" continuous="false" />
                 </SpeedActionTarget>
               </SpeedAction>
             </LongitudinalAction>
@@ -177,7 +177,7 @@
                 <PrivateAction>
                   <LateralAction>
                     <LaneChangeAction>
-                      <LaneChangeActionDynamics dynamicsShape="sinusoidal" value="$CutInVehicle_LaneChange_MaxLateralVelocity_Vy" dynamicsDimension="rate" />
+                      <LaneChangeActionDynamics dynamicsShape="sinusoidal" value="$CutInVehicle_LaneChange_MaxLateralVelocity_Vy_mps" dynamicsDimension="rate" />
                       <LaneChangeTarget>
                         <RelativeTargetLane entityRef="Ego" value="0" />
                       </LaneChangeTarget>
@@ -205,7 +205,7 @@
                         <EntityRef entityRef="Ego" />
                       </TriggeringEntities>
                       <EntityCondition>
-                        <RelativeDistanceCondition entityRef="CutInVehicle" relativeDistanceType="longitudinal" value="$CutInVehicle_HeadwayDistanceTrigger_dx0" freespace="true" rule="lessThan" coordinateSystem="entity" />
+                        <RelativeDistanceCondition entityRef="CutInVehicle" relativeDistanceType="longitudinal" value="$CutInVehicle_HeadwayDistanceTrigger_dx0_m" freespace="true" rule="lessThan" coordinateSystem="entity" />
                       </EntityCondition>
                     </ByEntityCondition>
                   </Condition>

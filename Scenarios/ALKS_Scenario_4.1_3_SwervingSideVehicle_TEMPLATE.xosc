@@ -3,11 +3,11 @@
   <FileHeader revMajor="1" revMinor="1" date="2021-06-18T10:00:00" description="ALKS Scenario 4.1_3 Swerving Side Vehicle Template" author="BMW AG" />
   <ParameterDeclarations>
     <!--The ParameterDeclarations section is needed for easy variation.-->
-    <ParameterDeclaration name="Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667">
+    <ParameterDeclaration name="Ego_InitSpeed_Ve0_kph" parameterType="double" value="60.0">
       <ConstraintGroup>
-        <!--The scenarios are meant to be run with a positive ego speed less than 250 km/h (~70 m/s).-->
+        <!--The scenarios are meant to be run with a positive ego speed up to 60 kph.-->
         <ValueConstraint rule="greaterThan" value="0.0" />
-        <ValueConstraint rule="lessOrEqual" value="70.0" />
+        <ValueConstraint rule="lessOrEqual" value="60.0" />
       </ConstraintGroup>
     </ParameterDeclaration>
     <ParameterDeclaration name="Duration" parameterType="double" value="40">
@@ -18,7 +18,7 @@
     <ParameterDeclaration name="SideVehicle_Model" parameterType="string" value="car">
       <!--Not constrained so it's possible to use different models.-->
     </ParameterDeclaration>
-    <ParameterDeclaration name="SideVehicle_InitLongitudinalOffset" parameterType="double" value="0.0" />
+    <ParameterDeclaration name="SideVehicle_InitLongitudinalOffset_m" parameterType="double" value="0.0" />
     <ParameterDeclaration name="SideVehicle_InitPosition_RelativeLaneId" parameterType="string" value="1">
       <ConstraintGroup>
         <ValueConstraint rule="equalTo" value="1"></ValueConstraint>
@@ -87,7 +87,7 @@
               <SpeedAction>
                 <SpeedActionDynamics dynamicsShape="step" dynamicsDimension="time" value="0" />
                 <SpeedActionTarget>
-                  <AbsoluteTargetSpeed value="$Ego_InitSpeed_Ve0" />
+                  <AbsoluteTargetSpeed value="${$Ego_InitSpeed_Ve0_kph / 3.6}" />
                 </SpeedActionTarget>
               </SpeedAction>
             </LongitudinalAction>
@@ -97,7 +97,7 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <RelativeLanePosition entityRef="Ego" dLane="$SideVehicle_InitPosition_RelativeLaneId" ds="$SideVehicle_InitLongitudinalOffset" offset="0.0" />
+                <RelativeLanePosition entityRef="Ego" dLane="$SideVehicle_InitPosition_RelativeLaneId" ds="$SideVehicle_InitLongitudinalOffset_m" offset="0.0" />
               </Position>
             </TeleportAction>
           </PrivateAction>
@@ -106,7 +106,7 @@
               <SpeedAction>
                 <SpeedActionDynamics dynamicsShape="step" dynamicsDimension="time" value="0" />
                 <SpeedActionTarget>
-                  <AbsoluteTargetSpeed value="$Ego_InitSpeed_Ve0" />
+                  <RelativeTargetSpeed entityRef="Ego" value="0" speedTargetValueType="delta" continuous="false" />
                 </SpeedActionTarget>
               </SpeedAction>
             </LongitudinalAction>

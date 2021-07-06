@@ -11,11 +11,11 @@
         <ValueConstraint rule="equalTo" value="4"></ValueConstraint>
       </ConstraintGroup>
     </ParameterDeclaration>
-    <ParameterDeclaration name="Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667">
+    <ParameterDeclaration name="Ego_InitSpeed_Ve0_kph" parameterType="double" value="60.0">
       <ConstraintGroup>
-        <!--The scenarios are meant to be run with a positive ego speed less than 250 km/h (~70 m/s).-->
+        <!--The scenarios are meant to be run with a positive ego speed up to 60 kph.-->
         <ValueConstraint rule="greaterThan" value="0.0" />
-        <ValueConstraint rule="lessOrEqual" value="70.0" />
+        <ValueConstraint rule="lessOrEqual" value="60.0" />
       </ConstraintGroup>
     </ParameterDeclaration>
     <ParameterDeclaration name="Duration" parameterType="double" value="40">
@@ -23,17 +23,26 @@
         <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
       </ConstraintGroup>
     </ParameterDeclaration>
-    <ParameterDeclaration name="LeadVehicle_InitDistance_dx0" parameterType="double" value="38.33333333">
+    <ParameterDeclaration name="LeadVehicle_InitDistance_dx0_m" parameterType="double" value="${2.0 * ($Ego_InitSpeed_Ve0_kph / 3.6)}">
+      <!--Distance is calculated from 2 second headway time.-->
       <ConstraintGroup>
         <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
       </ConstraintGroup>
     </ParameterDeclaration>
-    <ParameterDeclaration name="FrontOfLead_Distance_dx0_f" parameterType="double" value="50.0">
+    <ParameterDeclaration name="CutOutVehicle_RelativeTargetLane" parameterType="integer" value="1">
+      <ConstraintGroup>
+        <ValueConstraint rule="equalTo" value="1"></ValueConstraint>
+      </ConstraintGroup>
+      <ConstraintGroup>
+        <ValueConstraint rule="equalTo" value="-1"></ValueConstraint>
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="FrontOfLead_Distance_dx0_f_m" parameterType="double" value="50.0">
       <ConstraintGroup>
         <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
       </ConstraintGroup>
     </ParameterDeclaration>
-    <ParameterDeclaration name="Lateral_Velocity_Vy" parameterType="double" value="2.0">
+    <ParameterDeclaration name="CutOutVehicle_LaneChange_MaxLateralVelocity_Vy_mps" parameterType="double" value="2.0">
       <ConstraintGroup>
         <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
       </ConstraintGroup>
@@ -98,7 +107,7 @@
               <SpeedAction>
                 <SpeedActionDynamics dynamicsShape="step" dynamicsDimension="time" value="0" />
                 <SpeedActionTarget>
-                  <AbsoluteTargetSpeed value="$Ego_InitSpeed_Ve0" />
+                  <AbsoluteTargetSpeed value="${$Ego_InitSpeed_Ve0_kph / 3.6}" />
                 </SpeedActionTarget>
               </SpeedAction>
             </LongitudinalAction>
@@ -126,7 +135,7 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="$LeadVehicle_InitDistance_dx0"></LanePosition>
+                <RelativeLanePosition entityRef="Ego" dLane="0" ds="$LeadVehicle_InitDistance_dx0_m" offset="0.0" />
               </Position>
             </TeleportAction>
           </PrivateAction>
@@ -135,7 +144,7 @@
               <SpeedAction>
                 <SpeedActionDynamics dynamicsShape="step" dynamicsDimension="time" value="0" />
                 <SpeedActionTarget>
-                  <AbsoluteTargetSpeed value="$Ego_InitSpeed_Ve0" />
+                  <RelativeTargetSpeed entityRef="Ego" value="0" speedTargetValueType="delta" continuous="false" />
                 </SpeedActionTarget>
               </SpeedAction>
             </LongitudinalAction>
@@ -193,9 +202,9 @@
                 <PrivateAction>
                   <LateralAction>
                     <LaneChangeAction>
-                      <LaneChangeActionDynamics dynamicsShape="sinusoidal" value="$Lateral_Velocity_Vy" dynamicsDimension="rate" />
+                      <LaneChangeActionDynamics dynamicsShape="sinusoidal" value="$CutOutVehicle_LaneChange_MaxLateralVelocity_Vy_mps" dynamicsDimension="rate" />
                       <LaneChangeTarget>
-                        <RelativeTargetLane entityRef="TargetBlocking" value="1" />
+                        <RelativeTargetLane entityRef="TargetBlocking" value="$CutOutVehicle_RelativeTargetLane" />
                       </LaneChangeTarget>
                     </LaneChangeAction>
                   </LateralAction>

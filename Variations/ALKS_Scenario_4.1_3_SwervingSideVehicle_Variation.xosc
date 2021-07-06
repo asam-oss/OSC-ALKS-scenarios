@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<OpenSCENARIO>
+  <FileHeader revMajor="1" revMinor="1" date="2021-07-06T10:00:00" description="Variation for ALKS Scenario 4.1_3 Swerving Side Vehicle" author="BMW AG" />
+  <ParameterValueDistribution>
+    <ScenarioFile filepath="../Scenarios/ALKS_Scenario_4.1_3_SwervingSideVehicle_TEMPLATE.xosc" />
+    <Deterministic>
+      <DeterministicSingleParameterDistribution parameterName="Ego_InitSpeed_Ve0_kph">
+        <!--Variation between 10 kph and 60 kph with a step width of 10 kph-->
+        <DistributionRange stepWidth="10.0">
+          <Range lowerLimit="10.0" upperLimit="60.0" />
+        </DistributionRange>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="SideVehicle_Model">
+        <DistributionSet>
+          <Element value="car" />
+          <Element value="truck" />
+          <Element value="van" />
+          <Element value="bus" />
+          <Element value="motorbike" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="SideVehicle_InitLongitudinalOffset_m">
+        <DistributionRange stepWidth="2.5">
+          <Range lowerLimit="-5.0" upperLimit="5.0" />
+        </DistributionRange>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="SideVehicle_InitPosition_RelativeLaneId">
+        <DistributionSet>
+          <Element value="1" />
+          <Element value="-1" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+    </Deterministic>
+  </ParameterValueDistribution>
+</OpenSCENARIO>

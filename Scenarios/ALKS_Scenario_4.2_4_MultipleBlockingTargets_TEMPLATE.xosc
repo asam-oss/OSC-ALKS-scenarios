@@ -13,16 +13,11 @@
         <ValueConstraint rule="lessOrEqual" value="5" />
       </ConstraintGroup>
     </ParameterDeclaration>
-    <ParameterDeclaration name="Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667">
+    <ParameterDeclaration name="Ego_InitSpeed_Ve0_kph" parameterType="double" value="60.0">
       <ConstraintGroup>
-        <!--The scenarios are meant to be run with a positive ego speed less than 250 km/h (~70 m/s).-->
+        <!--The scenarios are meant to be run with a positive ego speed up to 60 kph.-->
         <ValueConstraint rule="greaterThan" value="0.0" />
-        <ValueConstraint rule="lessOrEqual" value="70.0" />
-      </ConstraintGroup>
-    </ParameterDeclaration>
-    <ParameterDeclaration name="Duration" parameterType="double" value="40">
-      <ConstraintGroup>
-        <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
+        <ValueConstraint rule="lessOrEqual" value="60.0" />
       </ConstraintGroup>
     </ParameterDeclaration>
     <ParameterDeclaration name="TargetBlocking_Catalog" parameterType="string" value="PedestrianCatalog">
@@ -33,6 +28,17 @@
     </ParameterDeclaration>
     <ParameterDeclaration name="TargetBlocking2_Model" parameterType="string" value="bus">
       <!--Not constrained so it's possible to use different models.-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="TargetBlocking_InitPosition_LongitudinalOffset" parameterType="double" value="500.0">
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="0.0" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Duration" parameterType="double" value="${($TargetBlocking_InitPosition_LongitudinalOffset / ($Ego_InitSpeed_Ve0_kph / 3.6)) + 10.0}">
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
+      </ConstraintGroup>
+      <!--10 s more than the ego would need to reach the target without braking.-->
     </ParameterDeclaration>
   </ParameterDeclarations>
   <CatalogLocations>
@@ -82,7 +88,7 @@
               <SpeedAction>
                 <SpeedActionDynamics dynamicsShape="step" dynamicsDimension="time" value="0" />
                 <SpeedActionTarget>
-                  <AbsoluteTargetSpeed value="$Ego_InitSpeed_Ve0" />
+                  <AbsoluteTargetSpeed value="${$Ego_InitSpeed_Ve0_kph / 3.6}" />
                 </SpeedActionTarget>
               </SpeedAction>
             </LongitudinalAction>
@@ -92,7 +98,7 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="500.0"></LanePosition>
+                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="$TargetBlocking_InitPosition_LongitudinalOffset"></LanePosition>
               </Position>
             </TeleportAction>
           </PrivateAction>
@@ -101,7 +107,7 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="515.0"></LanePosition>
+                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="${$TargetBlocking_InitPosition_LongitudinalOffset + 15.0}"></LanePosition>
               </Position>
             </TeleportAction>
           </PrivateAction>
