@@ -42,6 +42,8 @@
     <ParameterDeclaration name="CutInVehicle_LaneChange_MaxLateralVelocity_Vy_mps" parameterType="double" value="3.0">
       <ConstraintGroup>
         <ValueConstraint rule="greaterThan" value="0.0" />
+        <!--The maximum lateral velocity during the lane change must be less than the magnitude of velocity.-->
+        <ValueConstraint rule="lessThan" value="${($Ego_InitSpeed_Ve0_kph + $CutInVehicle_RelativeInitSpeed_Ve0_Vo0_kph) / 3.6}" />
       </ConstraintGroup>
     </ParameterDeclaration>
     <ParameterDeclaration name="CutInVehicle_Acceleration_Rate" parameterType="double" value="0.0">

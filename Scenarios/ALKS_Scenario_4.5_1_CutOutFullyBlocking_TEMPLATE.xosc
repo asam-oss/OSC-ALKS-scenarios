@@ -45,6 +45,8 @@
     <ParameterDeclaration name="CutOutVehicle_LaneChange_MaxLateralVelocity_Vy_mps" parameterType="double" value="2.0">
       <ConstraintGroup>
         <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
+        <!--The lateral velocity during the lane change must be less than the magnitude of the velocity.-->
+        <ValueConstraint rule="lessThan" value="${$Ego_InitSpeed_Ve0_kph / 3.6}"></ValueConstraint>
       </ConstraintGroup>
     </ParameterDeclaration>
     <ParameterDeclaration name="TargetBlocking_Catalog" parameterType="string" value="PedestrianCatalog">

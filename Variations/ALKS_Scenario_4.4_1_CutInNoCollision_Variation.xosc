@@ -6,7 +6,9 @@
   <ParameterValueDistribution>
     <ScenarioFile filepath="../Scenarios/ALKS_Scenario_4.4_1_CutInNoCollision_TEMPLATE.xosc" />
     <Deterministic>
+      <!--These distributions will lead also to value combinations which are outside of the constraints for the parameters. E.g. "Ego speed" = 20 kph and "cut in relative speed" = -50 kph. It is exepected that these combinations are discarded by a scenario generator by comparing the values to the constraints.-->
       <DeterministicSingleParameterDistribution parameterName="Ego_InitSpeed_Ve0_kph">
+        <!--Minimum ego speed is 20 kph due to the minumum speed of the cutting in vehicle of 10 kph and a step width of 10 kph for the speed difference.-->
         <DistributionRange stepWidth="10.0">
           <Range lowerLimit="20.0" upperLimit="60.0" />
         </DistributionRange>
