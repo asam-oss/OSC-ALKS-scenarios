@@ -4,6 +4,7 @@
   <ParameterDeclarations>
     <!--The ParameterDeclarations section is needed for easy variation.-->
     <ParameterDeclaration name="Ego_InitPosition_LaneId" parameterType="string" value="-4">
+      <!--For left-hand side traffic it's also possible to position the entities on the left side of the road.-->
       <ConstraintGroup>
         <ValueConstraint rule="lessOrEqual" value="-3" />
         <ValueConstraint rule="greaterOrEqual" value="-5" />
@@ -34,15 +35,10 @@
       </ConstraintGroup>
     </ParameterDeclaration>
     <ParameterDeclaration name="TargetBlocking_InitPosition_LongitudinalOffset" parameterType="double" value="500.0">
+      <!--Not intended to be varied. Only defined for reusability in the scenario.-->
       <ConstraintGroup>
         <ValueConstraint rule="greaterThan" value="0.0" />
       </ConstraintGroup>
-    </ParameterDeclaration>
-    <ParameterDeclaration name="Duration" parameterType="double" value="${($TargetBlocking_InitPosition_LongitudinalOffset / ($Ego_InitSpeed_Ve0_kph / 3.6)) + 10.0}">
-      <ConstraintGroup>
-        <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
-      </ConstraintGroup>
-      <!--10 s more than the ego would need to reach the target without braking.-->
     </ParameterDeclaration>
   </ParameterDeclarations>
   <CatalogLocations>
@@ -148,7 +144,8 @@
       <ConditionGroup>
         <Condition name="End" delay="0" conditionEdge="rising">
           <ByValueCondition>
-            <SimulationTimeCondition value="$Duration" rule="greaterOrEqual" />
+            <!--10 s more than the ego would need to reach the target without braking.-->
+            <SimulationTimeCondition value="${($TargetBlocking_InitPosition_LongitudinalOffset / ($Ego_InitSpeed_Ve0_kph / 3.6)) + 10.0}" rule="greaterOrEqual" />
           </ByValueCondition>
         </Condition>
       </ConditionGroup>

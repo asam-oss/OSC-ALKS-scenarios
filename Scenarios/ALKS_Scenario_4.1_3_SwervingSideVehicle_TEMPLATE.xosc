@@ -18,7 +18,13 @@
     <ParameterDeclaration name="SideVehicle_Model" parameterType="string" value="car">
       <!--Not constrained so it's possible to use different models.-->
     </ParameterDeclaration>
-    <ParameterDeclaration name="SideVehicle_InitLongitudinalOffset_m" parameterType="double" value="0.0" />
+    <ParameterDeclaration name="SideVehicle_InitLongitudinalOffset_m" parameterType="double" value="0.0">
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="-10.0" />
+        <ValueConstraint rule="lessThan" value="10.0" />
+      </ConstraintGroup>
+      <!--With a longitudinal offset of more than 10.0 m the vehicle isn't considered to be close beside anymore as required by the regulation.-->
+    </ParameterDeclaration>
     <ParameterDeclaration name="SideVehicle_InitPosition_RelativeLaneId" parameterType="string" value="1">
       <ConstraintGroup>
         <ValueConstraint rule="equalTo" value="1"></ValueConstraint>
@@ -31,13 +37,16 @@
       <ConstraintGroup>
         <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
       </ConstraintGroup>
+      <!--Subject to interpretation what "close beside in the adjacent lane" means. Is it allowed/necessary to cross the lane boundary?-->
     </ParameterDeclaration>
     <ParameterDeclaration name="Swerve_Offset_Right" parameterType="double" value="-1.0">
       <ConstraintGroup>
         <ValueConstraint rule="lessThan" value="0.0"></ValueConstraint>
       </ConstraintGroup>
+      <!--Subject to interpretation what "close beside in the adjacent lane" means. Is it allowed/necessary to cross the lane boundary?-->
     </ParameterDeclaration>
     <ParameterDeclaration name="Swerve_MaxLateralAcc" parameterType="double" value="0.3">
+      <!--Not intended to be varied. Only defined for reusability in the scenario.-->
       <ConstraintGroup>
         <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
       </ConstraintGroup>

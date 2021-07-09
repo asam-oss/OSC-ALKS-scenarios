@@ -20,18 +20,14 @@
         <ValueConstraint rule="lessOrEqual" value="60.0" />
       </ConstraintGroup>
     </ParameterDeclaration>
-    <ParameterDeclaration name="Duration" parameterType="double" value="40">
-      <ConstraintGroup>
-        <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
-      </ConstraintGroup>
-    </ParameterDeclaration>
     <ParameterDeclaration name="LeadVehicle_Model" parameterType="string" value="car">
       <!--Not constrained so it's possible to use different models.-->
     </ParameterDeclaration>
-    <ParameterDeclaration name="LeadVehicle_Init_HeadwayTime_s" parameterType="double" value="2.0">
+    <ParameterDeclaration name="LeadVehicle_Init_HeadwayTime_s" parameterType="double" value="1.6">
       <ConstraintGroup>
         <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
       </ConstraintGroup>
+      <!--Should be adjusted to the specified speed dependent safety distance to start in a steady state.-->
     </ParameterDeclaration>
     <ParameterDeclaration name="LeadVehicle_VaryingSpeed_Positive_Offset" parameterType="double" value="5.0">
       <ConstraintGroup>
@@ -46,6 +42,13 @@
     <ParameterDeclaration name="LeadVehicle_VaryingSpeed_Rate" parameterType="double" value="1.0">
       <ConstraintGroup>
         <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="$LeadVehicle_Init_LateralOffset_m" parameterType="double" value="0.0">
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="-1.75" />
+        <ValueConstraint rule="lessOrEqual" value="1.75" />
+        <!--The lead vehicle should stay with it's center within the lane boundaries.-->
       </ConstraintGroup>
     </ParameterDeclaration>
   </ParameterDeclarations>
@@ -103,7 +106,7 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <RelativeLanePosition entityRef="Ego" dLane="0" ds="${$LeadVehicle_Init_HeadwayTime_s * ($Ego_InitSpeed_Ve0_kph / 3.6)}" offset="0.0">
+                <RelativeLanePosition entityRef="Ego" dLane="0" ds="${$LeadVehicle_Init_HeadwayTime_s * ($Ego_InitSpeed_Ve0_kph / 3.6)}" offset="$LeadVehicle_Init_LateralOffset_m">
                   <!--Headway distance is calculated from desired headway time and ego init speed.-->
                 </RelativeLanePosition>
               </Position>
@@ -205,7 +208,7 @@
               </Action>
               <StartTrigger>
                 <ConditionGroup>
-                  <Condition name="VaryingSpeedEvent2Start" delay="0" conditionEdge="rising">
+                  <Condition name="VaryingSpeedEvent2Start" delay="10.0" conditionEdge="rising">
                     <ByValueCondition>
                       <StoryboardElementStateCondition storyboardElementType="action" storyboardElementRef="VaryingSpeedAction" state="endTransition" />
                     </ByValueCondition>
@@ -228,9 +231,10 @@
     </Story>
     <StopTrigger>
       <ConditionGroup>
-        <Condition name="End" delay="0" conditionEdge="rising">
+        <Condition name="End" delay="20.0" conditionEdge="rising">
           <ByValueCondition>
-            <SimulationTimeCondition value="$Duration" rule="greaterOrEqual" />
+            <!--Scenario lasts until 20 seconds after the speed actions are complete.-->
+            <StoryboardElementStateCondition storyboardElementType="action" storyboardElementRef="VaryingSpeedAction2" state="endTransition" />
           </ByValueCondition>
         </Condition>
       </ConditionGroup>

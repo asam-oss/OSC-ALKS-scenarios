@@ -18,18 +18,8 @@
         <ValueConstraint rule="lessOrEqual" value="60.0" />
       </ConstraintGroup>
     </ParameterDeclaration>
-    <ParameterDeclaration name="Duration" parameterType="double" value="40">
-      <ConstraintGroup>
-        <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
-      </ConstraintGroup>
-    </ParameterDeclaration>
-    <ParameterDeclaration name="LeadVehicle_InitDistance_dx0_m" parameterType="double" value="${2.0 * ($Ego_InitSpeed_Ve0_kph / 3.6)}">
-      <!--Distance is calculated from 2 second headway time.-->
-      <ConstraintGroup>
-        <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
-      </ConstraintGroup>
-    </ParameterDeclaration>
     <ParameterDeclaration name="CutOutVehicle_RelativeTargetLane" parameterType="integer" value="1">
+      <!--Determines, if the lead vehicle cuts out to the left (1) or right (1-).-->
       <ConstraintGroup>
         <ValueConstraint rule="equalTo" value="1"></ValueConstraint>
       </ConstraintGroup>
@@ -57,6 +47,12 @@
     </ParameterDeclaration>
     <ParameterDeclaration name="TargetBlocking2_Model" parameterType="string" value="bus">
       <!--Not constrained so it's possible to use different models.-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="TargetBlocking_InitPosition_LongitudinalOffset" parameterType="double" value="500.0">
+      <!--Not intended to be varied. Only defined for reusability in the scenario.-->
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="0.0" />
+      </ConstraintGroup>
     </ParameterDeclaration>
   </ParameterDeclarations>
   <CatalogLocations>
@@ -119,7 +115,7 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="500.0"></LanePosition>
+                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="$TargetBlocking_InitPosition_LongitudinalOffset"></LanePosition>
               </Position>
             </TeleportAction>
           </PrivateAction>
@@ -137,7 +133,9 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <RelativeLanePosition entityRef="Ego" dLane="0" ds="$LeadVehicle_InitDistance_dx0_m" offset="0.0" />
+                <RelativeLanePosition entityRef="Ego" dLane="0" ds="${2.0 * ($Ego_InitSpeed_Ve0_kph / 3.6)}" offset="0.0">
+                  <!--Distance is calculated from 2 second headway time as required in Annex 4 - Appendix 3, chapter 5.2 of the regulation.-->
+                </RelativeLanePosition>
               </Position>
             </TeleportAction>
           </PrivateAction>
@@ -244,7 +242,8 @@
       <ConditionGroup>
         <Condition name="End" delay="0" conditionEdge="rising">
           <ByValueCondition>
-            <SimulationTimeCondition value="$Duration" rule="greaterOrEqual" />
+            <!--10 s more than the ego would need to reach the target without braking.-->
+            <SimulationTimeCondition value="${($TargetBlocking_InitPosition_LongitudinalOffset / ($Ego_InitSpeed_Ve0_kph / 3.6)) + 10.0}" rule="greaterOrEqual" />
           </ByValueCondition>
         </Condition>
       </ConditionGroup>

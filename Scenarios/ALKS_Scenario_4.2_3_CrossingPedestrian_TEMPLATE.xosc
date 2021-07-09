@@ -20,18 +20,13 @@
       <!--Heading / orientation of pedestrian is not constrained.-->
     </ParameterDeclaration>
     <ParameterDeclaration name="TargetBlocking_InitPosition_LongitudinalOffset" parameterType="double" value="500.0">
+      <!--Not intended to be varied. Only defined for reusability in the scenario.-->
       <ConstraintGroup>
         <ValueConstraint rule="greaterThan" value="0.0" />
       </ConstraintGroup>
     </ParameterDeclaration>
     <ParameterDeclaration name="TargetBlocking_InitPosition_LateralOffset" parameterType="double" value="-5.0">
-      <!--Lateral offset of the pedestrian relative to the ego.-->
-    </ParameterDeclaration>
-    <ParameterDeclaration name="Duration" parameterType="double" value="${($TargetBlocking_InitPosition_LongitudinalOffset / $Ego_InitSpeed_Ve0_kph) + 10.0}">
-      <!--The scenario ends 10 s after the ego would reach the target without braking.-->
-      <ConstraintGroup>
-        <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
-      </ConstraintGroup>
+      <!--Lateral offset of the pedestrian relative to the ego in m.-->
     </ParameterDeclaration>
     <ParameterDeclaration name="TargetBlocking_Speed_kph" parameterType="double" value="5.0">
       <!--The pedestrian shall walk with a speed of 5 kph according to the test specification.-->
@@ -218,7 +213,8 @@
       <ConditionGroup>
         <Condition name="End" delay="0" conditionEdge="rising">
           <ByValueCondition>
-            <SimulationTimeCondition value="$Duration" rule="greaterOrEqual" />
+            <!--The scenario ends 10 s after the ego would reach the target without braking.-->
+            <SimulationTimeCondition value="${($TargetBlocking_InitPosition_LongitudinalOffset / $Ego_InitSpeed_Ve0_kph) + 10.0}" rule="greaterOrEqual" />
           </ByValueCondition>
         </Condition>
       </ConditionGroup>

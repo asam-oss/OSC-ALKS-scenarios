@@ -20,11 +20,6 @@
         <ValueConstraint rule="lessOrEqual" value="60.0" />
       </ConstraintGroup>
     </ParameterDeclaration>
-    <ParameterDeclaration name="Duration" parameterType="double" value="40">
-      <ConstraintGroup>
-        <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
-      </ConstraintGroup>
-    </ParameterDeclaration>
     <ParameterDeclaration name="LeadVehicle_Model" parameterType="string" value="car">
       <!--Not constrained so it's possible to use different models.-->
     </ParameterDeclaration>
@@ -196,9 +191,10 @@
     </Story>
     <StopTrigger>
       <ConditionGroup>
-        <Condition name="End" delay="0" conditionEdge="rising">
+        <Condition name="End" delay="10.0" conditionEdge="rising">
           <ByValueCondition>
-            <SimulationTimeCondition value="$Duration" rule="greaterOrEqual" />
+            <!--The scenario ends 10.0 seconds after the lead vehicle has stopped.-->
+            <StoryboardElementStateCondition storyboardElementType="action" storyboardElementRef="BrakeAction" state="completeState" />
           </ByValueCondition>
         </Condition>
       </ConditionGroup>

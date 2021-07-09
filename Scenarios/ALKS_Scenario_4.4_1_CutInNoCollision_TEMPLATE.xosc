@@ -10,11 +10,6 @@
         <ValueConstraint rule="lessOrEqual" value="60.0" />
       </ConstraintGroup>
     </ParameterDeclaration>
-    <ParameterDeclaration name="Duration" parameterType="double" value="40">
-      <ConstraintGroup>
-        <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
-      </ConstraintGroup>
-    </ParameterDeclaration>
     <ParameterDeclaration name="CutInVehicle_Model" parameterType="string" value="car">
       <!--Not constrained so it's possible to use different models.-->
     </ParameterDeclaration>
@@ -49,7 +44,7 @@
     <ParameterDeclaration name="CutInVehicle_Acceleration_Rate" parameterType="double" value="0.0">
       <!--Not constrained. Vehicle can accelerate or decelerate during lane change.-->
     </ParameterDeclaration>
-    <ParameterDeclaration name="CutInVehicle_Acceleration_Target" parameterType="double" value="15.0">
+    <ParameterDeclaration name="CutInVehicle_Acceleration_Target_kph" parameterType="double" value="15.0">
       <ConstraintGroup>
         <ValueConstraint rule="greaterOrEqual" value="0.0" />
       </ConstraintGroup>
@@ -193,7 +188,7 @@
                     <SpeedAction>
                       <SpeedActionDynamics dynamicsShape="linear" value="$CutInVehicle_Acceleration_Rate" dynamicsDimension="rate" />
                       <SpeedActionTarget>
-                        <AbsoluteTargetSpeed value="$CutInVehicle_Acceleration_Target" />
+                        <AbsoluteTargetSpeed value="${$CutInVehicle_Acceleration_Target_kph / 3.6}" />
                       </SpeedActionTarget>
                     </SpeedAction>
                   </LongitudinalAction>
@@ -229,9 +224,10 @@
     </Story>
     <StopTrigger>
       <ConditionGroup>
-        <Condition name="End" delay="0" conditionEdge="rising">
+        <Condition name="End" delay="10.0" conditionEdge="rising">
           <ByValueCondition>
-            <SimulationTimeCondition value="$Duration" rule="greaterOrEqual" />
+            <!--The scenario ends 10.0 seconds after the lane change is complete.-->
+            <StoryboardElementStateCondition storyboardElementType="action" storyboardElementRef="CutInAction" state="completeState" />
           </ByValueCondition>
         </Condition>
       </ConditionGroup>

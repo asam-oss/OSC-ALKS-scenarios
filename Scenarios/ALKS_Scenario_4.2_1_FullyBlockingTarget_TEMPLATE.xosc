@@ -3,14 +3,8 @@
   <FileHeader revMajor="1" revMinor="1" date="2021-06-18T10:00:00" description="ALKS Scenario 4.2_1 FullyBlockingTarget Template" author="BMW AG" />
   <ParameterDeclarations>
     <!--The ParameterDeclarations section is needed for easy variation.-->
-    <ParameterDeclaration name="Ego_InitSpeed_Ve0_kph" parameterType="double" value="60.0">
-      <ConstraintGroup>
-        <!--The scenarios are meant to be run with a positive ego speed up to 60 kph.-->
-        <ValueConstraint rule="greaterThan" value="0.0" />
-        <ValueConstraint rule="lessOrEqual" value="60.0" />
-      </ConstraintGroup>
-    </ParameterDeclaration>
     <ParameterDeclaration name="Ego_InitPosition_LaneId" parameterType="string" value="-4">
+      <!--For left-hand side traffic it's also possible to position the entities on the left side of the road.-->
       <ConstraintGroup>
         <ValueConstraint rule="lessOrEqual" value="-3" />
         <ValueConstraint rule="greaterOrEqual" value="-5" />
@@ -20,6 +14,13 @@
         <ValueConstraint rule="lessOrEqual" value="5" />
       </ConstraintGroup>
     </ParameterDeclaration>
+    <ParameterDeclaration name="Ego_InitSpeed_Ve0_kph" parameterType="double" value="60.0">
+      <ConstraintGroup>
+        <!--The scenarios are meant to be run with a positive ego speed up to 60 kph.-->
+        <ValueConstraint rule="greaterThan" value="0.0" />
+        <ValueConstraint rule="lessOrEqual" value="60.0" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
     <ParameterDeclaration name="TargetBlocking_Catalog" parameterType="string" value="PedestrianCatalog">
       <!--Not constrained so it's possible to use different catalogs.-->
     </ParameterDeclaration>
@@ -27,15 +28,10 @@
       <!--Not constrained so it's possible to use different models.-->
     </ParameterDeclaration>
     <ParameterDeclaration name="TargetBlocking_InitPosition_LongitudinalOffset" parameterType="double" value="500.0">
+      <!--Not intended to be varied. Only defined for reusability in the scenario.-->
       <ConstraintGroup>
         <ValueConstraint rule="greaterThan" value="0.0" />
       </ConstraintGroup>
-    </ParameterDeclaration>
-    <ParameterDeclaration name="Duration" parameterType="double" value="${($TargetBlocking_InitPosition_LongitudinalOffset / ($Ego_InitSpeed_Ve0_kph / 3.6)) + 10.0}">
-      <ConstraintGroup>
-        <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
-      </ConstraintGroup>
-      <!--10 s more than the ego would need to reach the target without braking.-->
     </ParameterDeclaration>
   </ParameterDeclarations>
   <CatalogLocations>
@@ -141,7 +137,8 @@
       <ConditionGroup>
         <Condition name="End" delay="0" conditionEdge="rising">
           <ByValueCondition>
-            <SimulationTimeCondition value="$Duration" rule="greaterOrEqual" />
+            <!--10 s more than the ego would need to reach the target without braking.-->
+            <SimulationTimeCondition value="${($TargetBlocking_InitPosition_LongitudinalOffset / ($Ego_InitSpeed_Ve0_kph / 3.6)) + 10.0}" rule="greaterOrEqual"></SimulationTimeCondition>
           </ByValueCondition>
         </Condition>
       </ConditionGroup>

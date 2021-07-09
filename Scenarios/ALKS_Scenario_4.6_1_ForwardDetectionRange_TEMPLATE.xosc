@@ -18,11 +18,6 @@
         <ValueConstraint rule="lessOrEqual" value="60.0" />
       </ConstraintGroup>
     </ParameterDeclaration>
-    <ParameterDeclaration name="Duration" parameterType="double" value="40">
-      <ConstraintGroup>
-        <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
-      </ConstraintGroup>
-    </ParameterDeclaration>
     <ParameterDeclaration name="TargetBlocking_Catalog" parameterType="string" value="PedestrianCatalog">
       <!--Not constrained so it's possible to use different catalogs.-->
     </ParameterDeclaration>
@@ -39,6 +34,12 @@
       </ConstraintGroup>
       <ConstraintGroup>
         <ValueConstraint rule="equalTo" value="0.0"></ValueConstraint>
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="TargetBlocking_InitPosition_LongitudinalOffset" parameterType="double" value="500.0">
+      <!--Not intended to be varied. Only defined for reusability in the scenario.-->
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="0.0" />
       </ConstraintGroup>
     </ParameterDeclaration>
   </ParameterDeclarations>
@@ -96,7 +97,7 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="$TargetBlocking_InitPosition_Offset" s="500.0"></LanePosition>
+                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="$TargetBlocking_InitPosition_Offset" s="$TargetBlocking_InitPosition_LongitudinalOffset"></LanePosition>
               </Position>
             </TeleportAction>
           </PrivateAction>
@@ -145,7 +146,8 @@
       <ConditionGroup>
         <Condition name="End" delay="0" conditionEdge="rising">
           <ByValueCondition>
-            <SimulationTimeCondition value="$Duration" rule="greaterOrEqual" />
+            <!--The scenario ends 10 seconds after the ego reached the target.-->
+            <SimulationTimeCondition value="${($TargetBlocking_InitPosition_LongitudinalOffset / ($Ego_InitSpeed_Ve0_kph / 3.6)) + 10.0}" rule="greaterOrEqual" />
           </ByValueCondition>
         </Condition>
       </ConditionGroup>

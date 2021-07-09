@@ -3,16 +3,6 @@
   <FileHeader revMajor="1" revMinor="1" date="2021-06-18T10:00:00" description="ALKS Scenario 4.1_2 Swerving Lead Vehicle Template" author="BMW AG" />
   <ParameterDeclarations>
     <!--The ParameterDeclarations section is needed for easy variation.-->
-    <ParameterDeclaration name="Ego_InitPosition_LaneId" parameterType="string" value="-4">
-      <ConstraintGroup>
-        <ValueConstraint rule="lessOrEqual" value="-3" />
-        <ValueConstraint rule="greaterOrEqual" value="-5" />
-      </ConstraintGroup>
-      <ConstraintGroup>
-        <ValueConstraint rule="greaterOrEqual" value="3" />
-        <ValueConstraint rule="lessOrEqual" value="5" />
-      </ConstraintGroup>
-    </ParameterDeclaration>
     <ParameterDeclaration name="Ego_InitSpeed_Ve0_kph" parameterType="double" value="60.0">
       <ConstraintGroup>
         <!--The scenarios are meant to be run with a positive ego speed up to 60 kph.-->
@@ -20,31 +10,23 @@
         <ValueConstraint rule="lessOrEqual" value="60.0" />
       </ConstraintGroup>
     </ParameterDeclaration>
-    <ParameterDeclaration name="Duration" parameterType="double" value="40">
-      <ConstraintGroup>
-        <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
-      </ConstraintGroup>
-    </ParameterDeclaration>
     <ParameterDeclaration name="LeadVehicle_Model" parameterType="string" value="car">
       <!--Not constrained so it's possible to use different models.-->
     </ParameterDeclaration>
-    <ParameterDeclaration name="LeadVehicle_InitDistance_dx0_m" parameterType="double" value="${2.0 * ($Ego_InitSpeed_Ve0_kph / 3.6)}">
-      <!--Distance is calculated from 2 second headway time.-->
+    <ParameterDeclaration name="Swerve_Offset_Left" parameterType="double" value="1.5">
       <ConstraintGroup>
         <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
       </ConstraintGroup>
+      <!--With a lane width of 3.5 m the lead vehicle's center stays within the lane boundaries up to an offset of 1.75 m.-->
     </ParameterDeclaration>
-    <ParameterDeclaration name="Swerve_Offset_Left" parameterType="double" value="1.0">
-      <ConstraintGroup>
-        <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
-      </ConstraintGroup>
-    </ParameterDeclaration>
-    <ParameterDeclaration name="Swerve_Offset_Right" parameterType="double" value="-1.0">
+    <ParameterDeclaration name="Swerve_Offset_Right" parameterType="double" value="-1.5">
       <ConstraintGroup>
         <ValueConstraint rule="lessThan" value="0.0"></ValueConstraint>
       </ConstraintGroup>
+      <!--With a lane width of 3.5 m the lead vehicle's center stays within the lane boundaries up to an offset of 1.75 m.-->
     </ParameterDeclaration>
     <ParameterDeclaration name="Swerve_MaxLateralAcc" parameterType="double" value="0.3">
+      <!--Not intended to be varied. Only defined for reusability in the scenario.-->
       <ConstraintGroup>
         <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
       </ConstraintGroup>
@@ -85,7 +67,7 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="5.0"></LanePosition>
+                <LanePosition roadId="0" laneId="-4" offset="0.0" s="5.0"></LanePosition>
               </Position>
             </TeleportAction>
           </PrivateAction>
@@ -104,7 +86,9 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <RelativeLanePosition entityRef="Ego" dLane="0" ds="$LeadVehicle_InitDistance_dx0_m" offset="0.0" />
+                <RelativeLanePosition entityRef="Ego" dLane="0" ds="${2.0 * ($Ego_InitSpeed_Ve0_kph / 3.6)}" offset="0.0">
+                  <!--The initial headway distance in m is calculated from a 2.0 second headway time and the ego speed.-->
+                </RelativeLanePosition>
               </Position>
             </TeleportAction>
           </PrivateAction>
@@ -275,7 +259,7 @@
       <ConditionGroup>
         <Condition name="End" delay="0" conditionEdge="rising">
           <ByValueCondition>
-            <SimulationTimeCondition value="$Duration" rule="greaterOrEqual" />
+            <SimulationTimeCondition value="40.0" rule="greaterOrEqual" />
           </ByValueCondition>
         </Condition>
       </ConditionGroup>
