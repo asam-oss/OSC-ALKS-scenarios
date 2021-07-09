@@ -16,7 +16,7 @@
           </ParameterValueSet>
         </ValueSetDistribution>
       </DeterministicMultiParameterDistribution>
-      <DeterministicSingleParameterDistribution parameterName="TargetBlocking_InitPosition_OffseTargetBlocking_InitPosition_Offset">
+      <DeterministicSingleParameterDistribution parameterName="TargetBlocking_InitPosition_LateralOffset_m">
         <DistributionSet>
           <Element value="0.0" />
           <Element value="-5.25" />

@@ -41,7 +41,7 @@
         <ValueConstraint rule="lessThan" value="${($Ego_InitSpeed_Ve0_kph + $CutInVehicle_RelativeInitSpeed_Ve0_Vo0_kph) / 3.6}" />
       </ConstraintGroup>
     </ParameterDeclaration>
-    <ParameterDeclaration name="CutInVehicle_Acceleration_Rate" parameterType="double" value="0.0">
+    <ParameterDeclaration name="CutInVehicle_Acceleration_Rate_mps2" parameterType="double" value="0.0">
       <ConstraintGroup>
         <ValueConstraint rule="greaterOrEqual" value="0.0" />
       </ConstraintGroup>
@@ -185,7 +185,7 @@
                 <PrivateAction>
                   <LongitudinalAction>
                     <SpeedAction>
-                      <SpeedActionDynamics dynamicsShape="linear" value="$CutInVehicle_Acceleration_Rate" dynamicsDimension="rate" />
+                      <SpeedActionDynamics dynamicsShape="linear" value="$CutInVehicle_Acceleration_Rate_mps2" dynamicsDimension="rate" />
                       <SpeedActionTarget>
                         <AbsoluteTargetSpeed value="${$CutInVehicle_Acceleration_Target_kph / 3.6}" />
                       </SpeedActionTarget>

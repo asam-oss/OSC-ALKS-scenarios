@@ -13,19 +13,19 @@
     <ParameterDeclaration name="LeadVehicle_Model" parameterType="string" value="car">
       <!--Not constrained so it's possible to use different models.-->
     </ParameterDeclaration>
-    <ParameterDeclaration name="Swerve_Offset_Left" parameterType="double" value="1.5">
+    <ParameterDeclaration name="Swerve_Offset_Left_m" parameterType="double" value="1.5">
       <ConstraintGroup>
         <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
       </ConstraintGroup>
       <!--With a lane width of 3.5 m the lead vehicle's center stays within the lane boundaries up to an offset of 1.75 m.-->
     </ParameterDeclaration>
-    <ParameterDeclaration name="Swerve_Offset_Right" parameterType="double" value="-1.5">
+    <ParameterDeclaration name="Swerve_Offset_Right_m" parameterType="double" value="-1.5">
       <ConstraintGroup>
         <ValueConstraint rule="lessThan" value="0.0"></ValueConstraint>
       </ConstraintGroup>
       <!--With a lane width of 3.5 m the lead vehicle's center stays within the lane boundaries up to an offset of 1.75 m.-->
     </ParameterDeclaration>
-    <ParameterDeclaration name="Swerve_MaxLateralAcc" parameterType="double" value="0.3">
+    <ParameterDeclaration name="Swerve_MaxLateralAcc_mps2" parameterType="double" value="0.3">
       <!--Not intended to be varied. Only defined for reusability in the scenario.-->
       <ConstraintGroup>
         <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
@@ -155,9 +155,9 @@
                 <PrivateAction>
                   <LateralAction>
                     <LaneOffsetAction continuous="false">
-                      <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc" dynamicsShape="sinusoidal" />
+                      <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc_mps2" dynamicsShape="sinusoidal" />
                       <LaneOffsetTarget>
-                        <AbsoluteTargetLaneOffset value="$Swerve_Offset_Left" />
+                        <AbsoluteTargetLaneOffset value="$Swerve_Offset_Left_m" />
                       </LaneOffsetTarget>
                     </LaneOffsetAction>
                   </LateralAction>
@@ -178,7 +178,7 @@
                 <PrivateAction>
                   <LateralAction>
                     <LaneOffsetAction continuous="false">
-                      <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc" dynamicsShape="sinusoidal" />
+                      <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc_mps2" dynamicsShape="sinusoidal" />
                       <LaneOffsetTarget>
                         <AbsoluteTargetLaneOffset value="0.0" />
                       </LaneOffsetTarget>
@@ -201,9 +201,9 @@
                 <PrivateAction>
                   <LateralAction>
                     <LaneOffsetAction continuous="false">
-                      <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc" dynamicsShape="sinusoidal" />
+                      <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc_mps2" dynamicsShape="sinusoidal" />
                       <LaneOffsetTarget>
-                        <AbsoluteTargetLaneOffset value="$Swerve_Offset_Right" />
+                        <AbsoluteTargetLaneOffset value="$Swerve_Offset_Right_m" />
                       </LaneOffsetTarget>
                     </LaneOffsetAction>
                   </LateralAction>
@@ -224,7 +224,7 @@
                 <PrivateAction>
                   <LateralAction>
                     <LaneOffsetAction continuous="false">
-                      <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc" dynamicsShape="sinusoidal" />
+                      <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc_mps2" dynamicsShape="sinusoidal" />
                       <LaneOffsetTarget>
                         <AbsoluteTargetLaneOffset value="0.0" />
                       </LaneOffsetTarget>

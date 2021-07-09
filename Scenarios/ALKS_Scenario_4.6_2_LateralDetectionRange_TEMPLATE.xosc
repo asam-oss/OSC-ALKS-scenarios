@@ -10,13 +10,8 @@
         <ValueConstraint rule="lessOrEqual" value="60.0" />
       </ConstraintGroup>
     </ParameterDeclaration>
-    <ParameterDeclaration name="Duration" parameterType="double" value="40">
-      <ConstraintGroup>
-        <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
-      </ConstraintGroup>
-    </ParameterDeclaration>
-    <ParameterDeclaration name="SideVehicle_InitLongitudinalOffset" parameterType="double" value="0.0" />
-    <ParameterDeclaration name="SideVehicle_InitLateralOffset" parameterType="double" value="-5.25">
+    <ParameterDeclaration name="SideVehicle_InitLongitudinalOffset_m" parameterType="double" value="0.0" />
+    <ParameterDeclaration name="SideVehicle_InitLateralOffset_m" parameterType="double" value="-5.25">
       <!--With a lane width of 3.5 m the side vehicle is positioned with it's center on the lane border.-->
       <ConstraintGroup>
         <ValueConstraint rule="equalTo" value="-5.25"></ValueConstraint>
@@ -25,7 +20,7 @@
         <ValueConstraint rule="equalTo" value="5.25"></ValueConstraint>
       </ConstraintGroup>
     </ParameterDeclaration>
-    <ParameterDeclaration name="SideVehicle_FinalLateralOffset" parameterType="double" value="-1.75">
+    <ParameterDeclaration name="SideVehicle_FinalLateralOffset_m" parameterType="double" value="-1.75">
       <!--The motorcycle will approach the ego from the side until its' center is at the lane border (lane width 3.5m).-->
       <ConstraintGroup>
         <ValueConstraint rule="equalTo" value="-1.75"></ValueConstraint>
@@ -34,7 +29,7 @@
         <ValueConstraint rule="equalTo" value="1.75"></ValueConstraint>
       </ConstraintGroup>
     </ParameterDeclaration>
-    <ParameterDeclaration name="Swerve_MaxLateralAcc" parameterType="double" value="0.1">
+    <ParameterDeclaration name="Swerve_MaxLateralAcc_mps2" parameterType="double" value="0.1">
       <ConstraintGroup>
         <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
       </ConstraintGroup>
@@ -94,7 +89,7 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <RelativeLanePosition entityRef="Ego" dLane="0" ds="$SideVehicle_InitLongitudinalOffset" offset="$SideVehicle_InitLateralOffset" />
+                <RelativeLanePosition entityRef="Ego" dLane="0" ds="$SideVehicle_InitLongitudinalOffset_m" offset="$SideVehicle_InitLateralOffset_m" />
               </Position>
             </TeleportAction>
           </PrivateAction>
@@ -161,9 +156,9 @@
                 <PrivateAction>
                   <LateralAction>
                     <LaneOffsetAction continuous="false">
-                      <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc" dynamicsShape="sinusoidal" />
+                      <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc_mps2" dynamicsShape="sinusoidal" />
                       <LaneOffsetTarget>
-                        <RelativeTargetLaneOffset entityRef="Ego" value="$SideVehicle_FinalLateralOffset" />
+                        <RelativeTargetLaneOffset entityRef="Ego" value="$SideVehicle_FinalLateralOffset_m" />
                       </LaneOffsetTarget>
                     </LaneOffsetAction>
                   </LateralAction>
@@ -196,7 +191,7 @@
       <ConditionGroup>
         <Condition name="End" delay="0" conditionEdge="rising">
           <ByValueCondition>
-            <SimulationTimeCondition value="$Duration" rule="greaterOrEqual" />
+            <SimulationTimeCondition value="40" rule="greaterOrEqual" />
           </ByValueCondition>
         </Condition>
       </ConditionGroup>

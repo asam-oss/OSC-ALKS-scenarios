@@ -24,7 +24,7 @@
     <ParameterDeclaration name="TargetBlocking_Model" parameterType="string" value="pedestrian">
       <!--Not constrained so it's possible to use different models.-->
     </ParameterDeclaration>
-    <ParameterDeclaration name="TargetBlocking_InitPosition_Offset" parameterType="double" value="-5.25">
+    <ParameterDeclaration name="TargetBlocking_InitPosition_LateralOffset_m" parameterType="double" value="-5.25">
       <!--Requirement is the outer edge of each adjacent lane and within ego lane.-->
       <ConstraintGroup>
         <ValueConstraint rule="equalTo" value="-5.25"></ValueConstraint>
@@ -36,7 +36,7 @@
         <ValueConstraint rule="equalTo" value="0.0"></ValueConstraint>
       </ConstraintGroup>
     </ParameterDeclaration>
-    <ParameterDeclaration name="TargetBlocking_InitPosition_LongitudinalOffset" parameterType="double" value="500.0">
+    <ParameterDeclaration name="TargetBlocking_InitPosition_LongitudinalOffset_m" parameterType="double" value="500.0">
       <!--Not intended to be varied. Only defined for reusability in the scenario.-->
       <ConstraintGroup>
         <ValueConstraint rule="greaterThan" value="0.0" />
@@ -97,7 +97,7 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="$TargetBlocking_InitPosition_Offset" s="$TargetBlocking_InitPosition_LongitudinalOffset"></LanePosition>
+                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="$TargetBlocking_InitPosition_LateralOffset_m" s="$TargetBlocking_InitPosition_LongitudinalOffset_m"></LanePosition>
               </Position>
             </TeleportAction>
           </PrivateAction>
@@ -147,7 +147,7 @@
         <Condition name="End" delay="0" conditionEdge="rising">
           <ByValueCondition>
             <!--The scenario ends 10 seconds after the ego reached the target.-->
-            <SimulationTimeCondition value="${($TargetBlocking_InitPosition_LongitudinalOffset / ($Ego_InitSpeed_Ve0_kph / 3.6)) + 10.0}" rule="greaterOrEqual" />
+            <SimulationTimeCondition value="${($TargetBlocking_InitPosition_LongitudinalOffset_m / ($Ego_InitSpeed_Ve0_kph / 3.6)) + 10.0}" rule="greaterOrEqual" />
           </ByValueCondition>
         </Condition>
       </ConditionGroup>

@@ -10,11 +10,6 @@
         <ValueConstraint rule="lessOrEqual" value="60.0" />
       </ConstraintGroup>
     </ParameterDeclaration>
-    <ParameterDeclaration name="Duration" parameterType="double" value="40">
-      <ConstraintGroup>
-        <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
-      </ConstraintGroup>
-    </ParameterDeclaration>
     <ParameterDeclaration name="SideVehicle_Model" parameterType="string" value="car">
       <!--Not constrained so it's possible to use different models.-->
     </ParameterDeclaration>
@@ -33,19 +28,19 @@
         <ValueConstraint rule="equalTo" value="-1"></ValueConstraint>
       </ConstraintGroup>
     </ParameterDeclaration>
-    <ParameterDeclaration name="Swerve_Offset_Left" parameterType="double" value="1.0">
+    <ParameterDeclaration name="Swerve_Offset_Left_m" parameterType="double" value="1.0">
       <ConstraintGroup>
         <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
       </ConstraintGroup>
       <!--Subject to interpretation what "close beside in the adjacent lane" means. Is it allowed/necessary to cross the lane boundary?-->
     </ParameterDeclaration>
-    <ParameterDeclaration name="Swerve_Offset_Right" parameterType="double" value="-1.0">
+    <ParameterDeclaration name="Swerve_Offset_Right_m" parameterType="double" value="-1.0">
       <ConstraintGroup>
         <ValueConstraint rule="lessThan" value="0.0"></ValueConstraint>
       </ConstraintGroup>
       <!--Subject to interpretation what "close beside in the adjacent lane" means. Is it allowed/necessary to cross the lane boundary?-->
     </ParameterDeclaration>
-    <ParameterDeclaration name="Swerve_MaxLateralAcc" parameterType="double" value="0.3">
+    <ParameterDeclaration name="Swerve_MaxLateralAcc_mps2" parameterType="double" value="0.3">
       <!--Not intended to be varied. Only defined for reusability in the scenario.-->
       <ConstraintGroup>
         <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
@@ -173,9 +168,9 @@
                 <PrivateAction>
                   <LateralAction>
                     <LaneOffsetAction continuous="false">
-                      <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc" dynamicsShape="sinusoidal" />
+                      <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc_mps2" dynamicsShape="sinusoidal" />
                       <LaneOffsetTarget>
-                        <AbsoluteTargetLaneOffset value="$Swerve_Offset_Left" />
+                        <AbsoluteTargetLaneOffset value="$Swerve_Offset_Left_m" />
                       </LaneOffsetTarget>
                     </LaneOffsetAction>
                   </LateralAction>
@@ -196,7 +191,7 @@
                 <PrivateAction>
                   <LateralAction>
                     <LaneOffsetAction continuous="false">
-                      <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc" dynamicsShape="sinusoidal" />
+                      <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc_mps2" dynamicsShape="sinusoidal" />
                       <LaneOffsetTarget>
                         <AbsoluteTargetLaneOffset value="0.0" />
                       </LaneOffsetTarget>
@@ -219,9 +214,9 @@
                 <PrivateAction>
                   <LateralAction>
                     <LaneOffsetAction continuous="false">
-                      <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc" dynamicsShape="sinusoidal" />
+                      <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc_mps2" dynamicsShape="sinusoidal" />
                       <LaneOffsetTarget>
-                        <AbsoluteTargetLaneOffset value="$Swerve_Offset_Right" />
+                        <AbsoluteTargetLaneOffset value="$Swerve_Offset_Right_m" />
                       </LaneOffsetTarget>
                     </LaneOffsetAction>
                   </LateralAction>
@@ -242,7 +237,7 @@
                 <PrivateAction>
                   <LateralAction>
                     <LaneOffsetAction continuous="false">
-                      <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc" dynamicsShape="sinusoidal" />
+                      <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc_mps2" dynamicsShape="sinusoidal" />
                       <LaneOffsetTarget>
                         <AbsoluteTargetLaneOffset value="0.0" />
                       </LaneOffsetTarget>
@@ -277,7 +272,7 @@
       <ConditionGroup>
         <Condition name="End" delay="0" conditionEdge="rising">
           <ByValueCondition>
-            <SimulationTimeCondition value="$Duration" rule="greaterOrEqual" />
+            <SimulationTimeCondition value="40" rule="greaterOrEqual" />
           </ByValueCondition>
         </Condition>
       </ConditionGroup>

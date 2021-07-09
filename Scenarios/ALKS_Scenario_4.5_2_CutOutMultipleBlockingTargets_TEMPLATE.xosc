@@ -48,7 +48,7 @@
     <ParameterDeclaration name="TargetBlocking2_Model" parameterType="string" value="bus">
       <!--Not constrained so it's possible to use different models.-->
     </ParameterDeclaration>
-    <ParameterDeclaration name="TargetBlocking_InitPosition_LongitudinalOffset" parameterType="double" value="500.0">
+    <ParameterDeclaration name="TargetBlocking_InitPosition_LongitudinalOffset_m" parameterType="double" value="500.0">
       <!--Not intended to be varied. Only defined for reusability in the scenario.-->
       <ConstraintGroup>
         <ValueConstraint rule="greaterThan" value="0.0" />
@@ -115,7 +115,7 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="$TargetBlocking_InitPosition_LongitudinalOffset"></LanePosition>
+                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="$TargetBlocking_InitPosition_LongitudinalOffset_m"></LanePosition>
               </Position>
             </TeleportAction>
           </PrivateAction>
@@ -243,7 +243,7 @@
         <Condition name="End" delay="0" conditionEdge="rising">
           <ByValueCondition>
             <!--10 s more than the ego would need to reach the target without braking.-->
-            <SimulationTimeCondition value="${($TargetBlocking_InitPosition_LongitudinalOffset / ($Ego_InitSpeed_Ve0_kph / 3.6)) + 10.0}" rule="greaterOrEqual" />
+            <SimulationTimeCondition value="${($TargetBlocking_InitPosition_LongitudinalOffset_m / ($Ego_InitSpeed_Ve0_kph / 3.6)) + 10.0}" rule="greaterOrEqual" />
           </ByValueCondition>
         </Condition>
       </ConditionGroup>

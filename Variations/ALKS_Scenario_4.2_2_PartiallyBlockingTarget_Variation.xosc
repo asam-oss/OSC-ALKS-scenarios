@@ -38,7 +38,7 @@
           </ParameterValueSet>
         </ValueSetDistribution>
       </DeterministicMultiParameterDistribution>
-      <DeterministicSingleParameterDistribution parameterName="TargetBlocking_InitPosition_OffseTargetBlocking_InitPosition_Offset">
+      <DeterministicSingleParameterDistribution parameterName="TargetBlocking_InitPosition_LateralOffset_m">
         <!--Variation between left and right border of lane (3.5 m width)-->
         <DistributionRange stepWidth="0.25">
           <Range lowerLimit="-2" upperLimit="2" />
