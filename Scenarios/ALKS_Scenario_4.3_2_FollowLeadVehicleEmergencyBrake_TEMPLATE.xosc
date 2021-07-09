@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <OpenSCENARIO>
-  <FileHeader revMajor="1" revMinor="1" date="2021-06-18T10:00:00" description="ALKS Scenario 4.3_2 FollowLeadVehicleEmergencyBrake Template" author="BMW AG" />
+  <FileHeader revMajor="1" revMinor="1" date="2021-07-09T10:00:00" description="ALKS Scenario 4.3_2 FollowLeadVehicleEmergencyBrake Template" author="BMW AG" />
   <ParameterDeclarations>
     <!--The ParameterDeclarations section is needed for easy variation.-->
     <ParameterDeclaration name="Ego_InitPosition_LaneId" parameterType="string" value="-4">
@@ -32,6 +32,13 @@
       <ConstraintGroup>
         <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
         <ValueConstraint rule="lessThan" value="10.0"></ValueConstraint>
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="$LeadVehicle_Init_LateralOffset_m" parameterType="double" value="0.0">
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="-1.75" />
+        <ValueConstraint rule="lessOrEqual" value="1.75" />
+        <!--The lead vehicle should stay with it's center within the lane boundaries.-->
       </ConstraintGroup>
     </ParameterDeclaration>
   </ParameterDeclarations>
@@ -89,7 +96,7 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <RelativeLanePosition entityRef="Ego" dLane="0" ds="${$LeadVehicle_Init_HeadwayTime_s * ($Ego_InitSpeed_Ve0_kph / 3.6)}" offset="0.0">
+                <RelativeLanePosition entityRef="Ego" dLane="0" ds="${$LeadVehicle_Init_HeadwayTime_s * ($Ego_InitSpeed_Ve0_kph / 3.6)}" offset="$LeadVehicle_Init_LateralOffset_m">
                   <!--Headway distance is calculated from desired headway time and ego init speed.-->
                 </RelativeLanePosition>
               </Position>

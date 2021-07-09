@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <OpenSCENARIO>
-  <FileHeader revMajor="1" revMinor="1" date="2021-06-18T10:00:00" description="ALKS Scenario 4.3_1 FollowLeadVehicleComfortable Template" author="BMW AG" />
+  <FileHeader revMajor="1" revMinor="1" date="2021-07-09T10:00:00" description="ALKS Scenario 4.3_1 FollowLeadVehicleComfortable Template" author="BMW AG" />
   <ParameterDeclarations>
     <!--The ParameterDeclarations section is needed for easy variation.-->
     <ParameterDeclaration name="Ego_InitPosition_LaneId" parameterType="string" value="-4">
@@ -27,7 +27,7 @@
       <ConstraintGroup>
         <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
       </ConstraintGroup>
-      <!--Should be adjusted to the specified speed dependent safety distance to start in a steady state.-->
+      <!--Should be adjusted to the specified (speed dependent) safety distance to start in a steady state. Can also be less so the ego acquires the specified safety distance during the first 10 seconds.-->
     </ParameterDeclaration>
     <ParameterDeclaration name="LeadVehicle_VaryingSpeed_Positive_Offset_mps" parameterType="double" value="5.0">
       <ConstraintGroup>

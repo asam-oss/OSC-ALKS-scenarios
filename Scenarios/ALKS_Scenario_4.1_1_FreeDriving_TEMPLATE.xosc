@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <OpenSCENARIO>
-  <FileHeader revMajor="1" revMinor="1" date="2021-06-18T10:00:00" description="ALKS Scenario 4.1_1 FreeDriving Template" author="BMW AG" />
+  <FileHeader revMajor="1" revMinor="1" date="2021-07-09T10:00:00" description="ALKS Scenario 4.1_1 FreeDriving Template" author="BMW AG" />
   <ParameterDeclarations>
     <!--The ParameterDeclarations section is needed for easy variation.-->
     <ParameterDeclaration name="Ego_InitSpeed_Ve0_kph" parameterType="double" value="60.0">
@@ -102,9 +102,8 @@
       <ConditionGroup>
         <Condition name="End" delay="0" conditionEdge="rising">
           <ByValueCondition>
-            <SimulationTimeCondition value="${5000.0 / ($Ego_InitSpeed_Ve0_kph / 3.6)}" rule="greaterOrEqual">
-              <!--A duration of at least 5 minutes is required for this scenario. The whole road is a bit more than 5000 m long and should be covered. With the maximum speed of 60 kph this would take exactly 5 minutes. With lower speeds it takes longer.-->
-            </SimulationTimeCondition>
+            <!--A duration of at least 5 minutes is required for this scenario. The whole road is a bit more than 5000 m long and should be covered. With the maximum speed of 60 kph this would take exactly 5 minutes. With lower speeds it takes longer.-->
+            <SimulationTimeCondition value="${5000.0 / ($Ego_InitSpeed_Ve0_kph / 3.6)}" rule="greaterOrEqual"></SimulationTimeCondition>
           </ByValueCondition>
         </Condition>
       </ConditionGroup>

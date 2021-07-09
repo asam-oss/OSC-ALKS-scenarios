@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <OpenSCENARIO>
-  <FileHeader revMajor="1" revMinor="1" date="2021-06-18T10:00:00" description="ALKS Scenario 4.5_2 CutOutMultipleBlockingTargets Template" author="BMW AG" />
+  <FileHeader revMajor="1" revMinor="1" date="2021-07-09T10:00:00" description="ALKS Scenario 4.5_2 CutOutMultipleBlockingTargets Template" author="BMW AG" />
   <ParameterDeclarations>
     <!--The ParameterDeclarations section is needed for easy variation.-->
     <ParameterDeclaration name="Ego_InitPosition_LaneId" parameterType="string" value="-4">
@@ -124,7 +124,7 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="515.0"></LanePosition>
+                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="${$TargetBlocking_InitPosition_LongitudinalOffset_m + 15.0}"></LanePosition>
               </Position>
             </TeleportAction>
           </PrivateAction>
@@ -218,7 +218,7 @@
                         <EntityRef entityRef="LeadVehicle" />
                       </TriggeringEntities>
                       <EntityCondition>
-                        <RelativeDistanceCondition entityRef="TargetBlocking" relativeDistanceType="longitudinal" value="$FrontOfLead_Distance_dx0_f" freespace="true" rule="lessThan" coordinateSystem="entity" />
+                        <RelativeDistanceCondition entityRef="TargetBlocking" relativeDistanceType="longitudinal" value="$FrontOfLead_Distance_dx0_f_m" freespace="true" rule="lessThan" coordinateSystem="entity" />
                       </EntityCondition>
                     </ByEntityCondition>
                   </Condition>
@@ -242,7 +242,7 @@
       <ConditionGroup>
         <Condition name="End" delay="0" conditionEdge="rising">
           <ByValueCondition>
-            <!--10 s more than the ego would need to reach the target without braking.-->
+            <!--The scenario stops 10 s after the ego would reach the target without braking.-->
             <SimulationTimeCondition value="${($TargetBlocking_InitPosition_LongitudinalOffset_m / ($Ego_InitSpeed_Ve0_kph / 3.6)) + 10.0}" rule="greaterOrEqual" />
           </ByValueCondition>
         </Condition>

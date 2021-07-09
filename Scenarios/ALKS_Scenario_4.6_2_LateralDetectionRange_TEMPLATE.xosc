@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <OpenSCENARIO>
-  <FileHeader revMajor="1" revMinor="1" date="2021-06-18T10:00:00" description="ALKS Scenario 4.6_2 LateralDetectionRange Template" author="BMW AG" />
+  <FileHeader revMajor="1" revMinor="1" date="2021-07-09T10:00:00" description="ALKS Scenario 4.6_2 LateralDetectionRange Template" author="BMW AG" />
   <ParameterDeclarations>
     <!--The ParameterDeclarations section is needed for easy variation.-->
     <ParameterDeclaration name="Ego_InitSpeed_Ve0_kph" parameterType="double" value="60.0">
@@ -11,13 +11,13 @@
       </ConstraintGroup>
     </ParameterDeclaration>
     <ParameterDeclaration name="SideVehicle_InitLongitudinalOffset_m" parameterType="double" value="0.0" />
-    <ParameterDeclaration name="SideVehicle_InitLateralOffset_m" parameterType="double" value="-5.25">
-      <!--With a lane width of 3.5 m the side vehicle is positioned with it's center on the lane border.-->
+    <ParameterDeclaration name="SideVehicle_InitLateralOffset_m" parameterType="double" value="-7">
+      <!--According to the regulation the ALKS shall detect a side vehicle within an area at least up to the full width of the adjacent lane. With a lane width of 3.5 m the side vehicle (width 2.5m max) needs to start at least at an offset of 3.5m/2 (half ego lane) + 3.5m (full adjacent lane) + 2.5m/2 (half side vehicle width) = 6.5 m. Therfore 7 m is used as initial lateral offset.-->
       <ConstraintGroup>
-        <ValueConstraint rule="equalTo" value="-5.25"></ValueConstraint>
+        <ValueConstraint rule="equalTo" value="-7"></ValueConstraint>
       </ConstraintGroup>
       <ConstraintGroup>
-        <ValueConstraint rule="equalTo" value="5.25"></ValueConstraint>
+        <ValueConstraint rule="equalTo" value="7"></ValueConstraint>
       </ConstraintGroup>
     </ParameterDeclaration>
     <ParameterDeclaration name="SideVehicle_FinalLateralOffset_m" parameterType="double" value="-1.75">

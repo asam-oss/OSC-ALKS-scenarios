@@ -10,6 +10,12 @@
           <Range lowerLimit="5.0" upperLimit="60.0" />
         </DistributionRange>
       </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="Ego_InitPosition_LaneId">
+        <DistributionSet>
+          <Element value="4" />
+          <Element value="-4" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
     </Deterministic>
   </ParameterValueDistribution>
 </OpenSCENARIO>

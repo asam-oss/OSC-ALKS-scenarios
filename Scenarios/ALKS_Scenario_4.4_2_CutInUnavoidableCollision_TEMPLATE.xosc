@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <OpenSCENARIO>
-  <FileHeader revMajor="1" revMinor="1" date="2021-06-18T10:00:00" description="ALKS Scenario 4.4_2 CutInUnavoidableCollision Template" author="BMW AG" />
+  <FileHeader revMajor="1" revMinor="1" date="2021-07-09T10:00:00" description="ALKS Scenario 4.4_2 CutInUnavoidableCollision Template" author="BMW AG" />
   <ParameterDeclarations>
     <!--The ParameterDeclarations section is needed for easy variation.-->
     <ParameterDeclaration name="Ego_InitSpeed_Ve0_kph" parameterType="double" value="60.0">
@@ -46,7 +46,7 @@
         <ValueConstraint rule="greaterOrEqual" value="0.0" />
       </ConstraintGroup>
     </ParameterDeclaration>
-    <ParameterDeclaration name="CutInVehicle_Acceleration_Target_kph" parameterType="double" value="15.0">
+    <ParameterDeclaration name="CutInVehicle_Acceleration_Target_kph" parameterType="double" value="40.0">
       <ConstraintGroup>
         <ValueConstraint rule="greaterOrEqual" value="0.0" />
       </ConstraintGroup>
@@ -106,7 +106,8 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <RelativeLanePosition entityRef="Ego" dLane="$CutInVehicle_InitPosition_RelativeLaneId" ds="55.0" offset="0.0" />
+                <!--The target starts at a position ahead of the ego, so that it takes 10 seconds before the cut in maneuver starts.-->
+                <RelativeLanePosition entityRef="Ego" dLane="$CutInVehicle_InitPosition_RelativeLaneId" ds="${$CutInVehicle_HeadwayDistanceTrigger_dx0_m + (-10.0 * ($CutInVehicle_RelativeInitSpeed_Ve0_Vo0_kph / 3.6))}" offset="0.0" />
               </Position>
             </TeleportAction>
           </PrivateAction>
