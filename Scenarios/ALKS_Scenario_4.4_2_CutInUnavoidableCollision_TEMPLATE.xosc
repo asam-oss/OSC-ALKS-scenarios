@@ -116,7 +116,7 @@
               <SpeedAction>
                 <SpeedActionDynamics dynamicsShape="step" dynamicsDimension="time" value="0" />
                 <SpeedActionTarget>
-                  <RelativeTargetSpeed entityRef="Ego" value="${$CutInVehicle_RelativeInitSpeed_Ve0_Vo0 / 3.6}" speedTargetValueType="delta" continuous="false" />
+                  <RelativeTargetSpeed entityRef="Ego" value="${$CutInVehicle_RelativeInitSpeed_Ve0_Vo0_kph / 3.6}" speedTargetValueType="delta" continuous="false" />
                 </SpeedActionTarget>
               </SpeedAction>
             </LongitudinalAction>

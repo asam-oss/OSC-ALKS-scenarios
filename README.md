@@ -30,7 +30,7 @@ _Note:_ Currently only esmini supports the OpenSCENARIO 1.1 format. For openPASS
 _Note:_ The execution with openPASS expects xsltproc on the system path. Check out the "Notes regarding openPASS" for more information.
 
 1. Clone or download this repository to your local drive.
-2. a) Download the [latest esmini release](https://github.com/esmini/esmini/releases) (e.g. esmini-bin_win_x64.zip) (tested successfully with [esmini 2.8.2](https://github.com/esmini/esmini/releases/tag/v2.8.2)),  
+2. a) Download the [latest esmini release](https://github.com/esmini/esmini/releases) (e.g. esmini-bin_win_x64.zip) (tested successfully with [esmini 2.12.0](https://github.com/esmini/esmini/releases/tag/v2.12.0)),  
 or  
 b) Download the [latest openPASS release](https://gitlab.eclipse.org/eclipse/simopenpass/simopenpass) (tested successfully with [openPASS v0.7](https://gitlab.eclipse.org/eclipse/simopenpass/simopenpass/-/tree/openPASS_0.7))
 3. a) Create an environment variable "ESMINI", which directs to the "bin" folder of esmini. E.g. "C:\MyFolder\esmini\bin\",  

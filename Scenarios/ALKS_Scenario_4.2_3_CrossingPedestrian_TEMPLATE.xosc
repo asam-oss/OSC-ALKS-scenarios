@@ -163,7 +163,8 @@
                                   </LanePosition>
                                 </Position>
                               </Vertex>
-                              <Vertex time="${2 * $TargetBlocking_InitPosition_LateralOffset_m / ($TargetBlocking_Speed_kph / 3.6)}">
+                              <Vertex time="${2 * sqrt( $TargetBlocking_InitPosition_LateralOffset_m * $TargetBlocking_InitPosition_LateralOffset_m ) / ($TargetBlocking_Speed_kph / 3.6)}">
+                                <!--Using sqrt(x*x) as replacement for abs()-->
                                 <Position>
                                   <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="${-$TargetBlocking_InitPosition_LateralOffset_m}" s="$TargetBlocking_InitPosition_LongitudinalOffset_m">
                                     <Orientation h="$TargetBlocking_InitPosition_Heading_rad" />
@@ -191,7 +192,8 @@
                       </TriggeringEntities>
                       <EntityCondition>
                         <!--The target should start walking at a point in time, so that the ego would hit the target with the center of it's front bumper, if it doesn't brake.-->
-                        <TimeHeadwayCondition entityRef="TargetBlocking" value="${$TargetBlocking_InitPosition_LateralOffset_m / ($TargetBlocking_Speed_kph / 3.6)}" freespace="true" rule="lessThan" coordinateSystem="road" relativeDistanceType="longitudinal"></TimeHeadwayCondition>
+                        <!--Using sqrt(x*x) as replacement for abs()-->
+                        <TimeHeadwayCondition entityRef="TargetBlocking" value="${sqrt( $TargetBlocking_InitPosition_LateralOffset_m * $TargetBlocking_InitPosition_LateralOffset_m ) / ($TargetBlocking_Speed_kph / 3.6)}" freespace="true" rule="lessThan" coordinateSystem="road" relativeDistanceType="longitudinal" />
                       </EntityCondition>
                     </ByEntityCondition>
                   </Condition>
@@ -216,7 +218,7 @@
         <Condition name="End" delay="0" conditionEdge="rising">
           <ByValueCondition>
             <!--The scenario ends 10 s after the ego would reach the target without braking.-->
-            <SimulationTimeCondition value="${($TargetBlocking_InitPosition_LongitudinalOffset_m / $Ego_InitSpeed_Ve0_kph) + 10.0}" rule="greaterOrEqual" />
+            <SimulationTimeCondition value="${($TargetBlocking_InitPosition_LongitudinalOffset_m / ($Ego_InitSpeed_Ve0_kph / 3.6)) + 10.0}" rule="greaterOrEqual" />
           </ByValueCondition>
         </Condition>
       </ConditionGroup>

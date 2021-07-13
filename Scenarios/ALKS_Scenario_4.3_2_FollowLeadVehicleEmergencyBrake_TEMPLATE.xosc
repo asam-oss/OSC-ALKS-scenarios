@@ -34,7 +34,7 @@
         <ValueConstraint rule="lessThan" value="10.0"></ValueConstraint>
       </ConstraintGroup>
     </ParameterDeclaration>
-    <ParameterDeclaration name="$LeadVehicle_Init_LateralOffset_m" parameterType="double" value="0.0">
+    <ParameterDeclaration name="LeadVehicle_Init_LateralOffset_m" parameterType="double" value="0.0">
       <ConstraintGroup>
         <ValueConstraint rule="greaterThan" value="-1.75" />
         <ValueConstraint rule="lessOrEqual" value="1.75" />
