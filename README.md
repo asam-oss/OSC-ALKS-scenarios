@@ -11,7 +11,7 @@ The ALKS regulation also contains test scenarios at a functional level, which ar
 
 The ALKS regulation itself leaves room for interpretation, therefore one goal of this publication is the coordination on a common interpretation with partners. Hence, this work has also been conducted in the context of the German research project [SET Level](https://setlevel.de). 
 
-BMW has taken on the task of implementing the test scenarios from the ALKS regulation. Since exchange and compatibility via the tool landscape is vital, another goal is the implementation of the scenarios using an international standard. At the [ASAM e.V.](https://www.asam.net/standards/domain-simulation/) members are developing the so called "OpenX" standards for the simulation domain like OpenSCENARIO (Release v1.1 Q1/21) for scenario definitions and OpenDRIVE (Release v1.6 Q1/2020) for road network definitions. The implementation is using [OpenSCENARIO](https://www.asam.net/standards/detail/openscenario/) and [OpenDRIVE](https://www.asam.net/standards/detail/opendrive/), resulting in a bundle of XML files executable with standard compliant simulators.
+BMW has taken on the task of implementing the test scenarios from the ALKS regulation. Since exchange and compatibility via the tool landscape is vital, another goal is the implementation of the scenarios using an international standard. At the [ASAM e.V.](https://www.asam.net/standards/domain-simulation/) members are developing the so called "OpenX" standards for the simulation domain like OpenSCENARIO (Release v1.1 Q1/21) for scenario definitions and OpenDRIVE (Release v1.6.1 Q1/2021) for road network definitions. The implementation is using [OpenSCENARIO](https://www.asam.net/standards/detail/openscenario/) and [OpenDRIVE](https://www.asam.net/standards/detail/opendrive/), resulting in a bundle of XML files executable with standard compliant simulators.
 
 ## Content
 
@@ -37,7 +37,7 @@ b) Download the [latest openPASS release](https://gitlab.eclipse.org/eclipse/sim
 or  
 b) Create an environment variable "OPENPASS", which directs to the installation directory of openPASS. E.g. "C:\MyFolder\openPASS\"
 4. Execute the script "run_Scenario.bat", located in the "Scenarios" folder of the local repository
-5. By changing the parameter values in the parameter declaration section of the OpenSCENARIO files within their defined constraints, the concrete scenarios can be varied.
+5. If you change the parameter values in the parameter declaration section of the OpenSCENARIO files within their defined constraints, the concrete scenarios can be varied manually.
 
 #### Notes regarding esmini:
 
