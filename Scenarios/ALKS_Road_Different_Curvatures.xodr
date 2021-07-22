@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <OpenDRIVE>
   <header vendor="BMW AG" revMajor="1" revMinor="6" name="ALKS Road Different Curvatures" version="1" date="Fri Sep  7 10:20:13 2018" north="0.0000000000000000e+000" south="0.0000000000000000e+000" east="0.0000000000000000e+000" west="0.0000000000000000e+000" />
-  <road name="Road" length="5.1000000000000000e+003" id="0" junction="-1">
+  <road name="Road" length="5.1000000000000000e+003" id="0" junction="-1" rule="RHT">
     <link />
     <type s="0.0000000000000000e+000" type="motorway" />
     <planView>

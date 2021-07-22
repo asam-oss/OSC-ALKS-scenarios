@@ -4,6 +4,7 @@
   <ParameterDeclarations>
     <!--The ParameterDeclarations section is needed for easy variation.-->
     <ParameterDeclaration name="Ego_InitPosition_LaneId" parameterType="string" value="-4">
+      <!--A positive lane number would position the entities on the left side of the road. For this the road needs to be adjusted to left hand traffic (attribute "rule"="LHT").-->
       <ConstraintGroup>
         <ValueConstraint rule="equalTo" value="-4" />
       </ConstraintGroup>
