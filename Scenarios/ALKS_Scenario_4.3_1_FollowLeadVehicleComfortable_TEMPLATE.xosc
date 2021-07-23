@@ -107,9 +107,8 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <RelativeLanePosition entityRef="Ego" dLane="0" ds="${$LeadVehicle_Init_HeadwayTime_s * ($Ego_InitSpeed_Ve0_kph / 3.6)}" offset="$LeadVehicle_Init_LateralOffset_m">
-                  <!--Headway distance is calculated from desired headway time and ego init speed.-->
-                </RelativeLanePosition>
+                <!--The Lead vehicle is positioned in front of the Ego. The headway time is not yet accurate because the bounding boxes are not considered in this action (origin-to-origin instead of bumper-to-bumper). Only an approximated 5m are added to the distance. The LongitudinalDistanceAction will position the Lead vehicle precisely.-->
+                <RelativeLanePosition entityRef="Ego" dLane="0" ds="${($LeadVehicle_Init_HeadwayTime_s * ($Ego_InitSpeed_Ve0_kph / 3.6)) + 5.0}" offset="$LeadVehicle_Init_LateralOffset_m"></RelativeLanePosition>
               </Position>
             </TeleportAction>
           </PrivateAction>
@@ -121,6 +120,12 @@
                   <AbsoluteTargetSpeed value="${$Ego_InitSpeed_Ve0_kph / 3.6}" />
                 </SpeedActionTarget>
               </SpeedAction>
+            </LongitudinalAction>
+          </PrivateAction>
+          <PrivateAction>
+            <LongitudinalAction>
+              <!--The Lead vehicle shall start with a predefined headway time (bumper-to-bumper).-->
+              <LongitudinalDistanceAction continuous="false" coordinateSystem="entity" displacement="leadingReferencedEntity" timeGap="$LeadVehicle_Init_HeadwayTime_s" entityRef="Ego" freespace="true"></LongitudinalDistanceAction>
             </LongitudinalAction>
           </PrivateAction>
         </Private>
