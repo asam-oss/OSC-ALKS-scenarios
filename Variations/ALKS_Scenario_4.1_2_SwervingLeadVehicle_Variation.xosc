@@ -4,6 +4,15 @@
   <ParameterValueDistribution>
     <ScenarioFile filepath="../Scenarios/ALKS_Scenario_4.1_2_SwervingLeadVehicle_TEMPLATE.xosc" />
     <Deterministic>
+      <DeterministicSingleParameterDistribution parameterName="Road">
+        <DistributionSet>
+          <Element value="./ALKS_Road_straight.xodr" />
+          <Element value="./ALKS_Road_left_radius_250m.xodr" />
+          <Element value="./ALKS_Road_right_radius_250m.xodr" />
+          <Element value="./ALKS_Road_left_radius_1000m.xodr" />
+          <Element value="./ALKS_Road_right_radius_1000m.xodr" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
       <DeterministicSingleParameterDistribution parameterName="Ego_InitSpeed_Ve0_kph">
         <!--Variation between 5 kph and 60 kph with a step width of 5 kph-->
         <DistributionRange stepWidth="5.0">

@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <OpenDRIVE>
   <header vendor="BMW AG" revMajor="1" revMinor="6" name="ALKS Road" version="1" date="Fri Sep  7 10:20:13 2018" north="0.0000000000000000e+00" south="0.0000000000000000e+00" east="0.0000000000000000e+00" west="0.0000000000000000e+00"></header>
-  <road name="Road" length="10000" id="0" junction="-1" rule="RHT">
+  <road name="Road" length="1500" id="0" junction="-1" rule="RHT">
     <link></link>
     <type s="0" type="motorway" />
     <planView>
-      <geometry s="0" x="0" y="0" hdg="0" length="10000">
-        <arc curvature="0.00000001" />
+      <geometry s="0" x="0" y="0" hdg="0" length="1500">
+        <arc curvature="0.004" />
       </geometry>
     </planView>
     <lateralProfile></lateralProfile>

@@ -3,6 +3,7 @@
   <FileHeader revMajor="1" revMinor="1" date="2021-07-09T10:00:00" description="ALKS Scenario 4.1_2 Swerving Lead Vehicle Template" author="BMW AG" />
   <ParameterDeclarations>
     <!--The ParameterDeclarations section is needed for easy variation.-->
+    <ParameterDeclaration name="Road" parameterType="string" value="./ALKS_Road_straight.xodr"></ParameterDeclaration>
     <ParameterDeclaration name="Ego_InitSpeed_Ve0_kph" parameterType="double" value="60.0">
       <ConstraintGroup>
         <!--The scenarios are meant to be run with a positive ego speed up to 60 kph.-->
@@ -47,7 +48,7 @@
     </ControllerCatalog>
   </CatalogLocations>
   <RoadNetwork>
-    <LogicFile filepath="./ALKS_Road.xodr" />
+    <LogicFile filepath="$Road" />
   </RoadNetwork>
   <Entities>
     <ScenarioObject name="Ego">

@@ -17,7 +17,7 @@ jobs:
         with:
           FILE: "./Scenarios/ALKS_Scenario_4.1_1_FreeDriving_TEMPLATE.xosc \
           ./Scenarios/ALKS_Scenario_4.1_2_SwervingLeadVehicle_TEMPLATE.xosc \
-          ./Scenarios/ALKS_Scenario_4.1_3_SwervingSideVehicle_TEMPLATE.xosc \
+          ./Scenarios/ALKS_Scenario_4.1_3_SideVehicle_TEMPLATE.xosc \
           ./Scenarios/ALKS_Scenario_4.2_1_FullyBlockingTarget_TEMPLATE.xosc \
           ./Scenarios/ALKS_Scenario_4.2_2_PartiallyBlockingTarget_TEMPLATE.xosc \
           ./Scenarios/ALKS_Scenario_4.2_3_CrossingPedestrian_TEMPLATE.xosc \
@@ -36,7 +36,7 @@ jobs:
           ./Catalogs/Pedestrians/PedestrianCatalog.xosc \
           ./Variations/ALKS_Scenario_4.1_1_FreeDriving_Variation.xosc \
           ./Variations/ALKS_Scenario_4.1_2_SwervingLeadVehicle_Variation.xosc \
-          ./Variations/ALKS_Scenario_4.1_3_SwervingSideVehicle_Variation.xosc \
+          ./Variations/ALKS_Scenario_4.1_3_SideVehicle_Variation.xosc \
           ./Variations/ALKS_Scenario_4.2_1_FullyBlockingTarget_Variation.xosc \
           ./Variations/ALKS_Scenario_4.2_2_PartiallyBlockingTarget_Variation.xosc \
           ./Variations/ALKS_Scenario_4.2_3_CrossingPedestrian_Variation.xosc \
@@ -53,6 +53,10 @@ jobs:
       - name: Validate all maps
         uses: ./.github/actions/xmllint
         with:
-          FILE: "./Scenarios/ALKS_Road.xodr \
+          FILE: "./Scenarios/ALKS_Road_straight.xodr \
+          ./Scenarios/ALKS_Road_left_radius_250m.xodr \
+          ./Scenarios/ALKS_Road_right_radius_250m.xodr \
+          ./Scenarios/ALKS_Road_left_radius_1000m.xodr \
+          ./Scenarios/ALKS_Road_right_radius_1000m.xodr \
           ./Scenarios/ALKS_Road_Different_Curvatures.xodr"
           SCHEMA: ./.github/workflows/opendrive_16_core.xsd

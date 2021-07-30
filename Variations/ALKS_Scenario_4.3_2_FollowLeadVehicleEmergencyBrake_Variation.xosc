@@ -4,6 +4,15 @@
   <ParameterValueDistribution>
     <ScenarioFile filepath="../Scenarios/ALKS_Scenario_4.3_2_FollowLeadVehicleEmergencyBrake_TEMPLATE.xosc" />
     <Deterministic>
+      <DeterministicSingleParameterDistribution parameterName="Road">
+        <DistributionSet>
+          <Element value="./ALKS_Road_straight.xodr" />
+          <Element value="./ALKS_Road_left_radius_250m.xodr" />
+          <Element value="./ALKS_Road_right_radius_250m.xodr" />
+          <Element value="./ALKS_Road_left_radius_1000m.xodr" />
+          <Element value="./ALKS_Road_right_radius_1000m.xodr" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
       <DeterministicSingleParameterDistribution parameterName="LeadVehicle_Deceleration_Rate_mps2">
         <DistributionSet>
           <Element value="6.0" />

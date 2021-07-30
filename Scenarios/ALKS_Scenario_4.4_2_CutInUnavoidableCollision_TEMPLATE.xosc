@@ -67,7 +67,7 @@
     </ControllerCatalog>
   </CatalogLocations>
   <RoadNetwork>
-    <LogicFile filepath="./ALKS_Road.xodr" />
+    <LogicFile filepath="./ALKS_Road_straight.xodr" />
   </RoadNetwork>
   <Entities>
     <ScenarioObject name="Ego">
