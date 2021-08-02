@@ -42,7 +42,7 @@
       </ConstraintGroup>
     </ParameterDeclaration>
     <ParameterDeclaration name="CutInVehicle_Acceleration_Rate_mps2" parameterType="double" value="0.0">
-      <!--Not constrained. Vehicle can accelerate or decelerate during lane change.-->
+      <!--Not constrained. Vehicle can accelerate (positive value) or decelerate (negative value) during lane change.-->
     </ParameterDeclaration>
     <ParameterDeclaration name="CutInVehicle_Acceleration_Target_kph" parameterType="double" value="40.0">
       <ConstraintGroup>

@@ -43,6 +43,11 @@
           <Range lowerLimit="0.5" upperLimit="3.0" />
         </DistributionRange>
       </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="CutInVehicle_Acceleration_Rate_mps2">
+        <DistributionRange stepWidth="1.5">
+          <Range lowerLimit="-3.0" upperLimit="3.0" />
+        </DistributionRange>
+      </DeterministicSingleParameterDistribution>
     </Deterministic>
   </ParameterValueDistribution>
 </OpenSCENARIO>
