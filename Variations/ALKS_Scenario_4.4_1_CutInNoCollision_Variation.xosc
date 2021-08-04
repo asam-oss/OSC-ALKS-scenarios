@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<OpenSCENARIO>
+  <FileHeader revMajor="1" revMinor="1" date="2021-07-06T10:00:00" description="Variation for ALKS Scenarios 4.4_1 CutInNoCollision" author="BMW AG">
+    <!--This variation file includes also parameter sets for the unavoidable collision cases (4.4_2). If used in a test, then for unavoidable collision cases avoidance of a collision must not be a pass criteria for the test.-->
+  </FileHeader>
+  <ParameterValueDistribution>
+    <ScenarioFile filepath="../Scenarios/ALKS_Scenario_4.4_1_CutInNoCollision_TEMPLATE.xosc" />
+    <Deterministic>
+      <!--These distributions will lead also to value combinations which are outside of the constraints for the parameters. E.g. "Ego speed" = 20 kph and "cut in relative speed" = -50 kph. It is exepected that these combinations are discarded by a scenario generator by comparing the values to the constraints.-->
+      <DeterministicSingleParameterDistribution parameterName="Ego_InitSpeed_Ve0_kph">
+        <!--Minimum ego speed is 20 kph due to the minumum speed of the cutting in vehicle of 10 kph and a step width of 10 kph for the speed difference.-->
+        <DistributionRange stepWidth="10.0">
+          <Range lowerLimit="20.0" upperLimit="60.0" />
+        </DistributionRange>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="CutInVehicle_Model">
+        <DistributionSet>
+          <Element value="car" />
+          <Element value="truck" />
+          <Element value="van" />
+          <Element value="bus" />
+          <Element value="motorbike" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="CutInVehicle_InitPosition_RelativeLaneId">
+        <DistributionSet>
+          <Element value="1" />
+          <Element value="-1" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="CutInVehicle_RelativeInitSpeed_Ve0_Vo0_kph">
+        <DistributionRange stepWidth="10.0">
+          <Range lowerLimit="-50.0" upperLimit="-10.0" />
+        </DistributionRange>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="CutInVehicle_HeadwayDistanceTrigger_dx0_m">
+        <DistributionRange stepWidth="10.0">
+          <Range lowerLimit="0.0" upperLimit="60.0" />
+        </DistributionRange>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="CutInVehicle_LaneChange_MaxLateralVelocity_Vy_mps">
+        <DistributionRange stepWidth="0.5">
+          <Range lowerLimit="0.5" upperLimit="3.0" />
+        </DistributionRange>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="CutInVehicle_Acceleration_Rate_mps2">
+        <DistributionRange stepWidth="1.5">
+          <Range lowerLimit="-3.0" upperLimit="3.0" />
+        </DistributionRange>
+      </DeterministicSingleParameterDistribution>
+    </Deterministic>
+  </ParameterValueDistribution>
+</OpenSCENARIO>

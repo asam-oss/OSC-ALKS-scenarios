@@ -1,14 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <OpenSCENARIO>
-  <FileHeader revMajor="1" revMinor="1" date="2021-06-18T10:00:00" description="ALKS Scenario 4.2_4 MultipleBlockingTargets Template" author="BMW AG" />
+  <FileHeader revMajor="1" revMinor="1" date="2021-07-09T10:00:00" description="ALKS Scenario 4.2_4 MultipleBlockingTargets Template" author="BMW AG" />
   <ParameterDeclarations>
     <!--The ParameterDeclarations section is needed for easy variation.-->
-    <ParameterDeclaration name="Ego_InitPosition_LaneId" parameterType="string" value="-4" />
-    <ParameterDeclaration name="Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667" />
-    <ParameterDeclaration name="Duration" parameterType="double" value="40" />
-    <ParameterDeclaration name="TargetBlocking_Catalog" parameterType="string" value="PedestrianCatalog" />
-    <ParameterDeclaration name="TargetBlocking_Model" parameterType="string" value="pedestrian" />
-    <ParameterDeclaration name="TargetBlocking2_Model" parameterType="string" value="bus" />
+    <ParameterDeclaration name="Road" parameterType="string" value="./ALKS_Road_straight.xodr"></ParameterDeclaration>
+    <ParameterDeclaration name="Ego_InitPosition_LaneId" parameterType="string" value="-4">
+      <!--A positive lane number would position the entities on the left side of the road. For this the road needs to be adjusted to left hand traffic (attribute "rule"="LHT").-->
+      <ConstraintGroup>
+        <ValueConstraint rule="lessOrEqual" value="-3" />
+        <ValueConstraint rule="greaterOrEqual" value="-5" />
+      </ConstraintGroup>
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterOrEqual" value="3" />
+        <ValueConstraint rule="lessOrEqual" value="5" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Ego_InitSpeed_Ve0_kph" parameterType="double" value="60.0">
+      <ConstraintGroup>
+        <!--The scenarios are meant to be run with a positive ego speed up to 60 kph.-->
+        <ValueConstraint rule="greaterThan" value="0.0" />
+        <ValueConstraint rule="lessOrEqual" value="60.0" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="TargetBlocking_Catalog" parameterType="string" value="PedestrianCatalog">
+      <!--Not constrained so it's possible to use different catalogs.-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="TargetBlocking_Model" parameterType="string" value="pedestrian">
+      <!--Not constrained so it's possible to use different models.-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="TargetBlocking2_Model" parameterType="string" value="bus">
+      <!--Not constrained so it's possible to use different models.-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="TargetBlocking_InitPosition_LongitudinalOffset_m" parameterType="double" value="500.0">
+      <!--Not intended to be varied. Only defined for reusability in the scenario.-->
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="0.0" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
   </ParameterDeclarations>
   <CatalogLocations>
     <VehicleCatalog>
@@ -25,7 +53,7 @@
     </ControllerCatalog>
   </CatalogLocations>
   <RoadNetwork>
-    <LogicFile filepath="./ALKS_Road.xodr" />
+    <LogicFile filepath="$Road" />
   </RoadNetwork>
   <Entities>
     <ScenarioObject name="Ego">
@@ -57,7 +85,7 @@
               <SpeedAction>
                 <SpeedActionDynamics dynamicsShape="step" dynamicsDimension="time" value="0" />
                 <SpeedActionTarget>
-                  <AbsoluteTargetSpeed value="$Ego_InitSpeed_Ve0" />
+                  <AbsoluteTargetSpeed value="${$Ego_InitSpeed_Ve0_kph / 3.6}" />
                 </SpeedActionTarget>
               </SpeedAction>
             </LongitudinalAction>
@@ -67,7 +95,7 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="500.0"></LanePosition>
+                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="$TargetBlocking_InitPosition_LongitudinalOffset_m"></LanePosition>
               </Position>
             </TeleportAction>
           </PrivateAction>
@@ -76,7 +104,7 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="515.0"></LanePosition>
+                <LanePosition roadId="0" laneId="$Ego_InitPosition_LaneId" offset="0.0" s="${$TargetBlocking_InitPosition_LongitudinalOffset_m + 15.0}"></LanePosition>
               </Position>
             </TeleportAction>
           </PrivateAction>
@@ -125,7 +153,8 @@
       <ConditionGroup>
         <Condition name="End" delay="0" conditionEdge="rising">
           <ByValueCondition>
-            <SimulationTimeCondition value="$Duration" rule="greaterOrEqual" />
+            <!--The scenario stops 10 s after the ego would reach the target without braking.-->
+            <SimulationTimeCondition value="${($TargetBlocking_InitPosition_LongitudinalOffset_m / ($Ego_InitSpeed_Ve0_kph / 3.6)) + 10.0}" rule="greaterOrEqual" />
           </ByValueCondition>
         </Condition>
       </ConditionGroup>

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<OpenSCENARIO>
+  <FileHeader revMajor="1" revMinor="1" date="2021-07-06T10:00:00" description="Variation for ALKS Scenario 4.1_3 Side Vehicle" author="BMW AG" />
+  <ParameterValueDistribution>
+    <ScenarioFile filepath="../Scenarios/ALKS_Scenario_4.1_3_SideVehicle_TEMPLATE.xosc" />
+    <Deterministic>
+      <DeterministicSingleParameterDistribution parameterName="Ego_InitSpeed_Ve0_kph">
+        <!--Variation between 5 kph and 60 kph with a step width of 5 kph-->
+        <DistributionRange stepWidth="5.0">
+          <Range lowerLimit="5.0" upperLimit="60.0" />
+        </DistributionRange>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="SideVehicle_Model">
+        <DistributionSet>
+          <Element value="car" />
+          <Element value="truck" />
+          <Element value="van" />
+          <Element value="bus" />
+          <Element value="motorbike" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="SideVehicle_InitLongitudinalOffset_m">
+        <DistributionRange stepWidth="2.5">
+          <Range lowerLimit="-5.0" upperLimit="5.0" />
+        </DistributionRange>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="SideVehicle_InitPosition_RelativeLaneId">
+        <DistributionSet>
+          <Element value="1" />
+          <Element value="-1" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="SideVehicle_InitLateralOffset_m">
+        <DistributionSet>
+          <Element value="0.0" />
+          <Element value="0.5" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+    </Deterministic>
+  </ParameterValueDistribution>
+</OpenSCENARIO>

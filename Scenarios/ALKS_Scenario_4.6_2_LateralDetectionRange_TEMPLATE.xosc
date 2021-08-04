@@ -1,16 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <OpenSCENARIO>
-  <FileHeader revMajor="1" revMinor="1" date="2021-06-18T10:00:00" description="ALKS Scenario 4.6_2 LateralDetectionRange Template" author="BMW AG" />
+  <FileHeader revMajor="1" revMinor="1" date="2021-07-09T10:00:00" description="ALKS Scenario 4.6_2 LateralDetectionRange Template" author="BMW AG" />
   <ParameterDeclarations>
     <!--The ParameterDeclarations section is needed for easy variation.-->
-    <ParameterDeclaration name="Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667" />
-    <ParameterDeclaration name="Duration" parameterType="double" value="40" />
-    <ParameterDeclaration name="SideVehicle_InitLongitudinalOffset" parameterType="double" value="0.0" />
-    <ParameterDeclaration name="SideVehicle_InitPosition_RelativeLaneId" parameterType="string" value="-1" />
-    <ParameterDeclaration name="SideVehicle_InitLateralOffset" parameterType="double" value="-1.75" />
-    <ParameterDeclaration name="Swerve_Offset_Left" parameterType="double" value="1.5" />
-    <ParameterDeclaration name="Swerve_Offset_Right" parameterType="double" value="-0.0" />
-    <ParameterDeclaration name="Swerve_MaxLateralAcc" parameterType="double" value="0.1" />
+    <ParameterDeclaration name="Ego_InitSpeed_Ve0_kph" parameterType="double" value="60.0">
+      <ConstraintGroup>
+        <!--The scenarios are meant to be run with a positive ego speed up to 60 kph.-->
+        <ValueConstraint rule="greaterThan" value="0.0" />
+        <ValueConstraint rule="lessOrEqual" value="60.0" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="SideVehicle_InitLongitudinalOffset_m" parameterType="double" value="0.0" />
+    <ParameterDeclaration name="SideVehicle_InitLateralOffset_m" parameterType="double" value="-7">
+      <!--According to the regulation the ALKS shall detect a side vehicle within an area at least up to the full width of the adjacent lane. With a lane width of 3.5 m the side vehicle (width 2.5m max) needs to start at least at an offset of 3.5m/2 (half ego lane) + 3.5m (full adjacent lane) + 2.5m/2 (half side vehicle width) = 6.5 m. Therfore 7 m is used as initial lateral offset.-->
+      <ConstraintGroup>
+        <ValueConstraint rule="equalTo" value="-7"></ValueConstraint>
+      </ConstraintGroup>
+      <ConstraintGroup>
+        <ValueConstraint rule="equalTo" value="7"></ValueConstraint>
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="SideVehicle_FinalLateralOffset_m" parameterType="double" value="-1.75">
+      <!--The motorcycle will approach the ego from the side until its' center is at the lane border (lane width 3.5m).-->
+      <ConstraintGroup>
+        <ValueConstraint rule="equalTo" value="-1.75"></ValueConstraint>
+      </ConstraintGroup>
+      <ConstraintGroup>
+        <ValueConstraint rule="equalTo" value="1.75"></ValueConstraint>
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Swerve_MaxLateralAcc_mps2" parameterType="double" value="0.1">
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
+      </ConstraintGroup>
+    </ParameterDeclaration>
   </ParameterDeclarations>
   <CatalogLocations>
     <VehicleCatalog>
@@ -27,7 +50,7 @@
     </ControllerCatalog>
   </CatalogLocations>
   <RoadNetwork>
-    <LogicFile filepath="./ALKS_Road.xodr" />
+    <LogicFile filepath="./ALKS_Road_straight.xodr" />
   </RoadNetwork>
   <Entities>
     <ScenarioObject name="Ego">
@@ -56,7 +79,7 @@
               <SpeedAction>
                 <SpeedActionDynamics dynamicsShape="step" dynamicsDimension="time" value="0" />
                 <SpeedActionTarget>
-                  <AbsoluteTargetSpeed value="$Ego_InitSpeed_Ve0" />
+                  <AbsoluteTargetSpeed value="${$Ego_InitSpeed_Ve0_kph / 3.6}" />
                 </SpeedActionTarget>
               </SpeedAction>
             </LongitudinalAction>
@@ -66,7 +89,7 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <RelativeLanePosition entityRef="Ego" dLane="$SideVehicle_InitPosition_RelativeLaneId" ds="$SideVehicle_InitLongitudinalOffset" offset="$SideVehicle_InitLateralOffset" />
+                <RelativeLanePosition entityRef="Ego" dLane="0" ds="$SideVehicle_InitLongitudinalOffset_m" offset="$SideVehicle_InitLateralOffset_m" />
               </Position>
             </TeleportAction>
           </PrivateAction>
@@ -75,7 +98,7 @@
               <SpeedAction>
                 <SpeedActionDynamics dynamicsShape="step" dynamicsDimension="time" value="0" />
                 <SpeedActionTarget>
-                  <AbsoluteTargetSpeed value="$Ego_InitSpeed_Ve0" />
+                  <RelativeTargetSpeed entityRef="Ego" value="0" speedTargetValueType="delta" continuous="false" />
                 </SpeedActionTarget>
               </SpeedAction>
             </LongitudinalAction>
@@ -133,9 +156,9 @@
                 <PrivateAction>
                   <LateralAction>
                     <LaneOffsetAction continuous="false">
-                      <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc" dynamicsShape="sinusoidal" />
+                      <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc_mps2" dynamicsShape="sinusoidal" />
                       <LaneOffsetTarget>
-                        <AbsoluteTargetLaneOffset value="$Swerve_Offset_Left" />
+                        <RelativeTargetLaneOffset entityRef="Ego" value="$SideVehicle_FinalLateralOffset_m" />
                       </LaneOffsetTarget>
                     </LaneOffsetAction>
                   </LateralAction>
@@ -145,76 +168,7 @@
                 <ConditionGroup>
                   <Condition name="SwerveEventStart" delay="0" conditionEdge="rising">
                     <ByValueCondition>
-                      <SimulationTimeCondition value="5.0" rule="greaterOrEqual" />
-                    </ByValueCondition>
-                  </Condition>
-                </ConditionGroup>
-              </StartTrigger>
-            </Event>
-            <Event name="SwerveEvent2" priority="overwrite">
-              <Action name="SwerveAction2">
-                <PrivateAction>
-                  <LateralAction>
-                    <LaneOffsetAction continuous="false">
-                      <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc" dynamicsShape="sinusoidal" />
-                      <LaneOffsetTarget>
-                        <AbsoluteTargetLaneOffset value="0.0" />
-                      </LaneOffsetTarget>
-                    </LaneOffsetAction>
-                  </LateralAction>
-                </PrivateAction>
-              </Action>
-              <StartTrigger>
-                <ConditionGroup>
-                  <Condition name="SwerveEvent2Start" delay="5" conditionEdge="rising">
-                    <ByValueCondition>
-                      <StoryboardElementStateCondition storyboardElementType="action" storyboardElementRef="SwerveAction" state="endTransition" />
-                    </ByValueCondition>
-                  </Condition>
-                </ConditionGroup>
-              </StartTrigger>
-            </Event>
-            <Event name="SwerveEvent3" priority="overwrite">
-              <Action name="SwerveAction3">
-                <PrivateAction>
-                  <LateralAction>
-                    <LaneOffsetAction continuous="false">
-                      <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc" dynamicsShape="sinusoidal" />
-                      <LaneOffsetTarget>
-                        <AbsoluteTargetLaneOffset value="$Swerve_Offset_Right" />
-                      </LaneOffsetTarget>
-                    </LaneOffsetAction>
-                  </LateralAction>
-                </PrivateAction>
-              </Action>
-              <StartTrigger>
-                <ConditionGroup>
-                  <Condition name="SwerveEvent3Start" delay="0" conditionEdge="rising">
-                    <ByValueCondition>
-                      <StoryboardElementStateCondition storyboardElementType="action" storyboardElementRef="SwerveAction2" state="endTransition" />
-                    </ByValueCondition>
-                  </Condition>
-                </ConditionGroup>
-              </StartTrigger>
-            </Event>
-            <Event name="SwerveEvent4" priority="overwrite">
-              <Action name="SwerveAction4">
-                <PrivateAction>
-                  <LateralAction>
-                    <LaneOffsetAction continuous="false">
-                      <LaneOffsetActionDynamics maxLateralAcc="$Swerve_MaxLateralAcc" dynamicsShape="sinusoidal" />
-                      <LaneOffsetTarget>
-                        <AbsoluteTargetLaneOffset value="0.0" />
-                      </LaneOffsetTarget>
-                    </LaneOffsetAction>
-                  </LateralAction>
-                </PrivateAction>
-              </Action>
-              <StartTrigger>
-                <ConditionGroup>
-                  <Condition name="SwerveEvent4Start" delay="5" conditionEdge="rising">
-                    <ByValueCondition>
-                      <StoryboardElementStateCondition storyboardElementType="action" storyboardElementRef="SwerveAction3" state="endTransition" />
+                      <SimulationTimeCondition value="10.0" rule="greaterOrEqual" />
                     </ByValueCondition>
                   </Condition>
                 </ConditionGroup>
@@ -237,7 +191,7 @@
       <ConditionGroup>
         <Condition name="End" delay="0" conditionEdge="rising">
           <ByValueCondition>
-            <SimulationTimeCondition value="$Duration" rule="greaterOrEqual" />
+            <SimulationTimeCondition value="40" rule="greaterOrEqual" />
           </ByValueCondition>
         </Condition>
       </ConditionGroup>

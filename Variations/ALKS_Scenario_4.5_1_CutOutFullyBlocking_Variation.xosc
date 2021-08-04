@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<OpenSCENARIO>
+  <FileHeader revMajor="1" revMinor="1" date="2021-07-06T10:00:00" description="Variation for ALKS Scenario 4.5_1 CutOutFullyBlocking" author="BMW AG">
+    <!--This variation file includes also parameter sets for the unavoidable collision cases (4.4_2). If used in a test, then for unavoidable collision cases avoidance of a collision must not be a pass criteria for the test.-->
+  </FileHeader>
+  <ParameterValueDistribution>
+    <ScenarioFile filepath="../Scenarios/ALKS_Scenario_4.5_1_CutOutFullyBlocking_TEMPLATE.xosc" />
+    <Deterministic>
+      <DeterministicSingleParameterDistribution parameterName="Ego_InitSpeed_Ve0_kph">
+        <!--Variation between 5 kph and 60 kph with a step width of 5 kph-->
+        <DistributionRange stepWidth="5.0">
+          <Range lowerLimit="5.0" upperLimit="60.0" />
+        </DistributionRange>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="CutOutVehicle_RelativeTargetLane">
+        <DistributionSet>
+          <Element value="1" />
+          <Element value="-1" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="FrontOfLead_Distance_dx0_f_m">
+        <DistributionRange stepWidth="10.0">
+          <Range lowerLimit="10.0" upperLimit="100.0" />
+        </DistributionRange>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="CutOutVehicle_LaneChange_MaxLateralVelocity_Vy_mps">
+        <DistributionRange stepWidth="0.5">
+          <Range lowerLimit="0.5" upperLimit="3.0" />
+        </DistributionRange>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="CutInVehicle_Model">
+        <DistributionSet>
+          <Element value="car" />
+          <Element value="truck" />
+          <Element value="van" />
+          <Element value="bus" />
+          <Element value="motorbike" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicMultiParameterDistribution>
+        <ValueSetDistribution>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="TargetBlocking_Catalog" value="PedestrianCatalog" />
+            <ParameterAssignment parameterRef="TargetBlocking_Model" value="pedestrian" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="TargetBlocking_Catalog" value="VehicleCatalog" />
+            <ParameterAssignment parameterRef="TargetBlocking_Model" value="car" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="TargetBlocking_Catalog" value="VehicleCatalog" />
+            <ParameterAssignment parameterRef="TargetBlocking_Model" value="truck" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="TargetBlocking_Catalog" value="VehicleCatalog" />
+            <ParameterAssignment parameterRef="TargetBlocking_Model" value="van" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="TargetBlocking_Catalog" value="VehicleCatalog" />
+            <ParameterAssignment parameterRef="TargetBlocking_Model" value="bus" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="TargetBlocking_Catalog" value="VehicleCatalog" />
+            <ParameterAssignment parameterRef="TargetBlocking_Model" value="motorbike" />
+          </ParameterValueSet>
+        </ValueSetDistribution>
+      </DeterministicMultiParameterDistribution>
+    </Deterministic>
+  </ParameterValueDistribution>
+</OpenSCENARIO>

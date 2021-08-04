@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<OpenSCENARIO>
+  <FileHeader revMajor="1" revMinor="1" date="2021-07-09T10:00:00" description="ALKS Scenario 4.1_3 Side Vehicle Template" author="BMW AG" />
+  <ParameterDeclarations>
+    <!--The ParameterDeclarations section is needed for easy variation.-->
+    <ParameterDeclaration name="Ego_InitSpeed_Ve0_kph" parameterType="double" value="60.0">
+      <ConstraintGroup>
+        <!--The scenarios are meant to be run with a positive ego speed up to 60 kph.-->
+        <ValueConstraint rule="greaterThan" value="0.0" />
+        <ValueConstraint rule="lessOrEqual" value="60.0" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="SideVehicle_Model" parameterType="string" value="truck">
+      <!--Not constrained so it's possible to use different models.-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="SideVehicle_InitLongitudinalOffset_m" parameterType="double" value="0.0">
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="-10.0" />
+        <ValueConstraint rule="lessThan" value="10.0" />
+      </ConstraintGroup>
+      <!--With a longitudinal offset of more than 10.0 m the vehicle isn't considered to be close beside anymore as required by the regulation.-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="SideVehicle_InitPosition_RelativeLaneId" parameterType="string" value="1">
+      <!--Left=1, Right=-1-->
+      <ConstraintGroup>
+        <ValueConstraint rule="equalTo" value="1"></ValueConstraint>
+      </ConstraintGroup>
+      <ConstraintGroup>
+        <ValueConstraint rule="equalTo" value="-1"></ValueConstraint>
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="SideVehicle_InitLateralOffset_m" parameterType="double" value="0.5">
+      <!--If the side vehicle has to stay within its' lane, then the maximum offset is: (lane width / 2)-(max vehicle width / 2) = (3.5 / 2) - (2.5 / 2) = 1.75 - 1.25 = 0.5. To do: calculate precisely for diefferent vehicle widths.-->
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterOrEqual" value="0.0"></ValueConstraint>
+        <ValueConstraint rule="lessOrEqual" value="0.5"></ValueConstraint>
+      </ConstraintGroup>
+    </ParameterDeclaration>
+  </ParameterDeclarations>
+  <CatalogLocations>
+    <VehicleCatalog>
+      <Directory path="../Catalogs/Vehicles" />
+    </VehicleCatalog>
+    <PedestrianCatalog>
+      <Directory path="../Catalogs/Pedestrians" />
+    </PedestrianCatalog>
+    <MiscObjectCatalog>
+      <Directory path="../Catalogs/MiscObjects" />
+    </MiscObjectCatalog>
+    <ControllerCatalog>
+      <Directory path="../Catalogs/Controllers" />
+    </ControllerCatalog>
+  </CatalogLocations>
+  <RoadNetwork>
+    <LogicFile filepath="./ALKS_Road_Different_Curvatures.xodr" />
+  </RoadNetwork>
+  <Entities>
+    <ScenarioObject name="Ego">
+      <CatalogReference catalogName="VehicleCatalog" entryName="car_ego"></CatalogReference>
+      <ObjectController>
+        <CatalogReference catalogName="ControllerCatalog" entryName="ALKSController"></CatalogReference>
+      </ObjectController>
+    </ScenarioObject>
+    <ScenarioObject name="SideVehicle">
+      <CatalogReference catalogName="VehicleCatalog" entryName="$SideVehicle_Model"></CatalogReference>
+    </ScenarioObject>
+  </Entities>
+  <Storyboard>
+    <Init>
+      <Actions>
+        <Private entityRef="Ego">
+          <PrivateAction>
+            <TeleportAction>
+              <Position>
+                <LanePosition roadId="0" laneId="-4" offset="0.0" s="5.0"></LanePosition>
+              </Position>
+            </TeleportAction>
+          </PrivateAction>
+          <PrivateAction>
+            <LongitudinalAction>
+              <SpeedAction>
+                <SpeedActionDynamics dynamicsShape="step" dynamicsDimension="time" value="0" />
+                <SpeedActionTarget>
+                  <AbsoluteTargetSpeed value="${$Ego_InitSpeed_Ve0_kph / 3.6}" />
+                </SpeedActionTarget>
+              </SpeedAction>
+            </LongitudinalAction>
+          </PrivateAction>
+        </Private>
+        <Private entityRef="SideVehicle">
+          <PrivateAction>
+            <TeleportAction>
+              <Position>
+                <RelativeLanePosition entityRef="Ego" dLane="$SideVehicle_InitPosition_RelativeLaneId" ds="$SideVehicle_InitLongitudinalOffset_m" offset="${$SideVehicle_InitPosition_RelativeLaneId * -$SideVehicle_InitLateralOffset_m}"></RelativeLanePosition>
+              </Position>
+            </TeleportAction>
+          </PrivateAction>
+          <PrivateAction>
+            <LongitudinalAction>
+              <SpeedAction>
+                <SpeedActionDynamics dynamicsShape="step" dynamicsDimension="time" value="0" />
+                <SpeedActionTarget>
+                  <RelativeTargetSpeed entityRef="Ego" value="0" speedTargetValueType="delta" continuous="false" />
+                </SpeedActionTarget>
+              </SpeedAction>
+            </LongitudinalAction>
+          </PrivateAction>
+        </Private>
+      </Actions>
+    </Init>
+    <Story name="ActivateALKSControllerStory">
+      <Act name="ActivateALKSControllerAct">
+        <ManeuverGroup maximumExecutionCount="1" name="ActivateALKSControllerManeuverGroup">
+          <Actors selectTriggeringEntities="false">
+            <EntityRef entityRef="Ego" />
+          </Actors>
+          <Maneuver name="ActivateALKSControllerManeuver">
+            <Event name="ActivateALKSControllerEvent" priority="overwrite">
+              <Action name="ActivateALKSControllerAction">
+                <PrivateAction>
+                  <ControllerAction>
+                    <ActivateControllerAction lateral="true" longitudinal="true" />
+                  </ControllerAction>
+                </PrivateAction>
+              </Action>
+              <StartTrigger>
+                <ConditionGroup>
+                  <Condition name="ActivateALKSControllerEventCondition" delay="0" conditionEdge="rising">
+                    <ByValueCondition>
+                      <SimulationTimeCondition value="10000" rule="greaterOrEqual" />
+                    </ByValueCondition>
+                  </Condition>
+                </ConditionGroup>
+              </StartTrigger>
+            </Event>
+          </Maneuver>
+        </ManeuverGroup>
+        <StartTrigger>
+          <ConditionGroup>
+            <Condition name="ActivateALKSControllerActCondition" delay="0" conditionEdge="none">
+              <ByValueCondition>
+                <SimulationTimeCondition value="0" rule="greaterOrEqual" />
+              </ByValueCondition>
+            </Condition>
+          </ConditionGroup>
+        </StartTrigger>
+      </Act>
+    </Story>
+    <StopTrigger>
+      <ConditionGroup>
+        <Condition name="End" delay="0" conditionEdge="rising">
+          <ByValueCondition>
+            <!--A duration of at least 5 minutes is required for this scenario. The whole road is a bit more than 5000 m long and should be covered. With the maximum speed of 60 kph this would take exactly 5 minutes. With lower speeds it takes longer.-->
+            <SimulationTimeCondition value="${5000.0 / ($Ego_InitSpeed_Ve0_kph / 3.6)}" rule="greaterOrEqual"></SimulationTimeCondition>
+          </ByValueCondition>
+        </Condition>
+      </ConditionGroup>
+    </StopTrigger>
+  </Storyboard>
+</OpenSCENARIO>

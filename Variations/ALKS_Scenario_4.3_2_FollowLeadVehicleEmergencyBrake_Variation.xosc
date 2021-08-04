@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<OpenSCENARIO>
+  <FileHeader revMajor="1" revMinor="1" date="2021-07-06T10:00:00" description="Variation for ALKS Scenario 4.3_2 FollowLeadVehicleEmergencyBrake" author="BMW AG" />
+  <ParameterValueDistribution>
+    <ScenarioFile filepath="../Scenarios/ALKS_Scenario_4.3_2_FollowLeadVehicleEmergencyBrake_TEMPLATE.xosc" />
+    <Deterministic>
+      <DeterministicSingleParameterDistribution parameterName="Road">
+        <DistributionSet>
+          <Element value="./ALKS_Road_straight.xodr" />
+          <Element value="./ALKS_Road_left_radius_250m.xodr" />
+          <Element value="./ALKS_Road_right_radius_250m.xodr" />
+          <Element value="./ALKS_Road_left_radius_1000m.xodr" />
+          <Element value="./ALKS_Road_right_radius_1000m.xodr" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="LeadVehicle_Deceleration_Rate_mps2">
+        <DistributionSet>
+          <Element value="6.0" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="LeadVehicle_Model">
+        <DistributionSet>
+          <Element value="car" />
+          <Element value="truck" />
+          <Element value="van" />
+          <Element value="bus" />
+          <Element value="motorbike" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicMultiParameterDistribution>
+        <ValueSetDistribution>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="Ego_InitSpeed_Ve0_kph" value="7.2" />
+            <ParameterAssignment parameterRef="LeadVehicle_Init_HeadwayTime_s" value="1.0" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="Ego_InitSpeed_Ve0_kph" value="10.0" />
+            <ParameterAssignment parameterRef="LeadVehicle_Init_HeadwayTime_s" value="1.1" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="Ego_InitSpeed_Ve0_kph" value="20.0" />
+            <ParameterAssignment parameterRef="LeadVehicle_Init_HeadwayTime_s" value="1.2" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="Ego_InitSpeed_Ve0_kph" value="30.0" />
+            <ParameterAssignment parameterRef="LeadVehicle_Init_HeadwayTime_s" value="1.3" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="Ego_InitSpeed_Ve0_kph" value="40.0" />
+            <ParameterAssignment parameterRef="LeadVehicle_Init_HeadwayTime_s" value="1.4" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="Ego_InitSpeed_Ve0_kph" value="50.0" />
+            <ParameterAssignment parameterRef="LeadVehicle_Init_HeadwayTime_s" value="1.5" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="Ego_InitSpeed_Ve0_kph" value="60.0" />
+            <ParameterAssignment parameterRef="LeadVehicle_Init_HeadwayTime_s" value="1.6" />
+          </ParameterValueSet>
+        </ValueSetDistribution>
+      </DeterministicMultiParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="LeadVehicle_Init_LateralOffset_m">
+        <DistributionRange stepWidth="0.5">
+          <Range lowerLimit="-1.75" upperLimit="1.75" />
+        </DistributionRange>
+      </DeterministicSingleParameterDistribution>
+    </Deterministic>
+  </ParameterValueDistribution>
+</OpenSCENARIO>

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<OpenSCENARIO>
+  <FileHeader revMajor="1" revMinor="1" date="2021-07-06T10:00:00" description="Variation for ALKS Scenario 4.6_1 ForwardDetectionRange" author="BMW AG" />
+  <ParameterValueDistribution>
+    <ScenarioFile filepath="../Scenarios/ALKS_Scenario_4.6_1_ForwardDetectionRange_TEMPLATE.xosc" />
+    <Deterministic>
+      <DeterministicMultiParameterDistribution>
+        <ValueSetDistribution>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="TargetBlocking_Catalog" value="PedestrianCatalog" />
+            <ParameterAssignment parameterRef="TargetBlocking_Model" value="pedestrian" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="TargetBlocking_Catalog" value="VehicleCatalog" />
+            <ParameterAssignment parameterRef="TargetBlocking_Model" value="motorbike" />
+          </ParameterValueSet>
+        </ValueSetDistribution>
+      </DeterministicMultiParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="TargetBlocking_InitPosition_LateralOffset_m">
+        <!--Positioned within the ego lane (offset=0.0m) and at the outer edge of each adjacent lane (ego is in center of lane, lane width 3.5m => 3.5m*1.5=5.25m)-->
+        <DistributionSet>
+          <Element value="0.0" />
+          <Element value="-5.25" />
+          <Element value="5.25"></Element>
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+    </Deterministic>
+  </ParameterValueDistribution>
+</OpenSCENARIO>

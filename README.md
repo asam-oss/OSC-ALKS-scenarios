@@ -1,41 +1,43 @@
 ALKS Scenario Interpretation in OpenSCENARIO
 ============================================
 
-The "ALKS Regulation UN R157" ECE/TRANS/WP.29/2020/81 <sup>[[1]](https://unece.org/transport/documents/2021/03/standards/un-regulation-no-157-automated-lane-keeping-systems-alks)</sup>  is necessary for the approval of an "Automated Lane Keeping System" on motorways presented in the [UNECE Press Release](https://unece.org/transport/press/un-regulation-automated-lane-keeping-systems-milestone-safe-introduction-automated).
+As presented in the [UNECE Press Release](https://unece.org/transport/press/un-regulation-automated-lane-keeping-systems-milestone-safe-introduction-automated), the "UN Regulation No. 157 - Automated Lane Keeping Systems (ALKS)" ECE/TRANS/WP.29/2020/81 <sup>[[1]](https://unece.org/transport/documents/2021/03/standards/un-regulation-no-157-automated-lane-keeping-systems-alks)</sup> describes the necessary requirements to be fulfilled for the approval of an ALKS, which is a level 3 automated driving system on motorways.
 
-## Goal
-
-BMW has taken on the task of implementing the test scenarios from the ALKS regulation using [OpenSCENARIO](https://www.asam.net/standards/detail/openscenario/) and [OpenDRIVE](https://www.asam.net/standards/detail/opendrive/) resulting in a bundle of XML files executable with standard compliant simulators. The ALKS regulation itself leaves room for interpretation, therefore the coordination on a common interpretation with partners is recommended. This work has been conducted in the context of the German research project [SET Level](https://sl4to5.de/).
-
-## Content
-
-The ALKS document contains test scenarios at a functional level, which are to be carried out in close coordination with a technical service:
+The ALKS regulation also contains test scenarios at a functional level, which are to be carried out in close coordination with a technical service:
 
 *"Until [...] specific test provisions have been agreed, the Technical Service shall ensure that the ALKS is subject to at least the tests outlined in Annex 5."*
 
-The here provided 15 executable test scenarios are derived from the 6 subject areas analogous to Annex 5, Chapter 4.1-4.6 as an initial attempt to clarify the described set of functional scenarios.
+## Goal
 
-The implementation of the scenarios should as well be conducted using an international standard to ensure exchange and compatibility via the tool landscape. At the [ASAM e.V.](https://www.asam.net/standards/domain-simulation/) members are developing the so called "OpenX" standards for the simulation domain like OpenSCENARIO (Release v1.1 Q1/21) for test scenario definitions and OpenDRIVE (Release v1.6 Q1/2020) for road network definitions.
+The ALKS regulation itself leaves room for interpretation, therefore one goal of this publication is the coordination on a common interpretation with partners. Hence, this work has also been conducted in the context of the German research project [SET Level](https://setlevel.de). 
 
-The focus of the scenarios is on securing the planning aspects of an "Automated Lane Keeping System". By extending the scenarios with references to e.g. 3D models or environmental conditions (e.g. light, rain), aspects of sensor and actuator technology could also be simulated and validated.
+BMW has taken on the task of implementing the test scenarios from the ALKS regulation. Since exchange and compatibility via the tool landscape is vital, another goal is the implementation of the scenarios using an international standard. At the [ASAM e.V.](https://www.asam.net/standards/domain-simulation/) members are developing the so called "OpenX" standards for the simulation domain like OpenSCENARIO (Release v1.1 Q1/21) for scenario definitions and OpenDRIVE (Release v1.6.1 Q1/2021) for road network definitions. The implementation is using [OpenSCENARIO](https://www.asam.net/standards/detail/openscenario/) and [OpenDRIVE](https://www.asam.net/standards/detail/opendrive/), resulting in a bundle of XML files executable with standard compliant simulators.
 
-## Running on Windows
+## Content
 
-The execution in the open source tools "esmini", a basic OpenSCENARIO player, and "openPASS", a simulation platform for traffic simulation, is described on Windows:
+The here provided 15 concrete parametrized test scenarios are derived from the 6 subject areas analogous to Annex 5, Chapter 4.1-4.6 as an initial attempt to clarify the described set of functional scenarios.
+
+Each concrete scenario is complemented by a variation file to form a logical scenario, which then represents a set of concrete scenarios. By applying the parameter variation defined in the variation files to the parameters in the concrete scenarios, multiple concrete scenarios can be derived or generated to cover the required scenario space.
+
+The focus of the here provided scenarios is on securing the planning aspects of an "Automated Lane Keeping System". By extending the scenarios with environmental conditions (e.g. light, rain or wind) or references to e.g. 3D models, aspects of sensor and actuator technology could also be simulated and validated.
+
+## Executing on Windows
+
+The execution of the concrete scenarios in the open source tools "esmini", a basic OpenSCENARIO player, and "openPASS", a simulation platform for traffic simulation, is described on Windows:
 
 _Note:_ Currently only esmini supports the OpenSCENARIO 1.1 format. For openPASS please use the [release v0.3.2](https://github.com/asam-oss/OSC-ALKS-scenarios/releases/tag/v0.3.2) with scenarios in OpenSCENARIO 1.0 format.
 
 _Note:_ The execution with openPASS expects xsltproc on the system path. Check out the "Notes regarding openPASS" for more information.
 
 1. Clone or download this repository to your local drive.
-2. a) Download the [latest esmini release](https://github.com/esmini/esmini/releases) (e.g. esmini-bin_win_x64.zip) (tested successfully with [esmini 2.8.2](https://github.com/esmini/esmini/releases/tag/v2.8.2)),  
+2. a) Download the [latest esmini release](https://github.com/esmini/esmini/releases) (e.g. esmini-bin_win_x64.zip) (tested successfully with [esmini 2.12.4](https://github.com/esmini/esmini/releases/tag/v2.12.4)),  
 or  
 b) Download the [latest openPASS release](https://gitlab.eclipse.org/eclipse/simopenpass/simopenpass) (tested successfully with [openPASS v0.7](https://gitlab.eclipse.org/eclipse/simopenpass/simopenpass/-/tree/openPASS_0.7))
 3. a) Create an environment variable "ESMINI", which directs to the "bin" folder of esmini. E.g. "C:\MyFolder\esmini\bin\",  
 or  
 b) Create an environment variable "OPENPASS", which directs to the installation directory of openPASS. E.g. "C:\MyFolder\openPASS\"
 4. Execute the script "run_Scenario.bat", located in the "Scenarios" folder of the local repository
-5. By changing the parameter values in the parameter declaration section of the OpenSCENARIO files, the concrete scenarios can be varied.
+5. If you change the parameter values in the parameter declaration section of the OpenSCENARIO files within their defined constraints, the concrete scenarios can be varied manually.
 
 #### Notes regarding esmini:
 
@@ -58,11 +60,9 @@ Similar to esmini, openPASS does not provide an ALKS. Therefore, for demonstrati
 
 Currently openPASS does not support the controller concept of OpenSCENARIO. Instead, entities and their controlling components are defined in the ProfilesCatalog.xml. Sourrounding entities are also controlled by the Algorithm Following Driver Model. Therefore, the velocities of the surrounding entities may differ slightly from the definitions in the scenarios. 
 
-## Running on Linux
+## Executing on Linux
 
 The execution in the open source simulator "CARLA" under Ubuntu 20.04 is described here:
-
-_Note:_ For execution with CARLA please use the [release v0.3.2](https://github.com/asam-oss/OSC-ALKS-scenarios/releases/tag/v0.3.2) with scenarios in OpenSCENARIO 1.0 format.
 
 1. Clone or download this repository to your local drive.
 2. Download CARLA and the compatible scenario-runner for CARLA (tested successfully with [CARLA 0.9.11](https://github.com/carla-simulator/carla/releases/tag/0.9.11) and [scenario_runner-0.9.11](https://github.com/carla-simulator/scenario_runner/releases/tag/v0.9.11)
@@ -71,13 +71,15 @@ _Note:_ For execution with CARLA please use the [release v0.3.2](https://github.
  a) Start the CARLA simulator: Go to the CARLA installation folder and type "./CarlaUE4.sh" 
  b) Start the scenario runner: Go to the scenario_runner installation folder and type e.g. "python scenario_runner.py --openscenario /path/to/OSC-ALKS-scenarios/Scenarios/ALKS_Scenario_4.1_1_FreeDriving_TEMPLATE.xosc"
 
+_Note:_ For execution with CARLA please use the [release v0.3.2](https://github.com/asam-oss/OSC-ALKS-scenarios/releases/tag/v0.3.2) with scenarios in OpenSCENARIO 1.0 format.
+
 Execution with esmini or openPASS on Linux hasn't been tested yet.
 
 #### Notes regarding CARLA
 
 With CARLA version 0.9.11 the following scenarios are supported: 4.1_1, 4.2_1, 4.2_2, 4.2_4.
 
-_NOTE:_ 4.2_X scenarios do only work if the pedestrian is modeled directly in the scenario and not in a catalog or is exchanged by a vehicle. Please refer to the bug fix in [this PR](https://github.com/carla-simulator/scenario_runner/pull/713)
+_Note:_ 4.2_X scenarios do only work if the pedestrian is modeled directly in the scenario and not in a catalog or is exchanged by a vehicle. Please refer to the bug fix in [this PR](https://github.com/carla-simulator/scenario_runner/pull/713)
 
 ## Quality Measures
 
@@ -87,7 +89,7 @@ The validation of the scenarios and maps provided in this repository is integrat
 1. Syntactic validation of the scenarios and maps against the XSD schemas of the OpenSCENARIO 1.1 and OpenDRIVE 1.6 standards with xmllint
 2. Syntactic and semantic validation of the scenarios with the *Standalone Checker* of the [OpenSCENARIO API](https://github.com/RA-Consulting-GmbH/openscenario.api.test). Integration into the CI is prepared by a [GitHub action](https://github.com/ahege/openscenario.ci.test) and an [example](https://github.com/ahege/opensceanrio.ci.example.test/)
 
-_NOTE:_ The *Standalone Checker* does not yet support OpenSCENARIO 1.1. Those checks are only applied including [release v0.3.2](https://github.com/asam-oss/OSC-ALKS-scenarios/releases/tag/v0.3.2)
+_Note:_ The *Standalone Checker* does not yet support OpenSCENARIO 1.1. Those checks are only applied including [release v0.3.2](https://github.com/asam-oss/OSC-ALKS-scenarios/releases/tag/v0.3.2)
 
 ## Legal
 

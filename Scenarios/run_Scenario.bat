@@ -11,13 +11,15 @@ SET sel=0
 ECHO Please select simulation tool:
 ECHO [0]: Abort program
 ECHO [1]: esmini
-ECHO [2]: openPASS
+:: TODO: Add again once openPASS can execute OpenSCENARIO 1.1
+::ECHO [2]: openPASS
 SET /p sel="Enter ID: "
 
 IF %sel% LSS 1 GOTO finish
-IF %sel% GTR 2 GOTO finish
+::IF %sel% GTR 2 GOTO finish
+IF %sel% GTR 1 GOTO finish
 IF %sel% EQU 1 GOTO esmini
-IF %sel% EQU 2 GOTO OpenPASS
+::IF %sel% EQU 2 GOTO OpenPASS
 
 :esmini
 
@@ -89,7 +91,7 @@ SET /p id="Enter ID: "
 
 IF %id% GEQ 1 (
     IF %id% LEQ !x! (
-        "%ESMINI%\esmini.exe" --window 100 200 1024 576  --osc !list[%id%]! --trails
+        "%ESMINI%\esmini.exe" --window 100 200 1024 576  --osc !list[%id%]!
         GOTO again_esmini
     )
 )

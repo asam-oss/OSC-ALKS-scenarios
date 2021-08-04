@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<OpenSCENARIO>
+  <FileHeader revMajor="1" revMinor="1" date="2021-07-06T10:00:00" description="Variation for ALKS Scenario 4.3_2 FollowLeadVehicleEmergencyBrake following the Reference parameter variation from Annex 4 - Appendix 3, chapter 5.4" author="BMW AG" />
+  <ParameterValueDistribution>
+    <ScenarioFile filepath="../Scenarios/ALKS_Scenario_4.3_2_FollowLeadVehicleEmergencyBrake_TEMPLATE.xosc" />
+    <Deterministic>
+      <DeterministicSingleParameterDistribution parameterName="Road">
+        <DistributionSet>
+          <Element value="./ALKS_Road_straight.xodr" />
+          <Element value="./ALKS_Road_left_radius_250m.xodr" />
+          <Element value="./ALKS_Road_right_radius_250m.xodr" />
+          <Element value="./ALKS_Road_left_radius_1000m.xodr" />
+          <Element value="./ALKS_Road_right_radius_1000m.xodr" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="Ego_InitSpeed_Ve0_kph">
+        <!--Variation between 5 kph and 60 kph with a step width of 5 kph-->
+        <DistributionRange stepWidth="5.0">
+          <Range lowerLimit="5.0" upperLimit="60.0" />
+        </DistributionRange>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="LeadVehicle_Model">
+        <DistributionSet>
+          <Element value="car" />
+          <Element value="truck" />
+          <Element value="van" />
+          <Element value="bus" />
+          <Element value="motorbike" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="LeadVehicle_Init_HeadwayTime_s">
+        <DistributionSet>
+          <Element value="2.0" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="LeadVehicle_Deceleration_Rate_mps2">
+        <DistributionRange stepWidth="1.0">
+          <Range lowerLimit="1.0" upperLimit="10.0" />
+        </DistributionRange>
+      </DeterministicSingleParameterDistribution>
+    </Deterministic>
+  </ParameterValueDistribution>
+</OpenSCENARIO>

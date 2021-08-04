@@ -1,14 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <OpenSCENARIO>
-  <FileHeader revMajor="1" revMinor="1" date="2021-06-18T10:00:00" description="ALKS Scenario 4.3_2 FollowLeadVehicleEmergencyBrake Template" author="BMW AG" />
+  <FileHeader revMajor="1" revMinor="1" date="2021-07-09T10:00:00" description="ALKS Scenario 4.3_2 FollowLeadVehicleEmergencyBrake Template" author="BMW AG" />
   <ParameterDeclarations>
     <!--The ParameterDeclarations section is needed for easy variation.-->
-    <ParameterDeclaration name="Ego_InitPosition_LaneId" parameterType="string" value="-4" />
-    <ParameterDeclaration name="Ego_InitSpeed_Ve0" parameterType="double" value="16.66666667" />
-    <ParameterDeclaration name="Duration" parameterType="double" value="40" />
-    <ParameterDeclaration name="LeadVehicle_Model" parameterType="string" value="car" />
-    <ParameterDeclaration name="LeadVehicle_InitDistance_dx0" parameterType="double" value="33.33333333" />
-    <ParameterDeclaration name="LeadVehicle_Deceleration_Rate" parameterType="double" value="9.81" />
+    <ParameterDeclaration name="Road" parameterType="string" value="./ALKS_Road_straight.xodr"></ParameterDeclaration>
+    <ParameterDeclaration name="Ego_InitPosition_LaneId" parameterType="string" value="-4">
+      <!--A positive lane number would position the entities on the left side of the road. For this the road needs to be adjusted to left hand traffic (attribute "rule"="LHT").-->
+      <ConstraintGroup>
+        <ValueConstraint rule="lessOrEqual" value="-3" />
+        <ValueConstraint rule="greaterOrEqual" value="-5" />
+      </ConstraintGroup>
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterOrEqual" value="3" />
+        <ValueConstraint rule="lessOrEqual" value="5" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Ego_InitSpeed_Ve0_kph" parameterType="double" value="60.0">
+      <ConstraintGroup>
+        <!--The scenarios are meant to be run with a positive ego speed up to 60 kph.-->
+        <ValueConstraint rule="greaterThan" value="0.0" />
+        <ValueConstraint rule="lessOrEqual" value="60.0" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="LeadVehicle_Model" parameterType="string" value="car">
+      <!--Not constrained so it's possible to use different models.-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="LeadVehicle_Init_HeadwayTime_s" parameterType="double" value="2.0">
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="LeadVehicle_Deceleration_Rate_mps2" parameterType="double" value="9.81">
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="0.0"></ValueConstraint>
+        <ValueConstraint rule="lessThan" value="10.0"></ValueConstraint>
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="LeadVehicle_Init_LateralOffset_m" parameterType="double" value="0.0">
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="-1.75" />
+        <ValueConstraint rule="lessOrEqual" value="1.75" />
+        <!--The lead vehicle should stay with it's center within the lane boundaries.-->
+      </ConstraintGroup>
+    </ParameterDeclaration>
   </ParameterDeclarations>
   <CatalogLocations>
     <VehicleCatalog>
@@ -25,7 +59,7 @@
     </ControllerCatalog>
   </CatalogLocations>
   <RoadNetwork>
-    <LogicFile filepath="./ALKS_Road.xodr" />
+    <LogicFile filepath="$Road" />
   </RoadNetwork>
   <Entities>
     <ScenarioObject name="Ego">
@@ -54,7 +88,7 @@
               <SpeedAction>
                 <SpeedActionDynamics dynamicsShape="step" dynamicsDimension="time" value="0" />
                 <SpeedActionTarget>
-                  <AbsoluteTargetSpeed value="$Ego_InitSpeed_Ve0" />
+                  <AbsoluteTargetSpeed value="${$Ego_InitSpeed_Ve0_kph / 3.6}" />
                 </SpeedActionTarget>
               </SpeedAction>
             </LongitudinalAction>
@@ -64,7 +98,8 @@
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <RelativeLanePosition entityRef="Ego" dLane="0" ds="$LeadVehicle_InitDistance_dx0" offset="0.0" />
+                <!--The Lead vehicle is positioned in front of the Ego. The headway time is not yet accurate because the bounding boxes are not considered in this action (origin-to-origin instead of bumper-to-bumper). Only an approximated 5m are added to the distance. The LongitudinalDistanceAction will position the Lead vehicle precisely.-->
+                <RelativeLanePosition entityRef="Ego" dLane="0" ds="${($LeadVehicle_Init_HeadwayTime_s * ($Ego_InitSpeed_Ve0_kph / 3.6)) + 5.0}" offset="$LeadVehicle_Init_LateralOffset_m"></RelativeLanePosition>
               </Position>
             </TeleportAction>
           </PrivateAction>
@@ -73,9 +108,15 @@
               <SpeedAction>
                 <SpeedActionDynamics dynamicsShape="step" dynamicsDimension="time" value="0" />
                 <SpeedActionTarget>
-                  <AbsoluteTargetSpeed value="$Ego_InitSpeed_Ve0" />
+                  <AbsoluteTargetSpeed value="${$Ego_InitSpeed_Ve0_kph / 3.6}" />
                 </SpeedActionTarget>
               </SpeedAction>
+            </LongitudinalAction>
+          </PrivateAction>
+          <PrivateAction>
+            <LongitudinalAction>
+              <!--The Lead vehicle shall start with a predefined headway time (bumper-to-bumper).-->
+              <LongitudinalDistanceAction continuous="false" coordinateSystem="entity" displacement="leadingReferencedEntity" timeGap="$LeadVehicle_Init_HeadwayTime_s" entityRef="Ego" freespace="true"></LongitudinalDistanceAction>
             </LongitudinalAction>
           </PrivateAction>
         </Private>
@@ -131,7 +172,7 @@
                 <PrivateAction>
                   <LongitudinalAction>
                     <SpeedAction>
-                      <SpeedActionDynamics dynamicsShape="linear" value="$LeadVehicle_Deceleration_Rate" dynamicsDimension="rate" />
+                      <SpeedActionDynamics dynamicsShape="linear" value="$LeadVehicle_Deceleration_Rate_mps2" dynamicsDimension="rate" />
                       <SpeedActionTarget>
                         <AbsoluteTargetSpeed value="0.0" />
                       </SpeedActionTarget>
@@ -164,9 +205,10 @@
     </Story>
     <StopTrigger>
       <ConditionGroup>
-        <Condition name="End" delay="0" conditionEdge="rising">
+        <Condition name="End" delay="10.0" conditionEdge="rising">
           <ByValueCondition>
-            <SimulationTimeCondition value="$Duration" rule="greaterOrEqual" />
+            <!--The scenario ends 10.0 seconds after the lead vehicle has stopped.-->
+            <StoryboardElementStateCondition storyboardElementType="action" storyboardElementRef="BrakeAction" state="completeState" />
           </ByValueCondition>
         </Condition>
       </ConditionGroup>

@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<OpenSCENARIO>
+  <FileHeader revMajor="1" revMinor="1" date="2021-07-06T10:00:00" description="Variation for ALKS Scenario 4.2_2 PartiallyBlockingTarget" author="BMW AG" />
+  <ParameterValueDistribution>
+    <ScenarioFile filepath="../Scenarios/ALKS_Scenario_4.2_2_PartiallyBlockingTarget_TEMPLATE.xosc" />
+    <Deterministic>
+      <DeterministicSingleParameterDistribution parameterName="Road">
+        <DistributionSet>
+          <Element value="./ALKS_Road_straight.xodr" />
+          <Element value="./ALKS_Road_left_radius_250m.xodr" />
+          <Element value="./ALKS_Road_right_radius_250m.xodr" />
+          <Element value="./ALKS_Road_left_radius_1000m.xodr" />
+          <Element value="./ALKS_Road_right_radius_1000m.xodr" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="Ego_InitSpeed_Ve0_kph">
+        <!--Variation between 5 kph and 60 kph with a step width of 5 kph-->
+        <DistributionRange stepWidth="5.0">
+          <Range lowerLimit="5.0" upperLimit="60.0" />
+        </DistributionRange>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicMultiParameterDistribution>
+        <ValueSetDistribution>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="TargetBlocking_Catalog" value="PedestrianCatalog" />
+            <ParameterAssignment parameterRef="TargetBlocking_Model" value="pedestrian" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="TargetBlocking_Catalog" value="VehicleCatalog" />
+            <ParameterAssignment parameterRef="TargetBlocking_Model" value="car" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="TargetBlocking_Catalog" value="VehicleCatalog" />
+            <ParameterAssignment parameterRef="TargetBlocking_Model" value="truck" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="TargetBlocking_Catalog" value="VehicleCatalog" />
+            <ParameterAssignment parameterRef="TargetBlocking_Model" value="van" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="TargetBlocking_Catalog" value="VehicleCatalog" />
+            <ParameterAssignment parameterRef="TargetBlocking_Model" value="bus" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="TargetBlocking_Catalog" value="VehicleCatalog" />
+            <ParameterAssignment parameterRef="TargetBlocking_Model" value="motorbike" />
+          </ParameterValueSet>
+        </ValueSetDistribution>
+      </DeterministicMultiParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="TargetBlocking_InitPosition_LateralOffset_m">
+        <!--Variation between left and right border of lane (3.5 m width)-->
+        <DistributionRange stepWidth="0.25">
+          <Range lowerLimit="-2" upperLimit="2" />
+        </DistributionRange>
+      </DeterministicSingleParameterDistribution>
+    </Deterministic>
+  </ParameterValueDistribution>
+</OpenSCENARIO>
