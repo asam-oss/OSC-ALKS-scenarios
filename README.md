@@ -15,7 +15,7 @@ The ALKS regulation also contains test scenarios at a functional level, which ar
 
 The ALKS regulation itself leaves room for interpretation, therefore one goal of this publication is the coordination on a common interpretation with partners. Hence, this work has also been conducted in the context of the German research project [SET Level](https://setlevel.de). 
 
-BMW has taken on the task of implementing the test scenarios from the ALKS regulation. Since exchange and compatibility via the tool landscape is vital, another goal is the implementation of the scenarios using an international standard. At the [ASAM e.V.](https://www.asam.net/standards/domain-simulation/) members are developing the so called "OpenX" standards for the simulation domain like OpenSCENARIO (Release v1.1 Q1/21) for scenario definitions and OpenDRIVE (Release v1.6.1 Q1/2021) for road network definitions. The implementation is using [OpenSCENARIO](https://www.asam.net/standards/detail/openscenario/) and [OpenDRIVE](https://www.asam.net/standards/detail/opendrive/), resulting in a bundle of XML files executable with standard compliant simulators.
+BMW has taken on the task of implementing the test scenarios from the ALKS regulation. Since exchange and compatibility via the tool landscape is vital, another goal is the implementation of the scenarios using an international standard. At the [ASAM e.V.](https://www.asam.net) members are developing the so called "OpenX" standards for the simulation domain like OpenSCENARIO (Release v1.1 3/2021) for scenario definitions and OpenDRIVE (Release v1.7 8/2021) for road network definitions. The implementation is using [OpenSCENARIO](https://www.asam.net/standards/detail/openscenario/) and [OpenDRIVE](https://www.asam.net/standards/detail/opendrive/), resulting in a bundle of XML files executable with standard compliant simulators.
 
 ### Content
 
@@ -109,7 +109,7 @@ Architecturally this could be achieved in different ways:
 
 ## Quality Measures
 
-As a first proof-of-concept the scenarios have been integrated and simulated in [openPASS 0.7](https://git.eclipse.org/c/simopenpass/simopenpass.git/tag/?h=openPASS_0.7) at BMW. In addition the open source tool esmini can be used as described above.
+As a first proof-of-concept the scenarios have been integrated and simulated in [openPASS 0.7](https://gitlab.eclipse.org/eclipse/simopenpass/simopenpass/-/tree/openPASS_0.7) at BMW. In addition the open source tool esmini can be used as described above.
 
 The validation of the scenarios and maps provided in this repository is integrated into the CI workflow. There are two validation mechanisms implemented with GitHub actions:
 1. Syntactic validation of the scenarios and maps against the XSD schemas of the OpenSCENARIO 1.1 and OpenDRIVE 1.6 standards with xmllint
@@ -121,9 +121,9 @@ _Note:_ The *Standalone Checker* does not yet support OpenSCENARIO 1.1. Those ch
 
 The corresponding OpenSCENARIO Bundle has been licensed by [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.de) and is hereby made publicly available. 
 
-The XSD schema of OpenSCENARIO is used under the license of ASAM, which can be found [here](https://www.asam.net/index.php?eID=dumpFile&t=f&f=3496&token=df4fdaf41a8463e585495001cc3db3298b57d426).
+The XSD schema of OpenSCENARIO is used under the license of ASAM, which can be found [here](https://www.asam.net/index.php?eID=dumpFile&t=f&f=4092&token=d3b6a55e911b22179e3c0895fe2caae8f5492467).
 
-The XSD schemas of OpenDRIVE are used under the license of ASAM, which can be found [here](https://www.asam.net/index.php?eID=dumpFile&t=f&f=3495&token=56b15ffd9dfe23ad8f759523c806fc1f1a90a0e8)
+The XSD schemas of OpenDRIVE are used under the license of ASAM, which can be found [here](https://www.asam.net/index.php?eID=dumpFile&t=f&f=4422&token=e590561f3c39aa2260e5442e29e93f6693d1cccd)
 
 The *Standalone Checker* of the OpenSCENARIO API and the corresponding GitHub action are used under the [Apache 2.0](https://github.com/RA-Consulting-GmbH/openscenario.api.test/blob/master/LICENSE) license.
 
