@@ -77,9 +77,9 @@
               </Action>
               <StartTrigger>
                 <ConditionGroup>
-                  <Condition name="ActivateALKSControllerEventCondition" delay="0" conditionEdge="rising">
+                  <Condition name="ActivateALKSControllerEventCondition" delay="0" conditionEdge="none">
                     <ByValueCondition>
-                      <SimulationTimeCondition value="10000" rule="greaterOrEqual" />
+                      <SimulationTimeCondition value="3.0" rule="greaterOrEqual" />
                     </ByValueCondition>
                   </Condition>
                 </ConditionGroup>
