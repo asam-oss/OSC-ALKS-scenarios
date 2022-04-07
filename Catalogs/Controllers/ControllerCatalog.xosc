@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <OpenSCENARIO>
-  <FileHeader revMajor="1" revMinor="1" date="2021-06-18T10:00:00" description="Controller Catalog for ALKS Scenarios" author="BMW AG" />
+  <FileHeader revMajor="1" revMinor="1" date="2021-06-18T10:00:00" description="Controller Catalog for ALKS Scenarios" author="BMW AG">
+    <License name="Creative Commons Attribution-ShareAlike 4.0 International Public License" resource="https://creativecommons.org/licenses/by-sa/4.0/legalcode" spdxId="CC-BY-SA-4.0" />
+  </FileHeader>
   <Catalog name="ControllerCatalog">
     <Controller name="ALKSController">
       <Properties></Properties>
