@@ -30,15 +30,6 @@
           <Range lowerLimit="0.5" upperLimit="3.0" />
         </DistributionRange>
       </DeterministicSingleParameterDistribution>
-      <DeterministicSingleParameterDistribution parameterName="CutInVehicle_Model">
-        <DistributionSet>
-          <Element value="car" />
-          <Element value="truck" />
-          <Element value="van" />
-          <Element value="bus" />
-          <Element value="motorbike" />
-        </DistributionSet>
-      </DeterministicSingleParameterDistribution>
       <DeterministicMultiParameterDistribution>
         <ValueSetDistribution>
           <ParameterValueSet>
