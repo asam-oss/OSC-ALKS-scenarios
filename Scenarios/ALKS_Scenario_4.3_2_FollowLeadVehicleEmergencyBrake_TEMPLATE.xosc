@@ -10,12 +10,22 @@
     <ParameterDeclaration name="Ego_InitPosition_LaneId" parameterType="string" value="-4">
       <!--A positive lane number would position the entities on the left side of the road. For this the road needs to be adjusted to left hand traffic (attribute "rule"="LHT").-->
       <ConstraintGroup>
-        <ValueConstraint rule="lessOrEqual" value="-3" />
-        <ValueConstraint rule="greaterOrEqual" value="-5" />
+        <ValueConstraint rule="equalTo" value="-3" />
       </ConstraintGroup>
       <ConstraintGroup>
-        <ValueConstraint rule="greaterOrEqual" value="3" />
-        <ValueConstraint rule="lessOrEqual" value="5" />
+        <ValueConstraint rule="equalTo" value="-4" />
+      </ConstraintGroup>
+      <ConstraintGroup>
+        <ValueConstraint rule="equalTo" value="-5" />
+      </ConstraintGroup>
+      <ConstraintGroup>
+        <ValueConstraint rule="equalTo" value="3" />
+      </ConstraintGroup>
+      <ConstraintGroup>
+        <ValueConstraint rule="equalTo" value="4" />
+      </ConstraintGroup>
+      <ConstraintGroup>
+        <ValueConstraint rule="equalTo" value="5" />
       </ConstraintGroup>
     </ParameterDeclaration>
     <ParameterDeclaration name="Ego_InitSpeed_Ve0_kph" parameterType="double" value="60.0">
