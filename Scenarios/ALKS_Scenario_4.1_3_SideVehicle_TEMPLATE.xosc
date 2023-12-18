@@ -23,7 +23,7 @@
       </ConstraintGroup>
       <!--With a longitudinal offset of more than 10.0 m the vehicle isn't considered to be close beside anymore as required by the regulation.-->
     </ParameterDeclaration>
-    <ParameterDeclaration name="SideVehicle_InitPosition_RelativeLaneId" parameterType="int" value="1">
+    <ParameterDeclaration name="SideVehicle_InitPosition_RelativeLaneId" parameterType="integer" value="1">
       <!--Left=1, Right=-1-->
       <ConstraintGroup>
         <ValueConstraint rule="equalTo" value="1"></ValueConstraint>
