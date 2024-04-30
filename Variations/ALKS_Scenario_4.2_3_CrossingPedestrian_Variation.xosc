@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (c) 2020-2022, Bayerische Motoren Werke Aktiengesellschaft (BMW AG) -->
+<!-- Copyright (c) 2020-2024, Bayerische Motoren Werke Aktiengesellschaft (BMW AG) -->
 <OpenSCENARIO>
   <FileHeader revMajor="1" revMinor="1" date="2021-07-06T10:00:00" description="Variation for ALKS Scenario 4.2_3 CrossingPedestrian" author="BMW AG">
-    <License name="Creative Commons Attribution-ShareAlike 4.0 International Public License" resource="https://creativecommons.org/licenses/by-sa/4.0/legalcode" spdxId="CC-BY-SA-4.0" />
+    <License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" />
   </FileHeader>
   <ParameterValueDistribution>
     <ScenarioFile filepath="../Scenarios/ALKS_Scenario_4.2_3_CrossingPedestrian_TEMPLATE.xosc" />

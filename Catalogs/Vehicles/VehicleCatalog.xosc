@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (c) 2020-2022, Bayerische Motoren Werke Aktiengesellschaft (BMW AG) -->
+<!-- Copyright (c) 2020-2024, Bayerische Motoren Werke Aktiengesellschaft (BMW AG) -->
 <OpenSCENARIO>
   <FileHeader revMajor="1" revMinor="1" date="2021-06-18T10:00:00" author="BMW AG" description="Vehicle catalog">
-    <License name="Creative Commons Attribution-ShareAlike 4.0 International Public License" resource="https://creativecommons.org/licenses/by-sa/4.0/legalcode" spdxId="CC-BY-SA-4.0" />
+    <License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" />
   </FileHeader>
   <Catalog name="VehicleCatalog">
     <Vehicle name="car_ego" vehicleCategory="car">

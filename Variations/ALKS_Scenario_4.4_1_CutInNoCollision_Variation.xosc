@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (c) 2020-2022, Bayerische Motoren Werke Aktiengesellschaft (BMW AG) -->
+<!-- Copyright (c) 2020-2024, Bayerische Motoren Werke Aktiengesellschaft (BMW AG) -->
 <OpenSCENARIO>
   <FileHeader revMajor="1" revMinor="1" date="2021-07-06T10:00:00" description="Variation for ALKS Scenarios 4.4_1 CutInNoCollision" author="BMW AG">
     <!--This variation file includes also parameter sets for the unavoidable collision cases (4.4_2). If used in a test, then for unavoidable collision cases avoidance of a collision must not be a pass criteria for the test.-->
-    <License name="Creative Commons Attribution-ShareAlike 4.0 International Public License" resource="https://creativecommons.org/licenses/by-sa/4.0/legalcode" spdxId="CC-BY-SA-4.0" />
+    <License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" />
   </FileHeader>
   <ParameterValueDistribution>
     <ScenarioFile filepath="../Scenarios/ALKS_Scenario_4.4_1_CutInNoCollision_TEMPLATE.xosc" />
