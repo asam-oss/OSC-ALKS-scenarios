@@ -9,7 +9,7 @@ All IP remains that of the original contributors, and is subject to the original
 
 # Licensing
 
-This project uses the CC-BY-SA-4.0 License(s) (as found in the LICENSE file in the project’s GitHub repo).
+This project uses the Mozilla Public License Version 2.0 (as found in the LICENSE file in the project’s GitHub repo).
 
 The license tells you what rights you have as a developer, provided by the copyright holder.
 It is important that the contributor fully understands the licensing rights and agrees to them.

@@ -119,7 +119,7 @@ _Note:_ The *Standalone Checker* does not yet support OpenSCENARIO 1.1. Those ch
 
 ## Legal
 
-The corresponding OpenSCENARIO Bundle has been licensed by [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.de) and is hereby made publicly available. 
+The corresponding OpenSCENARIO Bundle has been licensed by [MPL-2.0](https://www.mozilla.org/en-US/MPL/2.0/) and is hereby made publicly available. 
 
 The XSD schema of OpenSCENARIO is used under the license of ASAM, which can be found [here](https://www.asam.net/index.php?eID=dumpFile&t=f&f=4092&token=d3b6a55e911b22179e3c0895fe2caae8f5492467).
 
