@@ -15,7 +15,7 @@ The ALKS regulation also contains test scenarios at a functional level, which ar
 
 The ALKS regulation itself leaves room for interpretation, therefore one goal of this publication is the coordination on a common interpretation with partners. Hence, this work has also been conducted in the context of the German research project [SET Level](https://setlevel.de). 
 
-BMW has taken on the task of implementing the test scenarios from the ALKS regulation. Since exchange and compatibility via the tool landscape is vital, another goal is the implementation of the scenarios using an international standard. At the [ASAM e.V.](https://www.asam.net) members are developing the so called "OpenX" standards for the simulation domain like OpenSCENARIO (Release v1.1 3/2021) for scenario definitions and OpenDRIVE (Release v1.7 8/2021) for road network definitions. The implementation is using [OpenSCENARIO](https://www.asam.net/standards/detail/openscenario/) and [OpenDRIVE](https://www.asam.net/standards/detail/opendrive/), resulting in a bundle of XML files executable with standard compliant simulators.
+BMW has taken on the task of implementing the test scenarios from the ALKS regulation. Since exchange and compatibility via the tool landscape is vital, another goal is the implementation of the scenarios using an international standard. At the [ASAM e.V.](https://www.asam.net) members are developing the so called "OpenX" standards for the simulation domain like OpenSCENARIO (Release v1.3.0 5/2024) for scenario definitions and OpenDRIVE (Release v1.7 8/2021) for road network definitions. The implementation is using [OpenSCENARIO XML](https://www.asam.net/standards/detail/openscenario-xml/) and [OpenDRIVE](https://www.asam.net/standards/detail/opendrive/), resulting in a bundle of XML files executable with standard compliant simulators.
 
 ### Content
 
@@ -31,12 +31,12 @@ The focus of the here provided scenarios is on securing the planning aspects of 
 
 The execution of the concrete scenarios in the open source tools "esmini", a basic OpenSCENARIO player, and "openPASS", a simulation platform for traffic simulation, is described on Windows:
 
-_Note:_ Currently only esmini supports the OpenSCENARIO 1.1 format. For openPASS please use the [release v0.3.2](https://github.com/asam-oss/OSC-ALKS-scenarios/releases/tag/v0.3.2) with scenarios in OpenSCENARIO 1.0 format.
+_Note:_ Currently only esmini supports the OpenSCENARIO 1.3 format. For openPASS please use the [release v0.3.2](https://github.com/asam-oss/OSC-ALKS-scenarios/releases/tag/v0.3.2) with scenarios in OpenSCENARIO 1.0 format.
 
 _Note:_ The execution with openPASS expects xsltproc on the system path. Check out the "Notes regarding openPASS" for more information.
 
 1. Clone or download this repository to your local drive.
-2. a) Download the [latest esmini release](https://github.com/esmini/esmini/releases) (e.g. esmini-bin_win_x64.zip) (tested successfully with [esmini 2.15.3](https://github.com/esmini/esmini/releases/tag/v2.15.3)),  
+2. a) Download the [latest esmini release](https://github.com/esmini/esmini/releases) (e.g. esmini-bin_win_x64.zip) (tested successfully with [esmini 2.37.16](https://github.com/esmini/esmini/releases/tag/v2.37.16)),  
 or  
 b) Download the [latest openPASS release](https://gitlab.eclipse.org/eclipse/simopenpass/simopenpass) (tested successfully with [openPASS v0.7](https://gitlab.eclipse.org/eclipse/simopenpass/simopenpass/-/tree/openPASS_0.7))
 3. a) Create an environment variable "ESMINI", which directs to the "bin" folder of esmini. E.g. "C:\MyFolder\esmini\bin\",  
@@ -67,9 +67,9 @@ Currently openPASS does not support the controller concept of OpenSCENARIO. Inst
 #### esmini
 
 1. Please follow the steps 1. and 2. a) from the above instructions for Windows (clone/download repo and install esmini)
-2. Once esmini is installed (e.g. to ~/esmini), go to the "Scenarios" folder and execute e.g.:
+2. Once esmini is installed (e.g. to ~/esmini), change to the "ConcreteScenarios" directory and execute e.g.:
 ```
-~/esmini/bin/esmini --osc ALKS_Scenario_4.1_1_FreeDriving_TEMPLATE.xosc
+s~/esmini/bin/esmini --osc ALKS_Scenario_4.1_1_FreeDriving_TEMPLATE.xosc
 ```
 
 #### openPASS
@@ -97,7 +97,11 @@ _Note:_ 4.2_X scenarios do only work if the pedestrian is modeled directly in th
 
 ### Scenario variation
 
-You can either manually vary the scenarios by changing the parameter values in the parameter declaration section of the OpenSCENARIO files within their defined constraints. Or you can use the provided variation files to automatically create multiple concrete parameter sets / concrete scenarios prior to execution. For this an additional parameter set / scenario generation tool is necessary.
+You can either manually vary the concrete scenarios by changing the parameter values in the parameter declaration section of the OpenSCENARIO files within their defined constraints. Or you can use the provided variation files to automatically create multiple concrete parameter sets / concrete scenarios prior to execution. For this an additional parameter set / scenario generation tool is necessary.
+esmini includes such a scenario generation mechanism as well. To generate and execute multiple scenarios in a row please go to the "LogicalScenarios" folder and execute e.g.:
+```
+~/esmini/bin/esmini --osc ConcreteScenarios/ALKS_Scenario_4.1_1_FreeDriving_TEMPLATE.xosc --param_dist ALKS_Scenario_4.1_1_FreeDriving_Variation.xosc
+```
 
 ### ALKS activation
 
