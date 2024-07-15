@@ -1,5 +1,5 @@
 *.txt
-/LogicalScenarios/*.txt
-/LogicalScenarios/*.osi
-/LogicalScenarios/ConcreteScenarios/*.txt
-/LogicalScenarios/ConcreteScenarios/*.osi
+/logical_scenarios/*.txt
+/logical_scenarios/*.osi
+/logical_scenarios/concrete_scenarios/*.txt
+/logical_scenarios/concrete_scenarios/*.osi
