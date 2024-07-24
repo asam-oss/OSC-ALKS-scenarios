@@ -15,48 +15,48 @@ jobs:
       - name: Validate all scenarios
         uses: ./.github/actions/xmllint
         with:
-          FILE: "./Scenarios/ALKS_Scenario_4.1_1_FreeDriving_TEMPLATE.xosc \
-          ./Scenarios/ALKS_Scenario_4.1_2_SwervingLeadVehicle_TEMPLATE.xosc \
-          ./Scenarios/ALKS_Scenario_4.1_3_SideVehicle_TEMPLATE.xosc \
-          ./Scenarios/ALKS_Scenario_4.2_1_FullyBlockingTarget_TEMPLATE.xosc \
-          ./Scenarios/ALKS_Scenario_4.2_2_PartiallyBlockingTarget_TEMPLATE.xosc \
-          ./Scenarios/ALKS_Scenario_4.2_3_CrossingPedestrian_TEMPLATE.xosc \
-          ./Scenarios/ALKS_Scenario_4.2_4_MultipleBlockingTargets_TEMPLATE.xosc \
-          ./Scenarios/ALKS_Scenario_4.3_1_FollowLeadVehicleComfortable_TEMPLATE.xosc \
-          ./Scenarios/ALKS_Scenario_4.3_2_FollowLeadVehicleEmergencyBrake_TEMPLATE.xosc \
-          ./Scenarios/ALKS_Scenario_4.4_1_CutInNoCollision_TEMPLATE.xosc \
-          ./Scenarios/ALKS_Scenario_4.4_2_CutInUnavoidableCollision_TEMPLATE.xosc \
-          ./Scenarios/ALKS_Scenario_4.5_1_CutOutFullyBlocking_TEMPLATE.xosc \
-          ./Scenarios/ALKS_Scenario_4.5_2_CutOutMultipleBlockingTargets_TEMPLATE.xosc \
-          ./Scenarios/ALKS_Scenario_4.6_1_ForwardDetectionRange_TEMPLATE.xosc \
-          ./Scenarios/ALKS_Scenario_4.6_2_LateralDetectionRange_TEMPLATE.xosc \
-          ./Catalogs/Controllers/ControllerCatalog.xosc \
-          ./Catalogs/MiscObjects/MiscObjectCatalog.xosc \
-          ./Catalogs/Vehicles/VehicleCatalog.xosc \
-          ./Catalogs/Pedestrians/PedestrianCatalog.xosc \
-          ./Variations/ALKS_Scenario_4.1_1_FreeDriving_Variation.xosc \
-          ./Variations/ALKS_Scenario_4.1_2_SwervingLeadVehicle_Variation.xosc \
-          ./Variations/ALKS_Scenario_4.1_3_SideVehicle_Variation.xosc \
-          ./Variations/ALKS_Scenario_4.2_1_FullyBlockingTarget_Variation.xosc \
-          ./Variations/ALKS_Scenario_4.2_2_PartiallyBlockingTarget_Variation.xosc \
-          ./Variations/ALKS_Scenario_4.2_3_CrossingPedestrian_Variation.xosc \
-          ./Variations/ALKS_Scenario_4.2_4_MultipleBlockingTargets_Variation.xosc \
-          ./Variations/ALKS_Scenario_4.3_1_FollowLeadVehicleComfortable_Variation.xosc \
-          ./Variations/ALKS_Scenario_4.3_2_FollowLeadVehicleEmergencyBrake_Variation.xosc \
-          ./Variations/ALKS_Scenario_4.3_2_FollowLeadVehicleEmergencyBrake_Variation_Reference.xosc \
-          ./Variations/ALKS_Scenario_4.4_1_CutInNoCollision_Variation.xosc \
-          ./Variations/ALKS_Scenario_4.5_1_CutOutFullyBlocking_Variation.xosc \
-          ./Variations/ALKS_Scenario_4.5_2_CutOutMultipleBlockingTargets_Variation.xosc \
-          ./Variations/ALKS_Scenario_4.6_1_ForwardDetectionRange_Variation.xosc \
-          ./Variations/ALKS_Scenario_4.6_2_LateralDetectionRange_Variation.xosc"
+          FILE: "./logical_scenarios/concrete_scenarios/alks_scenario_4_1_1_free_driving_template.xosc \
+          ./logical_scenarios/concrete_scenarios/alks_scenario_4_1_2_swerving_lead_vehicle_template.xosc \
+          ./logical_scenarios/concrete_scenarios/alks_scenario_4_1_3_side_vehicle_template.xosc \
+          ./logical_scenarios/concrete_scenarios/alks_scenario_4_2_1_fully_blocking_target_template.xosc \
+          ./logical_scenarios/concrete_scenarios/alks_scenario_4_2_2_partially_blocking_target_template.xosc \
+          ./logical_scenarios/concrete_scenarios/alks_scenario_4_2_3_crossing_pedestrian_template.xosc \
+          ./logical_scenarios/concrete_scenarios/alks_scenario_4_2_4_multiple_blocking_targets_template.xosc \
+          ./logical_scenarios/concrete_scenarios/alks_scenario_4_3_1_follow_lead_vehicle_comfortable_template.xosc \
+          ./logical_scenarios/concrete_scenarios/alks_scenario_4_3_2_follow_lead_vehicle_emergency_brake_template.xosc \
+          ./logical_scenarios/concrete_scenarios/alks_scenario_4_4_1_cut_in_no_collision_template.xosc \
+          ./logical_scenarios/concrete_scenarios/alks_scenario_4_4_2_cut_in_unavoidable_collision_template.xosc \
+          ./logical_scenarios/concrete_scenarios/alks_scenario_4_5_1_cut_out_fully_blocking_template.xosc \
+          ./logical_scenarios/concrete_scenarios/alks_scenario_4_5_2_cut_out_multiple_blocking_targets_template.xosc \
+          ./logical_scenarios/concrete_scenarios/alks_scenario_4_6_1_forward_detection_range_template.xosc \
+          ./logical_scenarios/concrete_scenarios/alks_scenario_4_6_2_lateral_detection_range_template.xosc \
+          ./logical_scenarios/concrete_scenarios/catalogs/controllers/controller_catalog.xosc \
+          ./logical_scenarios/concrete_scenarios/catalogs/misc_objects/misc_object_catalog.xosc \
+          ./logical_scenarios/concrete_scenarios/catalogs/vehicles/vehicle_catalog.xosc \
+          ./logical_scenarios/concrete_scenarios/catalogs/pedestrians/pedestrian_catalog.xosc \
+          ./logical_scenarios/alks_scenario_4_1_1_free_driving_variation.xosc \
+          ./logical_scenarios/alks_scenario_4_1_2_swerving_lead_vehicle_variation.xosc \
+          ./logical_scenarios/alks_scenario_4_1_3_side_vehicle_variation.xosc \
+          ./logical_scenarios/alks_scenario_4_2_1_fully_blocking_target_variation.xosc \
+          ./logical_scenarios/alks_scenario_4_2_2_partially_blocking_target_variation.xosc \
+          ./logical_scenarios/alks_scenario_4_2_3_crossing_pedestrian_variation.xosc \
+          ./logical_scenarios/alks_scenario_4_2_4_multiple_blocking_targets_variation.xosc \
+          ./logical_scenarios/alks_scenario_4_3_1_follow_lead_vehicle_comfortable_variation.xosc \
+          ./logical_scenarios/alks_scenario_4_3_2_follow_lead_vehicle_emergency_brake_variation.xosc \
+          ./logical_scenarios/alks_scenario_4_3_2_follow_lead_vehicle_emergency_brake_variation_reference.xosc \
+          ./logical_scenarios/alks_scenario_4_4_1_cut_in_no_collision_variation.xosc \
+          ./logical_scenarios/alks_scenario_4_5_1_cut_out_fully_blocking_variation.xosc \
+          ./logical_scenarios/alks_scenario_4_5_2_cut_out_multiple_blocking_targets_variation.xosc \
+          ./logical_scenarios/alks_scenario_4_6_1_forward_detection_range_variation.xosc \
+          ./logical_scenarios/alks_scenario_4_6_2_lateral_detection_range_variation.xosc"
           SCHEMA: ./.github/workflows/OpenSCENARIO_StrictValidation_1_1.xsd
       - name: Validate all maps
         uses: ./.github/actions/xmllint
         with:
-          FILE: "./Scenarios/ALKS_Road_straight.xodr \
-          ./Scenarios/ALKS_Road_left_radius_250m.xodr \
-          ./Scenarios/ALKS_Road_right_radius_250m.xodr \
-          ./Scenarios/ALKS_Road_left_radius_1000m.xodr \
-          ./Scenarios/ALKS_Road_right_radius_1000m.xodr \
-          ./Scenarios/ALKS_Road_Different_Curvatures.xodr"
+          FILE: "./logical_scenarios/concrete_scenarios/road_networks/alks_road_straight.xodr \
+          ./logical_scenarios/concrete_scenarios/road_networks/alks_road_left_radius_250m.xodr \
+          ./logical_scenarios/concrete_scenarios/road_networks/alks_road_right_radius_250m.xodr \
+          ./logical_scenarios/concrete_scenarios/road_networks/alks_road_left_radius_1000m.xodr \
+          ./logical_scenarios/concrete_scenarios/road_networks/alks_road_right_radius_1000m.xodr \
+          ./logical_scenarios/concrete_scenarios/road_networks/alks_road_different_curvatures.xodr"
           SCHEMA: ./.github/workflows/opendrive_16_core.xsd

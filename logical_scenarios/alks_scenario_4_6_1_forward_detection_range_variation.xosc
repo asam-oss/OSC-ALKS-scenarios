@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2020-2024, Bayerische Motoren Werke Aktiengesellschaft (BMW AG) -->
+<OpenSCENARIO>
+  <FileHeader revMajor="1" revMinor="1" date="2021-07-06T10:00:00" description="Variation for ALKS Scenario 4.6_1 ForwardDetectionRange" author="BMW AG">
+    <License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" />
+  </FileHeader>
+  <ParameterValueDistribution>
+    <ScenarioFile filepath="./concrete_scenarios/alks_scenario_4_6_1_forward_detection_range_template.xosc" />
+    <Deterministic>
+      <DeterministicMultiParameterDistribution>
+        <ValueSetDistribution>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="TargetBlocking_Catalog" value="pedestrian_catalog" />
+            <ParameterAssignment parameterRef="TargetBlocking_Model" value="pedestrian" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="TargetBlocking_Catalog" value="vehicle_catalog" />
+            <ParameterAssignment parameterRef="TargetBlocking_Model" value="motorbike" />
+          </ParameterValueSet>
+        </ValueSetDistribution>
+      </DeterministicMultiParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="TargetBlocking_InitPosition_LateralOffset_m">
+        <!--Positioned within the ego lane (offset=0.0m) and at the outer edge of each adjacent lane (ego is in center of lane, lane width 3.5m => 3.5m*1.5=5.25m)-->
+        <DistributionSet>
+          <Element value="0.0" />
+          <Element value="-5.25" />
+          <Element value="5.25"></Element>
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+    </Deterministic>
+  </ParameterValueDistribution>
+</OpenSCENARIO>

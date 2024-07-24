@@ -15,7 +15,7 @@ The ALKS regulation also contains test scenarios at a functional level, which ar
 
 The ALKS regulation itself leaves room for interpretation, therefore one goal of this publication is the coordination on a common interpretation with partners. Hence, this work has also been conducted in the context of the German research project [SET Level](https://setlevel.de). 
 
-BMW has taken on the task of implementing the test scenarios from the ALKS regulation. Since exchange and compatibility via the tool landscape is vital, another goal is the implementation of the scenarios using an international standard. At the [ASAM e.V.](https://www.asam.net) members are developing the so called "OpenX" standards for the simulation domain like OpenSCENARIO (Release v1.1 3/2021) for scenario definitions and OpenDRIVE (Release v1.7 8/2021) for road network definitions. The implementation is using [OpenSCENARIO](https://www.asam.net/standards/detail/openscenario/) and [OpenDRIVE](https://www.asam.net/standards/detail/opendrive/), resulting in a bundle of XML files executable with standard compliant simulators.
+BMW has taken on the task of implementing the test scenarios from the ALKS regulation. Since exchange and compatibility via the tool landscape is vital, another goal is the implementation of the scenarios using an international standard. At the [ASAM e.V.](https://www.asam.net) members are developing the so called "OpenX" standards for the simulation domain like OpenSCENARIO (Release v1.3.0 5/2024) for scenario definitions and OpenDRIVE (Release v1.7 8/2021) for road network definitions. The implementation is using [OpenSCENARIO XML](https://www.asam.net/standards/detail/openscenario-xml/) and [OpenDRIVE](https://www.asam.net/standards/detail/opendrive/), resulting in a bundle of XML files executable with standard compliant simulators.
 
 ### Content
 
@@ -31,18 +31,18 @@ The focus of the here provided scenarios is on securing the planning aspects of 
 
 The execution of the concrete scenarios in the open source tools "esmini", a basic OpenSCENARIO player, and "openPASS", a simulation platform for traffic simulation, is described on Windows:
 
-_Note:_ Currently only esmini supports the OpenSCENARIO 1.1 format. For openPASS please use the [release v0.3.2](https://github.com/asam-oss/OSC-ALKS-scenarios/releases/tag/v0.3.2) with scenarios in OpenSCENARIO 1.0 format.
+_Note:_ Currently only esmini supports the OpenSCENARIO 1.3 format. For openPASS please use the [release v0.3.2](https://github.com/asam-oss/OSC-ALKS-scenarios/releases/tag/v0.3.2) with scenarios in OpenSCENARIO 1.0 format.
 
 _Note:_ The execution with openPASS expects xsltproc on the system path. Check out the "Notes regarding openPASS" for more information.
 
 1. Clone or download this repository to your local drive.
-2. a) Download the [latest esmini release](https://github.com/esmini/esmini/releases) (e.g. esmini-bin_win_x64.zip) (tested successfully with [esmini 2.15.3](https://github.com/esmini/esmini/releases/tag/v2.15.3)),  
+2. a) Download the [latest esmini release](https://github.com/esmini/esmini/releases) (e.g. esmini-bin_win_x64.zip) (tested successfully with [esmini 2.37.16](https://github.com/esmini/esmini/releases/tag/v2.37.16)),  
 or  
 b) Download the [latest openPASS release](https://gitlab.eclipse.org/eclipse/simopenpass/simopenpass) (tested successfully with [openPASS v0.7](https://gitlab.eclipse.org/eclipse/simopenpass/simopenpass/-/tree/openPASS_0.7))
 3. a) Create an environment variable "ESMINI", which directs to the "bin" folder of esmini. E.g. "C:\MyFolder\esmini\bin\",  
 or  
 b) Create an environment variable "OPENPASS", which directs to the installation directory of openPASS. E.g. "C:\MyFolder\openPASS\"
-4. Execute the script "run_Scenario.bat", located in the "Scenarios" folder of the local repository and follow the instructions
+4. Execute the script "run_scenario.bat", located in the "Scenarios" folder of the local repository and follow the instructions
 
 #### Notes regarding esmini:
 
@@ -52,7 +52,7 @@ Esmini is an environment simulator with a visualization. It even provides a simp
 
 openPASS currently supports the execution of the scenarios 4.1_1, 4.2_1, 4.2_2, 4.2_4, 4.5_1, 4.5_2 and 4.6_1. The remaining scenarios will be enabled in upcoming releases of openPASS.
 
-The simulation in openPASS is configured through a set of configuration files. These files consist of the scenario, its catalogs and the map. Additionally some configuration files located in "OSC-ALKS-scenarios\Scenarios\openPASS_Resources" are required. Prior to simulation some slight modifications have to be done in the scenarios. This step is automated in the "run_Scenario.bat" by applying an xslt to the scenario. 
+The simulation in openPASS is configured through a set of configuration files. These files consist of the scenario, its catalogs and the map. Additionally some configuration files located in "OSC-ALKS-scenarios\Scenarios\openPASS_Resources" are required. Prior to simulation some slight modifications have to be done in the scenarios. This step is automated in the "run_scenario.bat" by applying an xslt to the scenario. 
 
 Dependency: xsltproc is used to apply the xslt script to the scenario. Guide for installation:  
 1. Download and install [msys2](https://www.msys2.org/)
@@ -67,14 +67,14 @@ Currently openPASS does not support the controller concept of OpenSCENARIO. Inst
 #### esmini
 
 1. Please follow the steps 1. and 2. a) from the above instructions for Windows (clone/download repo and install esmini)
-2. Once esmini is installed (e.g. to ~/esmini), go to the "Scenarios" folder and execute e.g.:
+2. Once esmini is installed (e.g. to ~/esmini), change to the "concrete_scenarios" directory and execute e.g.:
 ```
-~/esmini/bin/esmini --osc ALKS_Scenario_4.1_1_FreeDriving_TEMPLATE.xosc
+s~/esmini/bin/esmini --osc alks_scenario_4_1_1_free_driving_template.xosc
 ```
 
 #### openPASS
 
-The execution with openPASS works on Linux with the same scenarios as for Windows. However, steps from the execution script "run_Scenario.bat" have to be performed manually.
+The execution with openPASS works on Linux with the same scenarios as for Windows. However, steps from the execution script "run_scenario.bat" have to be performed manually.
 
 #### CARLA
 
@@ -85,7 +85,7 @@ The execution in the open source simulator "CARLA" under Ubuntu 20.04 is describ
 3. Follow the installation instructions for [CARLA](https://carla.readthedocs.io/en/0.9.11/) and the [scenario_runner](https://github.com/carla-simulator/scenario_runner/blob/master/Docs/getting_scenariorunner.md) (be sure to install all the required tools and libs from requirements.txt (mentioned in "Installation summary" and to set the environment variables (mentioned in "B. Download ScenarioRunner from source"))
 4. Once you can run the .xosc scenarios delivered with CARLA, run the ALKS scenarios like this:
  a) Start the CARLA simulator: Go to the CARLA installation folder and type "./CarlaUE4.sh" 
- b) Start the scenario runner: Go to the scenario_runner installation folder and type e.g. "python scenario_runner.py --openscenario /path/to/OSC-ALKS-scenarios/Scenarios/ALKS_Scenario_4.1_1_FreeDriving_TEMPLATE.xosc"
+ b) Start the scenario runner: Go to the scenario_runner installation folder and type e.g. "python scenario_runner.py --openscenario /path/to/OSC-ALKS-scenarios/logical_scenarios/concrete_scenarios/alks_scenario_4_1_1_free_driving_template.xosc"
 
 _Note:_ For execution with CARLA please use the [release v0.3.2](https://github.com/asam-oss/OSC-ALKS-scenarios/releases/tag/v0.3.2) with scenarios in OpenSCENARIO 1.0 format.
 
@@ -97,7 +97,11 @@ _Note:_ 4.2_X scenarios do only work if the pedestrian is modeled directly in th
 
 ### Scenario variation
 
-You can either manually vary the scenarios by changing the parameter values in the parameter declaration section of the OpenSCENARIO files within their defined constraints. Or you can use the provided variation files to automatically create multiple concrete parameter sets / concrete scenarios prior to execution. For this an additional parameter set / scenario generation tool is necessary.
+You can either manually vary the concrete scenarios by changing the parameter values in the parameter declaration section of the OpenSCENARIO files within their defined constraints. Or you can use the provided variation files to automatically create multiple concrete parameter sets / concrete scenarios prior to execution. For this an additional parameter set / scenario generation tool is necessary.
+esmini includes such a scenario generation mechanism as well. To generate and execute multiple scenarios in a row please go to the "concrete_scenarios" folder and execute e.g.:
+```
+~/esmini/bin/esmini --osc ./alks_scenario_4_1_1_free_driving_template.xosc --param_dist ../alks_scenario_4_1_1_free_driving_variation.xosc
+```
 
 ### ALKS activation
 

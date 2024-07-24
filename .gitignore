@@ -1,4 +1,5 @@
-/Scenarios/ALKS_MASTER_Scenario_TEMPLATE.xosc
-/Scenarios/*.txt
-/Scenarios/*.osi
-*.docx
+*.txt
+/logical_scenarios/*.txt
+/logical_scenarios/*.osi
+/logical_scenarios/concrete_scenarios/*.txt
+/logical_scenarios/concrete_scenarios/*.osi
